@@ -5,11 +5,16 @@ ul {
 
 li {
   display: inline-block;
-  padding-right: .5rem;
-  padding-left: .5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 a {
   text-decoration: none;
   color: #FFF;
+}
+
+a:hover {
+  color: #FFD256;
+  font-size: 1.2rem;
 }

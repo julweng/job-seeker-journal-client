@@ -10,7 +10,7 @@ export default function UserNav(props) {
           <a
             href="#dashboard"
             aria-label="dashboard"
-            onClick={() => props.onDashBoard()}
+            onClick={() => props.onDashboard()}
           >
             Dashboard
           </a>
