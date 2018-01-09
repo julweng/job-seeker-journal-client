@@ -6,7 +6,7 @@ export default function TopNav(props) {
   return (
     <nav>
       <ul>
-        <li>
+        <li className="smallScreenHidden">
           <a
             href="#about"
             aria-label="About"
@@ -15,13 +15,31 @@ export default function TopNav(props) {
             About
           </a>
         </li>
-        <li>
+        <li className="smallScreenHidden">
           <a
-            href="#sign-up-log-in"
-            aria-label="sign up or log in"
-            onClick={() => props.onSignUpLogIn()}
+            href="#register"
+            aria-label="register"
+            onClick={() => props.onRegister()}
           >
-          Sign up/Log In
+          Register
+          </a>
+        </li>
+        <li className="smallScreenHidden">
+          <a
+            href="#log-in-demo"
+            aria-label="log in or demo"
+            onClick={() => props.onLogInDemo()}
+          >
+          Log In/Demo
+          </a>
+        </li>
+        <li className="smallScreenDisplay">
+          <a
+            href="#more"
+            aria-label="more"
+            onClick={() => props.onMore()}
+          >
+          <i className="fa fa-bars" aria-hidden="true"></i>
           </a>
         </li>
       </ul>

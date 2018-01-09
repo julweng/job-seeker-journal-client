@@ -5,7 +5,7 @@ import Header from '../components/header/header';
 import FeatureCards from '../components/featureCards/featureCards';
 import SignUp from '../components/signUp/signUp';
 
-export default function App(Props) {
+export default function Landing(Props) {
   return (
     <div>
       <TopNav />

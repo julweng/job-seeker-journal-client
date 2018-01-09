@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './grid.css';
 
-import App from './components/app';
+import Landing from './components/landing';
 
 ReactDOM.render(
-  <App />,
+  <Landing />,
   document.getElementById('root')
 );
