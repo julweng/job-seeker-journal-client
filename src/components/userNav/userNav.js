@@ -1,12 +1,12 @@
 import React from 'react';
 
-import './navigation-bar.css';
+import '../topNav/navigation-bar.css';
 
-export default function TopNav(props) {
+export default function UserNav(props) {
   return (
     <nav>
       <ul>
-        <li>
+        <li className="smallScreenHidden">
           <a
             href="#dashboard"
             aria-label="dashboard"
@@ -15,7 +15,7 @@ export default function TopNav(props) {
             Dashboard
           </a>
         </li>
-        <li>
+        <li className="smallScreenHidden">
           <a
             href="#profile"
             aria-label="profile"
@@ -24,7 +24,7 @@ export default function TopNav(props) {
           Profile
           </a>
         </li>
-        <li>
+        <li className="smallScreenHidden">
           <a
             href="#add-job"
             aria-label="add job"
@@ -33,7 +33,7 @@ export default function TopNav(props) {
           Add Job
           </a>
         </li>
-        <li>
+        <li className="smallScreenHidden">
           <a
             href="#job-collection"
             aria-label="job collection"
@@ -42,7 +42,7 @@ export default function TopNav(props) {
           Job Collection
           </a>
         </li>
-        <li>
+        <li className="smallScreenHidden">
           <a
             href="#log-out"
             aria-label="log out"

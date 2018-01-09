@@ -1,18 +1,12 @@
 import React from 'react';
 
-import TopNav from '../components/topNav/navigation-bar';
-import Header from '../components/header/header';
-import FeatureCards from '../components/featureCards/featureCards';
-import SignUp from '../components/signUp/signUp';
+import UserNav from '../components/userNav/userNav';
 
-export default function Landing(Props) {
+export default function Dashboard(Props) {
   return (
     <div>
-      <TopNav />
+      <UserNav />
       <main role="main">
-        <Header />
-        <FeatureCards />
-        <SignUp />
       </main>
       <footer>Built by Julia Weng</footer>
     </div>

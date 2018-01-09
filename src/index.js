@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './grid.css';
 
-import Landing from './components/landing';
+import Dashboard from './components/dashboard';
 
 ReactDOM.render(
-  <Landing />,
+  <Dashboard />,
   document.getElementById('root')
 );
