@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TopNav from '../components/topNav/navigation-bar';
-import Header from '../components/header/header';
+import Header from '../components/landingHeader/header';
 import FeatureCards from '../components/featureCards/featureCards';
 import SignUp from '../components/signUp/signUp';
 
