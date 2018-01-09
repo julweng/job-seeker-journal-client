@@ -1,0 +1,20 @@
+section {
+  min-height: 13rem;
+  padding: 1.2rem;
+  background-color: #bbb;
+}
+
+section:nth-child(even) {
+  background-color: #ddd;
+}
+
+div {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem
+}
+
+p {
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

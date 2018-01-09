@@ -1,0 +1,25 @@
+header {
+  padding: 5rem 1rem;
+  background-image: url("landing.JPG");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 38rem;
+}
+
+h1, h2 {
+  margin-top: 5rem;
+  text-align: center;
+  color: #FFF;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+/* Turn off parallax scrolling for tablets and phones. Increase/decrease the pixels if needed */
+@media only screen and (max-device-width: 1024px) {
+  header {
+    background-attachment: scroll;
+  }
+}
