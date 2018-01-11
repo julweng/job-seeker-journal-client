@@ -8,8 +8,8 @@ import Footer from '../components/footer/footer';
 
 const headerText = 'Profile Editor';
 
-//const skills =[];
-
+const skills =[];
+/*
 const skills = [
   {
     name: 'HTML5',
@@ -24,7 +24,7 @@ const skills = [
     experience: '6 month(s)',
   },
 ];
-
+*/
 export default function Profile(Props) {
   return (
     <div>
