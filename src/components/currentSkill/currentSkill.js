@@ -5,7 +5,7 @@ import './currentSkill.css';
 export default function CurrentSkill(props) {
     const warning = <p>~* Add skills to build your profile *~</p>;
 
-    const data = props.skills.map((skill, index) =>
+    const skillData = props.skills.map((skill, index) =>
       <div className="col-12 individual-skill-container" key={index}>
         <p key={`${skill.name}${index}`} className="col-4">
           {skill.name}
@@ -21,7 +21,8 @@ export default function CurrentSkill(props) {
         </div>
     </div>
   );
-  if(props.skills.length === 0) {
+
+  if(!props.skills || props.skills.length === 0) {
     return (
     <div className="row profile-warning-container">
       <div className="col-12">
@@ -30,6 +31,7 @@ export default function CurrentSkill(props) {
     </div>
     );
   }
+
   return (
     <div className="row current-skill-container">
       <div className="col-12">
@@ -47,7 +49,7 @@ export default function CurrentSkill(props) {
         </div>
       </div>
       <div className="row">
-        {data}
+        {skillData}
       </div>
     </div>
   );
