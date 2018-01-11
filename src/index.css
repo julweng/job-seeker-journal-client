@@ -29,6 +29,26 @@ nav, footer {
   color: #FFF;
 }
 
+footer {
+  margin-top: 5rem;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  opacity: .6;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.188rem;
+  transition-duration: 200ms;
+}
+
+
 /*------------------------------------------------------------------------------
   Animations for typography & form elements
 ------------------------------------------------------------------------------*/

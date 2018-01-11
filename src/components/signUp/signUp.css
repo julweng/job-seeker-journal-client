@@ -4,29 +4,29 @@ form div {
 }
 
 button {
-  width: 23%;
+  width: 25%;
   height: 2rem;
   margin: 0;
-  border:none;
-  border-radius: 3px;
   background-color: #282E34;
   color: #FFF;
-  font-size: 100%;
-  transition-duration: 200ms;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: .7;
-}
-
-button:focus {
-  opacity: .3;
 }
 
 form p {
   padding: 0;
   margin: 0;
+}
+
+input {
+  width: 20%;
+  border: none;
+  border-bottom: .125rem solid #524632;
+  background-color: transparent;
+  padding: .5rem;
+}
+
+input:focus {
+  border-bottom: 2px solid #FFD256;
+  outline: none;
 }
 
 /*

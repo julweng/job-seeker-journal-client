@@ -4,6 +4,7 @@ import TopNav from '../components/topNav/navigation-bar';
 import Header from '../components/landingHeader/header';
 import FeatureCards from '../components/featureCards/featureCards';
 import SignUp from '../components/signUp/signUp';
+import Footer from '../components/footer/footer';
 
 export default function Landing(Props) {
   return (
@@ -14,7 +15,7 @@ export default function Landing(Props) {
         <FeatureCards />
         <SignUp />
       </main>
-      <footer>Built by Julia Weng</footer>
+      <Footer />
     </div>
   );
 }

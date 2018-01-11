@@ -2,10 +2,10 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import Header from './header';
+import SaveButton from './saveButton';
 
-describe('<Header />', () => {
+describe('<SaveButton />', () => {
   it('Renders without crashing', () => {
-    shallow(<Header />);
+    shallow(<SaveButton />);
   });
 });

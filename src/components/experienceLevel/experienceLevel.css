@@ -1,0 +1,15 @@
+.date {
+  display: inline-block;
+  text-align: left;
+  font-size: 1rem;
+  color: #524632;
+}
+
+.date-input {
+  width: 100%;
+}
+
+form p {
+  color: #524632;
+  font-size: 0.9rem;
+}

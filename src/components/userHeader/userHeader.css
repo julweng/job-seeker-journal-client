@@ -1,13 +1,11 @@
 header {
-  padding: 5rem 1rem;
-  height: 38rem;
+  padding: 4.5rem 1rem 0rem 1rem;
 }
 
 h1 {
   margin-top: 1.5rem;
   text-align: center;
-  color: #379392;
-  text-shadow: 0.07rem 0.07rem #524632;
+  color: #524632;
   font-family: 'Maven Pro', sans-serif;
   font-weight: bolder;
 }

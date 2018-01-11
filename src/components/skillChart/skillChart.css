@@ -1,0 +1,25 @@
+#container {
+  margin-top: 2rem;
+  height: 25rem;
+  background-color: #FFF;
+  text-align: center;
+}
+
+#container h3 {
+  color: #379392;
+  text-align: left;
+}
+
+.recharts-wrapper {
+  margin: 0 auto;
+}
+
+#edit-container {
+  text-align: right;
+}
+
+#edit-skill {
+  color: #379392;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
