@@ -48,6 +48,9 @@ button {
   transition-duration: 200ms;
 }
 
+input::placeholder {
+  color: #99B0C6;
+}
 
 /*------------------------------------------------------------------------------
   Animations for typography & form elements

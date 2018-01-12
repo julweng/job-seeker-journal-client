@@ -14,7 +14,7 @@ export default function AddSkillForm(props) {
       <div className="col-12" id="form-title-container">
         <h3>Add/Edit Skills</h3>
       </div>
-      <div className="col-12" id="form-section">
+      <div className="col-12">
         <fieldset>
           <SkillEntry />
           <ExperienceLevel />
