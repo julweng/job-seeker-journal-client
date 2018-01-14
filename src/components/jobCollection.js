@@ -8,10 +8,6 @@ import Footer from '../components/footer/footer';
 
 const headerText = 'Job Collection';
 
-const janJobTitles = [
-  'Lorem ipsum dolor sit amet', 'consectetur adipiscing elit', 'sed do eiusmod tempor', 'incididunt ut'
-];
-
 export default function JobCollection(Props) {
   return (
     <div>
