@@ -1,0 +1,11 @@
+.job-item {
+  color: #282E34;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  cursor: pointer;
+}
+
+.job-item:hover {
+  font-size: 1.1rem;
+  background-color: #E8E8E8;
+}

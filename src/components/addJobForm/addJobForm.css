@@ -1,9 +1,5 @@
-form, #form-title-container {
+form {
   text-align: left;
-}
-
-#form-title-container > h3 {
-  color: #379392;
 }
 
 fieldset {
@@ -42,10 +38,7 @@ form button {
   margin-top: .7rem;
   margin-bottom: .7rem;
 }
-/*
-@media screen and (min-width: 40rem) {
-  .add-job-button-container {
-    margin-left: calc(40rem / 3);
-  }
+
+p {
+  color: #E36397;
 }
-*/

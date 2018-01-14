@@ -9,22 +9,7 @@ import Footer from '../components/footer/footer';
 const headerText = 'Profile Editor';
 
 const skills =[];
-/*
-const skills = [
-  {
-    name: 'HTML5',
-    experience: '6 month(s)',
-  },
-  {
-    name: 'CSS3',
-    experience: '6 month(s)',
-  },
-  {
-    name: 'JavaScript',
-    experience: '6 month(s)',
-  },
-];
-*/
+
 export default function Profile(Props) {
   return (
     <div>

@@ -26,11 +26,11 @@ export default function UserNav(props) {
         </li>
         <li className="smallScreenHidden">
           <a
-            href="#add-job"
-            aria-label="add job"
+            href="#add-edit-job"
+            aria-label="add or edit job"
             onClick={() => props.onAddJob()}
           >
-          Add Job
+          Add/Edit Job
           </a>
         </li>
         <li className="smallScreenHidden">

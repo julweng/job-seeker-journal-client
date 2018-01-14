@@ -5,7 +5,7 @@ import UserHeader from '../components/userHeader/userHeader';
 import AddJobForm from '../components/addJobForm/addJobForm';
 import Footer from '../components/footer/footer';
 
-const headerText = 'New Job Application';
+const headerText = 'Add or Edit Job';
 
 export default function AddJob(Props) {
   return (

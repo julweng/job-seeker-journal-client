@@ -7,13 +7,15 @@ import './grid.css';
 //import Landing from './components/landing';
 //import Dashboard from './components/dashboard';
 //import Profile from './components/profile';
-import AddJob from './components/addJob';
+//import AddJob from './components/addJob';
+import JobCollection from './components/jobCollection'
 
 
 ReactDOM.render(
   //<Landing />,
   //<Dashboard />,
   //<Profile />,
-    <AddJob />,
+  //<AddJob />,
+  <JobCollection />,
   document.getElementById('root')
 );

@@ -10,8 +10,31 @@ import ResetButton from '../resetButton/resetButton';
 import SaveButton from '../saveButton/saveButton';
 import SkillEntry from '../skillEntry/skillEntry';
 import ExperienceLevel from '../experienceLevel/experienceLevel';
+import MonthButton from '../monthButton/monthButton';
 
-const jobDetail = {
+export default function AddJobForm(props) {
+  return (
+    <form className="row">
+      <fieldset className="col-12">
+        <JobDetailEntry name={props.title} placeholder={props.titlePlaceholder} />
+        <JobDetailEntry name={props.company} placeholder={props.companyPlaceholder} />
+        <JobDetailEntry name={props.location} placeholder={props.locationPlaceholder} />
+        <AdditionalJobInfo name={props.contact} placeholder={props.contactPlaceholder} />
+        <AdditionalJobInfo name={props.contactEmail} placeholder={props.contactEmailPlaceholder} />
+        <DateInput />
+        <AdditionalJobInfo name={props.referrer} placeholder={props.referrerPlaceholder} />
+        <AdditionalJobInfo name={props.referrerEmail} placeholder={props.referrerEmailPlaceholder} />
+        <SkillEntry />
+        <ExperienceLevel />
+      </fieldset>
+        <SaveButton />
+        <AddButton />
+        <ResetButton />
+    </form>
+  );
+}
+
+AddJobForm.defaultProps = {
   title: 'Job Title',
   titlePlaceholder: 'Front-end web developer',
   company: 'Company',
@@ -26,26 +49,4 @@ const jobDetail = {
   referrerPlaceholder: 'Alice Smith',
   referrerEmail: 'Email',
   referrerEmailPlaceholder: 'asmith@gmail.com'
-}
-
-export default function AddJobForm(props) {
-  return (
-    <form className="row">
-      <fieldset className="col-12">
-        <JobDetailEntry name={jobDetail.title} placeholder={jobDetail.titlePlaceholder} />
-        <JobDetailEntry name={jobDetail.company} placeholder={jobDetail.companyPlaceholder} />
-        <JobDetailEntry name={jobDetail.location} placeholder={jobDetail.locationPlaceholder} />
-        <AdditionalJobInfo name={jobDetail.contact} placeholder={jobDetail.contactPlaceholder} />
-        <AdditionalJobInfo name={jobDetail.contactEmail} placeholder={jobDetail.contactEmailPlaceholder} />
-        <DateInput />
-        <AdditionalJobInfo name={jobDetail.referrer} placeholder={jobDetail.referrerPlaceholder} />
-        <AdditionalJobInfo name={jobDetail.referrerEmail} placeholder={jobDetail.referrerEmailPlaceholder} />
-        <SkillEntry />
-        <ExperienceLevel />
-      </fieldset>
-        <SaveButton />
-        <AddButton />
-        <ResetButton />
-    </form>
-  );
 }

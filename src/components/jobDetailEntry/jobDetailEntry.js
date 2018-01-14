@@ -9,7 +9,7 @@ export default function JobDetailEntry(props) {
   );
 }
 
-JobDetailEntry.defaultProps ={
+JobDetailEntry.defaultProps = {
   name: '',
   placeholder: ''
 }

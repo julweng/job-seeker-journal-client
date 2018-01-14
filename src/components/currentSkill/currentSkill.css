@@ -1,6 +1,9 @@
 .profile-warning-container {
   text-align: center;
-  color: #E36397
+}
+
+.profile-warning-container a {
+  color: #4CA6EF;
 }
 
 .current-skill-container {
