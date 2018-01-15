@@ -1,11 +1,13 @@
 import React from 'react';
 
-import {Radar, RadarChart, PolarGrid,
-        PolarAngleAxis, PolarRadiusAxis} from 'recharts';
+import {
+  Radar, RadarChart, PolarGrid,
+  ResponsiveContainer, PolarAngleAxis, PolarRadiusAxis
+} from 'recharts';
 
 import './skillChart.css';
 
-const fullMark = 5;
+const fullMark = 20;
 
 const data = [
     { subject: 'HTML5', A: 1, fullMark: fullMark },
@@ -18,16 +20,18 @@ const data = [
 export default function SkillChart(props) {
   return (
     <div className="row">
-      <div className="col-12" id="container">
+      <div className="col-12 chart-container">
         <h3>Skill Chart</h3>
-  	    <RadarChart cx={360} cy={200} outerRadius={150} width={700} height={400} data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
-          <PolarRadiusAxis/>
-          <Radar name="Mike" dataKey="A" stroke="#FFD256" fill="#FFD256" fillOpacity={0.5}/>
-        </RadarChart>
+        <ResponsiveContainer aspect={2}>
+  	     <RadarChart data={data}>
+            <PolarGrid />
+            <PolarAngleAxis dataKey="subject" />
+            <PolarRadiusAxis/>
+            <Radar name="Mike" dataKey="A" stroke="#FFD256" fill="#FFD256" fillOpacity={0.5}/>
+          </RadarChart>
+        </ResponsiveContainer>
       </div>
-        <div id="edit-container">
+        <div className="col-12 edit-container">
           <a
             href="#profile" aria-label="profile" id="edit-skill"
             onClick={() => props.onProfile()}

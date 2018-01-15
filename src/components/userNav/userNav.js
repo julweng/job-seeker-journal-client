@@ -2,13 +2,15 @@ import React from 'react';
 
 import '../topNav/navigation-bar.css';
 
+import DropDownUserNav from '../dropDownUserNav/dropDownUserNav';
+
 export default function UserNav(props) {
   return (
     <nav>
       <ul>
         <li className="smallScreenHidden">
           <a
-            href="#dashboard"
+            href="/dashboard"
             aria-label="dashboard"
             onClick={() => props.onDashboard()}
           >
@@ -17,7 +19,7 @@ export default function UserNav(props) {
         </li>
         <li className="smallScreenHidden">
           <a
-            href="#profile"
+            href=".profile"
             aria-label="profile"
             onClick={() => props.onProfile()}
           >
@@ -26,7 +28,7 @@ export default function UserNav(props) {
         </li>
         <li className="smallScreenHidden">
           <a
-            href="#add-edit-job"
+            href="/add-edit-job"
             aria-label="add or edit job"
             onClick={() => props.onAddJob()}
           >
@@ -35,7 +37,7 @@ export default function UserNav(props) {
         </li>
         <li className="smallScreenHidden">
           <a
-            href="#job-collection"
+            href="/job-collection"
             aria-label="job collection"
             onClick={() => props.onJobCollection()}
           >
@@ -44,7 +46,7 @@ export default function UserNav(props) {
         </li>
         <li className="smallScreenHidden">
           <a
-            href="#log-out"
+            href="/log-out"
             aria-label="log out"
             onClick={() => props.onLogOut()}
           >
@@ -53,7 +55,7 @@ export default function UserNav(props) {
         </li>
         <li className="smallScreenDisplay">
           <a
-            href="#more"
+            href="/more"
             aria-label="more"
             onClick={() => props.onMore()}
           >
@@ -61,6 +63,7 @@ export default function UserNav(props) {
           </a>
         </li>
       </ul>
+      <DropDownUserNav />
     </nav>
   );
 }

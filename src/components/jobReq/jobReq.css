@@ -1,0 +1,12 @@
+.job-req-list-item {
+  display: block;
+  text-align: left;
+}
+
+.job-req-container {
+  text-align: left;
+}
+
+.job-req-list-container {
+  margin-left: 2.5rem;
+}

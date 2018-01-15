@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid,
-        Tooltip, Legend} from 'recharts';
+        ResponsiveContainer, Tooltip, Legend} from 'recharts';
 
 import './progressBarChart.css';
 
@@ -16,26 +16,27 @@ const data = [
 export default function ProgressBarChart(props) {
   return (
     <div className="row">
-      <div className="col-12" id="container">
+      <div className="col-12 chart-container">
         <h3>Progress Summary</h3>
-    	 <BarChart width={600} height={300} data={data}
-            margin={{top: 4, right: 30, left: 30, bottom: 4}}>
-          <XAxis dataKey="period"/>
-          <YAxis/>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <Tooltip/>
-          <Legend />
-          <Bar dataKey="phone" fill="#8884d8" />
-          <Bar dataKey="on-site" fill="#82ca9d" />
-          <Bar dataKey="offer" fill="#FFD256" />
-          <Bar dataKey="applied" fill="#BD9391" />
-        </BarChart>
+        <ResponsiveContainer aspect={2}>
+    	    <BarChart data={data}
+            margin={{top: 3, right: 4, left: 4, bottom: 3}}>
+            <XAxis dataKey="period"/>
+            <YAxis/>
+            <CartesianGrid strokeDasharray="3 3"/>
+            <Tooltip/>
+            <Legend />
+            <Bar dataKey="phone" fill="#8884d8" />
+            <Bar dataKey="on-site" fill="#82ca9d" />
+            <Bar dataKey="offer" fill="#FFD256" />
+            <Bar dataKey="applied" fill="#BD9391" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
-      <div id="edit-container">
+      <div className="col-12 edit-container">
         <a
           href="#job-collection"
           aria-label="job collection"
-          id="edit-job-collection"
           onClick={() => props.onJobCollection()}
           >
           Edit Job Collection...

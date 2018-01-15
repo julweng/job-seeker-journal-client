@@ -1,0 +1,12 @@
+.drop-down-top-nav ul, .drop-down-top-nav li {
+  display: block;
+}
+
+.drop-down-top-nav li  {
+  margin: 2% 0%;
+  text-align: center;
+}
+
+.toggle-smallScreenDisplay {
+  display: none;
+}

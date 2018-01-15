@@ -2,22 +2,22 @@ import React from 'react';
 
 import UserNav from '../components/userNav/userNav';
 import UserHeader from '../components/userHeader/userHeader';
-import AddJobForm from '../components/addJobForm/addJobForm';
+import ViewJob from '../components/viewJob/viewJob';
 import Footer from '../components/footer/footer';
 
-const headerText = 'Add Job';
+const headerText = 'Edit Job';
 
-export default function AddJob(Props) {
+export default function EditJob(Props) {
   return (
     <div>
       <UserNav />
       <main role="main">
         <UserHeader text={headerText}/>
         <section>
-          <AddJobForm />
+          <ViewJob />
         </section>
       </main>
       <Footer />
     </div>
-  );
+    );
 }

@@ -1,0 +1,11 @@
+.job-detail-container {
+  text-align: left;
+}
+
+.job-detail-container h4 {
+  text-align: center;
+}
+
+.job-detail-container p {
+  padding-left: 2.5rem;
+}

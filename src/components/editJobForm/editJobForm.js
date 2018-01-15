@@ -1,18 +1,24 @@
 import React from 'react';
 
-import './addJobForm.css';
+import '../addJobForm/addJobForm.css';
 
 import JobDetailEntry from '../jobDetailEntry/jobDetailEntry';
 import DateInput from '../dateInput/dateInput';
 import AdditionalJobInfo from '../additionalJobInfo/additionalJobInfo';
-import AddButton from '../addButton/addButton';
+import CancelButton from '../cancelButton/cancelButton';
 import ResetButton from '../resetButton/resetButton';
 import SaveButton from '../saveButton/saveButton';
-import SkillEntry from '../skillEntry/skillEntry';
-import ExperienceLevel from '../experienceLevel/experienceLevel';
 import AddProgress from '../addProgress/addProgress';
+import EditSkillEntry from '../editSkillEntry/editSkillEntry';
 
-export default function AddJobForm(props) {
+export default function EditJobForm(props) {
+  let skillExperiences = [];
+  if(props) {
+    skillExperiences = props.skillExperiences.map((item, index) =>
+      <EditSkillEntry skill={item.skill} months={item.experiences.months} years={item.experiences.years} key={index} />
+    )
+  }
+
   return (
     <form className="row">
       <fieldset className="col-12">
@@ -24,18 +30,17 @@ export default function AddJobForm(props) {
         <DateInput />
         <AdditionalJobInfo name={props.referrer} placeholder={props.referrerPlaceholder} />
         <AdditionalJobInfo name={props.referrerEmail} placeholder={props.referrerEmailPlaceholder} />
-        <SkillEntry />
-        <ExperienceLevel />
+        {skillExperiences}
         <AddProgress />
       </fieldset>
         <SaveButton />
-        <AddButton />
         <ResetButton />
+        <CancelButton />
     </form>
   );
 }
 
-AddJobForm.defaultProps = {
+EditJobForm.defaultProps = {
   title: 'Job Title',
   titlePlaceholder: 'Front-end web developer',
   company: 'Company',
@@ -49,5 +54,21 @@ AddJobForm.defaultProps = {
   referrer: 'Referrer',
   referrerPlaceholder: 'Alice Smith',
   referrerEmail: 'Email',
-  referrerEmailPlaceholder: 'asmith@gmail.com'
+  referrerEmailPlaceholder: 'asmith@gmail.com',
+  skillExeperiences: [
+    {
+      skill: 'HTML',
+      experiences: {
+        months: 0,
+        years: 1
+      }
+    },
+    {
+      skill: 'CSS',
+      experiences: {
+        months: 0,
+        years: 1
+      }
+    }
+  ]
 }

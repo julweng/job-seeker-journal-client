@@ -8,14 +8,15 @@ import './grid.css';
 //import Dashboard from './components/dashboard';
 //import Profile from './components/profile';
 //import AddJob from './components/addJob';
-import JobCollection from './components/jobCollection'
-
+//import JobCollection from './components/jobCollection'
+import EditJob from './components/editJob';
 
 ReactDOM.render(
   //<Landing />,
   //<Dashboard />,
   //<Profile />,
   //<AddJob />,
-  <JobCollection />,
+  //<JobCollection />,
+  <EditJob />,
   document.getElementById('root')
 );

@@ -4,7 +4,11 @@ export default function SkillEntry(props) {
   return (
     <div className="col-6">
       <label htmlFor="skills">Skill</label>
-      <input name="skill" placeholder="HTML5" autoComplete="off" required />
+      <input name="skill" placeholder={props.skill} autoComplete="off" required />
     </div>
   );
+}
+
+SkillEntry.defaultProps = {
+  skill: 'HTML'
 }

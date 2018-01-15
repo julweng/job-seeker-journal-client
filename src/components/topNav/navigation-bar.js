@@ -2,6 +2,8 @@ import React from 'react';
 
 import './navigation-bar.css';
 
+import DropDownTopNav from '../dropDownTopNav/dropDownTopNav';
+
 export default function TopNav(props) {
   return (
     <nav>
@@ -43,6 +45,7 @@ export default function TopNav(props) {
           </a>
         </li>
       </ul>
+      <DropDownTopNav />
     </nav>
   );
 }
