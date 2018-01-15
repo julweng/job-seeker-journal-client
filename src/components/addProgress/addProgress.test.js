@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
-import DeleteButton from './deleteButton';
+import AddProgress from './addProgress';
 
-describe('<DeleteButton />', () => {
+describe('<AddProgress />', () => {
   it('Renders without crashing', () => {
-    shallow(<DeleteButton />);
+    shallow(<AddProgress />);
   });
 });

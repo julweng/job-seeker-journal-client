@@ -1,10 +1,10 @@
 import React from 'react';
-
 import { shallow } from 'enzyme';
-import DeleteButton from './deleteButton';
 
-describe('<DeleteButton />', () => {
+import AddJob from './addJob';
+
+describe('<AddJob />', () => {
   it('Renders without crashing', () => {
-    shallow(<DeleteButton />);
+    shallow(<AddJob />);
   });
 });
