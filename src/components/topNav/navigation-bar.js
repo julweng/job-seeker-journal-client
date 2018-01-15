@@ -1,7 +1,9 @@
 import React from 'react';
 
-import './navigation-bar.css';
+//import { connect } from 'react';
+//import { Link } from 'react-router-dom';
 
+import './navigation-bar.css';
 import DropDownTopNav from '../dropDownTopNav/dropDownTopNav';
 
 export default function TopNav(props) {
@@ -12,7 +14,6 @@ export default function TopNav(props) {
           <a
             href="#about"
             aria-label="About"
-            onClick={() => props.onAbout()}
           >
             About
           </a>
@@ -49,3 +50,5 @@ export default function TopNav(props) {
     </nav>
   );
 }
+
+//export default connect()(TopNav);
