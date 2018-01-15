@@ -13,3 +13,7 @@ form p {
   color: #524632;
   font-size: 0.85rem;
 }
+
+.experience-label {
+  text-align: right;
+}

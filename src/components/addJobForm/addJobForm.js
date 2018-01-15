@@ -24,8 +24,12 @@ export default function AddJobForm(props) {
         <DateInput />
         <AdditionalJobInfo name={props.referrer} placeholder={props.referrerPlaceholder} />
         <AdditionalJobInfo name={props.referrerEmail} placeholder={props.referrerEmailPlaceholder} />
-        <SkillEntry />
-        <ExperienceLevel />
+        <div className="col-12">
+          <SkillEntry />
+        </div>
+        <div className="col-12">
+          <ExperienceLevel />
+        </div>
         <AddProgress />
       </fieldset>
         <SaveButton />

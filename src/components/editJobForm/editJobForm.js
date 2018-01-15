@@ -9,13 +9,18 @@ import CancelButton from '../cancelButton/cancelButton';
 import ResetButton from '../resetButton/resetButton';
 import SaveButton from '../saveButton/saveButton';
 import AddProgress from '../addProgress/addProgress';
-import EditSkillEntry from '../editSkillEntry/editSkillEntry';
+import SkillEntry from '../skillEntry/skillEntry';
+import ExperienceLevel from '../experienceLevel/experienceLevel';
 
 export default function EditJobForm(props) {
-  let skillExperiences = [];
+  let skills = [];
+  let experiences = [];
   if(props) {
-    skillExperiences = props.skillExperiences.map((item, index) =>
-      <EditSkillEntry skill={item.skill} months={item.experiences.months} years={item.experiences.years} key={index} />
+    skills = props.skills.map((skill, index) =>
+      <SkillEntry skill={skill} key={index} />
+    )
+    experiences = props.experiences.map((experience, index) =>
+      <ExperienceLevel months={experience.months} years={experience.years} key={index} />
     )
   }
 
@@ -30,7 +35,12 @@ export default function EditJobForm(props) {
         <DateInput />
         <AdditionalJobInfo name={props.referrer} placeholder={props.referrerPlaceholder} />
         <AdditionalJobInfo name={props.referrerEmail} placeholder={props.referrerEmailPlaceholder} />
-        {skillExperiences}
+        <div className="col-6">
+          {skills}
+        </div>
+        <div className="col-6">
+          {experiences}
+        </div>
         <AddProgress />
       </fieldset>
         <SaveButton />
@@ -55,20 +65,15 @@ EditJobForm.defaultProps = {
   referrerPlaceholder: 'Alice Smith',
   referrerEmail: 'Email',
   referrerEmailPlaceholder: 'asmith@gmail.com',
-  skillExeperiences: [
+  skills: ['HTML5', 'CSS3'],
+  experiences: [
     {
-      skill: 'HTML',
-      experiences: {
-        months: 0,
-        years: 1
-      }
+      months: 1,
+      years: 1
     },
     {
-      skill: 'CSS',
-      experiences: {
-        months: 0,
-        years: 1
-      }
+      months: 2,
+      years: 1
     }
   ]
 }
