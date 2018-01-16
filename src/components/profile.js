@@ -6,9 +6,24 @@ import CurrentSkill from '../components/currentSkill/currentSkill';
 import AddSkillForm from '../components/addSkillForm/addSkillForm';
 import Footer from '../components/footer/footer';
 
-const headerText = 'Profile Editor';
+const headerText = 'Edit Profile';
 
-const skills =[];
+const skills = [
+  {
+    skill: 'HTML',
+    experience: {
+      months: 0,
+      years: 1
+    }
+  },
+  {
+    skill: 'CSS3',
+    experience: {
+      months: 0,
+      years: 1
+    }
+  }
+]
 
 export default function Profile(Props) {
   return (

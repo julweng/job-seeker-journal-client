@@ -7,17 +7,17 @@ export default function CurrentSkill(props) {
     if(props.skills) {
       skillData = props.skills.map((skill, index) =>
       <div className="col-12 individual-skill-container" key={index}>
-        <p key={`${skill.name}${index}`} className="col-4">
-          {skill.name}
+        <p key={`${skill.skill}${index}`} className="col-4">
+          {skill.skill}
         </p>
-        <p key={`${skill.experience}${index}`} className="col-4">
-          {skill.experience}
+        <p key={`${skill.experience.months}${skill.experience.months}${index}`} className="col-4">
+          {skill.experience.years} years {skill.experience.months} months
         </p>
         <div className="col-2" key={`editButton-${index}`}>
-          <button className="edit-button" key={`edit-button${index}`} type="button">Edit</button>
+          <button className="edit-skill-button" key={`edit-button${index}`} type="button">Edit</button>
         </div>
         <div className="col-2" key={`deleteButton-${index}`}>
-          <button className="delete-button" key={`delete-button${index}`} type="button">Delete</button>
+          <button className="delete-skill-button" key={`delete-button${index}`} type="button">Delete</button>
         </div>
       </div>
   )}
