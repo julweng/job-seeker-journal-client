@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid,
         ResponsiveContainer, Tooltip, Legend} from 'recharts';
 
@@ -34,13 +34,9 @@ export default function ProgressBarChart(props) {
         </ResponsiveContainer>
       </div>
       <div className="col-12 edit-container">
-        <a
-          href="#job-collection"
-          aria-label="job collection"
-          onClick={() => props.onJobCollection()}
-          >
+        <Link to="/job-collection">
           Edit Job Collection...
-        </a>
+        </Link>
       </div>
     </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import {
   Radar, RadarChart, PolarGrid,
   ResponsiveContainer, PolarAngleAxis, PolarRadiusAxis
@@ -30,14 +30,12 @@ export default function SkillChart(props) {
             <Radar name="Mike" dataKey="A" stroke="#FFD256" fill="#FFD256" fillOpacity={0.5}/>
           </RadarChart>
         </ResponsiveContainer>
+        <p>(experience in years)</p>
       </div>
         <div className="col-12 edit-container">
-          <a
-            href="#profile" aria-label="profile" id="edit-skill"
-            onClick={() => props.onProfile()}
-          >
+          <Link to="/profile">
             Edit Profile...
-          </a>
+          </Link>
         </div>
     </div>
   );
