@@ -1,9 +1,9 @@
-form div {
+#auth-form div {
   text-align: center;
-  margin: .4rem;
+  margin: .5rem;
 }
 
-button {
+#auth-form button {
   width: 25%;
   height: 2rem;
   margin: 0;
@@ -11,12 +11,12 @@ button {
   color: #FFF;
 }
 
-form p {
+#auth-form p {
   padding: 0;
   margin: 0;
 }
 
-input {
+#auth-form input {
   width: 20%;
   border: none;
   border-bottom: .125rem solid #524632;
@@ -24,18 +24,22 @@ input {
   padding: .5rem;
 }
 
-input:focus {
+#auth-form input:focus {
   border-bottom: 2px solid #FFD256;
   outline: none;
 }
 
-/*
-#login {
-  background-color:
+#auth-form #sign-up-button {
+  background-color: #379392;
+  color: #FFF;
 }
 
-#sign-up {
-  background-color:
+#auth-form #login-button {
+  background-color: #FFD256;
+  color: #282E34;
 }
 
-*/
+#auth-form #demo-button {
+  background-color: #E36397;
+  color: #FFF;
+}

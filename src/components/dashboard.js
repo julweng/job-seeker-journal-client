@@ -8,6 +8,20 @@ import Footer from '../components/footer/footer';
 
 const headerText = 'Profile Summary';
 
+export default function Dashboard(props) {
+  return (
+    <div>
+      <UserNav />
+      <main role="main">
+        <UserHeader text={headerText}/>
+        <SkillChart />
+        <ProgressBarChart />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+/*
 export default class Dashboard extends React.Component {
   render () {
     return (
@@ -23,3 +37,4 @@ export default class Dashboard extends React.Component {
     );
   }
 }
+*/

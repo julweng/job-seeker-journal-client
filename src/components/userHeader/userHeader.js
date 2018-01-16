@@ -4,7 +4,7 @@ import '../userHeader/userHeader.css';
 
 export default function UserHeader(props) {
   return (
-    <header>
+    <header id="user-header">
       <h1>{props.text}</h1>
     </header>
   );

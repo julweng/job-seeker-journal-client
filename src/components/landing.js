@@ -6,6 +6,20 @@ import FeatureCards from '../components/featureCards/featureCards';
 import SignUp from '../components/signUp/signUp';
 import Footer from '../components/footer/footer';
 
+export default function Landing() {
+    return (
+        <div>
+          <TopNav />
+          <main role="main">
+            <Header />
+            <FeatureCards />
+            <SignUp />
+          </main>
+          <Footer />
+        </div>
+    )
+}
+/*
 export default class Landing extends React.Component {
   render () {
     return (
@@ -21,3 +35,4 @@ export default class Landing extends React.Component {
     )
   }
 }
+*/

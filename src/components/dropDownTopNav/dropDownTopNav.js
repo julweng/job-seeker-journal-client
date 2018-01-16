@@ -8,27 +8,24 @@ export default function DropDownTopNav(props) {
       <ul>
         <li>
           <a
-            href="/about"
+            href="#about"
             aria-label="About"
-            onClick={() => props.onAbout()}
           >
             About
           </a>
         </li>
         <li>
           <a
-            href="/register"
+            href="#register"
             aria-label="register"
-            onClick={() => props.onRegister()}
           >
           Register
           </a>
         </li>
         <li>
           <a
-            href="/log-in-demo"
+            href="#log-in-demo"
             aria-label="log in or demo"
-            onClick={() => props.onLogInDemo()}
           >
           Log In/Demo
           </a>
