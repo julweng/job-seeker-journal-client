@@ -14,7 +14,7 @@ import AddProgress from '../addProgress/addProgress';
 
 export default function AddJobForm(props) {
   return (
-    <form className="row">
+    <form className="row" id="add-job-form">
       <fieldset className="col-12">
         <JobDetailEntry name={props.title} placeholder={props.titlePlaceholder} />
         <JobDetailEntry name={props.company} placeholder={props.companyPlaceholder} />
@@ -24,10 +24,10 @@ export default function AddJobForm(props) {
         <DateInput />
         <AdditionalJobInfo name={props.referrer} placeholder={props.referrerPlaceholder} />
         <AdditionalJobInfo name={props.referrerEmail} placeholder={props.referrerEmailPlaceholder} />
-        <div className="col-12">
+        <div className="col-6">
           <SkillEntry />
         </div>
-        <div className="col-12">
+        <div className="col-6">
           <ExperienceLevel />
         </div>
         <AddProgress />

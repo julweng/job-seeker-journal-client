@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import '../topNav/navigation-bar.css';
 
@@ -20,13 +20,9 @@ export default function UserNav(props) {
             </Link>
           </li>
           <li className="smallScreenHidden">
-            <a
-              href="/add-edit-job"
-              aria-label="add or edit job"
-              onClick={() => props.onAddJob()}
-            >
-            Add/Edit Job
-            </a>
+            <Link to="/add-job">
+            Add Job
+            </Link>
           </li>
           <li className="smallScreenHidden">
             <a
