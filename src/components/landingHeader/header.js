@@ -5,7 +5,7 @@ import './header.css';
 export default function LandingHeader(props) {
   return (
     <header id="landing-header">
-      <h1>Job Seeker's Journal</h1>
+      <h1 id="app-title">Job Seeker's Journal</h1>
       <h2>Track & Manage</h2>
     </header>
   );

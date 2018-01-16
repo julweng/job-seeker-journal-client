@@ -7,7 +7,7 @@
   height: 40rem;
 }
 
-h1, h2 {
+#app-title, h2 {
   margin-top: 5rem;
   text-align: center;
   color: #FFF;

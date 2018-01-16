@@ -25,22 +25,14 @@ export default function UserNav(props) {
             </Link>
           </li>
           <li className="smallScreenHidden">
-            <a
-              href="/job-collection"
-              aria-label="job collection"
-              onClick={() => props.onJobCollection()}
-            >
+            <Link to="/job-collection">
             Job Collection
-            </a>
+            </Link>
           </li>
           <li className="smallScreenHidden">
-            <a
-              href="/log-out"
-              aria-label="log out"
-              onClick={() => props.onLogOut()}
-            >
-            Log Out
-            </a>
+            <Link to="/">
+              Log Out
+            </Link>
           </li>
           <li className="smallScreenDisplay">
             <a
