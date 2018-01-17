@@ -2,8 +2,8 @@ import React from 'react';
 
 import UserNav from '../common/userNav/userNav';
 import UserHeader from '../common/userHeader/userHeader';
-import MonthlyJobCollections from '../components/monthlyJobCollections/monthlyJobCollections';
-import MonthButton from '../components/monthButton/monthButton';
+import MonthlyJobCollections from '../monthlyJobCollections/monthlyJobCollections';
+import MonthButton from '../monthButton/monthButton';
 import Footer from '../common/footer/footer';
 
 const headerText = 'Job Collection';

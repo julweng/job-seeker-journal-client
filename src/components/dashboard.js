@@ -1,10 +1,10 @@
 import React from 'react';
 
-import UserNav from '../components/userNav/userNav';
-import UserHeader from '../components/userHeader/userHeader';
+import UserNav from './common/userNav/userNav';
+import UserHeader from './common/userHeader/userHeader';
 import SkillChart from '../components/skillChart/skillChart'
 import ProgressBarChart from '../components/progressBarChart/progressBarChart';
-import Footer from '../components/footer/footer';
+import Footer from './common/footer/footer';
 
 const headerText = 'Profile Summary';
 

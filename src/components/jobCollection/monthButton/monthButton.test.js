@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { shallow } from 'enzyme';
 
-import SaveButton from './saveButton';
+import MonthButton from './monthButton';
 
-describe('<SaveButton />', () => {
+describe('<MonthButton />', () => {
   it('Renders without crashing', () => {
-    shallow(<SaveButton />);
+    shallow(<MonthButton />);
   });
 });

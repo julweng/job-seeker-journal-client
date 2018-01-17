@@ -8,7 +8,7 @@ import Landing from './components/landing-page/landing';
 import Dashboard from './components/dashboard';
 import Profile from './components/profile-page/profile';
 import AddJob from './components/addJob-page/addJob';
-import JobCollection from './components/jobCollection'
+import JobCollection from './components/jobCollection/jobCollection'
 import EditJob from './components/editJob';
 
 
