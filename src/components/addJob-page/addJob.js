@@ -3,7 +3,7 @@ import React from 'react';
 import UserNav from '../common/userNav/userNav';
 import UserHeader from '../common/userHeader/userHeader';
 import AddJobForm from '../addJobForm/addJobForm';
-import Footer from '../comon/footer/footer';
+import Footer from '../common/footer/footer';
 
 const headerText = 'Add Job';
 
