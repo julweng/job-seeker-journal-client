@@ -70,6 +70,10 @@ h1, h2, h3, p, a, input, button, ol, ul, div {
   .smallScreenDisplay {
     display: none;
   }
+
+  .largeScreenHidden {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 40rem) {

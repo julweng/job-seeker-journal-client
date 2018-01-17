@@ -4,7 +4,7 @@ import './dropDownTopNav.css';
 
 export default function DropDownTopNav(props) {
   return (
-    <div className="drop-down-top-nav toggle-smallScreenDisplay">
+    <div className="drop-down-top-nav largeScreenHidden">
       <ul>
         <li>
           <a

@@ -3,10 +3,6 @@
 }
 
 .drop-down-top-nav li  {
-  margin: 2% 0%;
+  margin-bottom: 7%;
   text-align: center;
-}
-
-.toggle-smallScreenDisplay {
-  display: none;
 }

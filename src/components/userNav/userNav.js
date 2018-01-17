@@ -2,10 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import '../topNav/navigation-bar.css';
-
 import DropDownUserNav from '../dropDownUserNav/dropDownUserNav';
 
-export default function UserNav(props) {
+function contentClass(isShow) {
+  if (isShow) {
+    return "smallScreenDisplay";
+  }
+  return "smallScreenHidden";
+}
+
+export default class UserNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isShow: false};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(function(prevState) {
+      return {isShow: !prevState.isShow};
+    });
+  }
+
+  render() {
     return (
       <nav>
         <ul>
@@ -31,21 +50,22 @@ export default function UserNav(props) {
           </li>
           <li className="smallScreenHidden">
             <Link to="/">
-              Log Out
+            Log out
             </Link>
           </li>
           <li className="smallScreenDisplay">
             <a
-              href="/more"
+              href="#more"
               aria-label="more"
-              onClick={() => props.onMore()}
-            >
+              onClick={this.handleClick}>
             <i className="fa fa-bars" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
-        <DropDownUserNav />
+        <div className={contentClass(this.state.isShow)}>
+          <DropDownUserNav />
+        </div>
       </nav>
     );
-
+  }
 }

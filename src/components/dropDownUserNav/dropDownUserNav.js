@@ -1,55 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import '../dropDownTopNav/dropDownTopNav.css';
 
 export default function DropDownUserNav(props) {
   return (
-    <div className="drop-down-top-nav toggle-smallScreenDisplay">
+    <div className="drop-down-top-nav largeScreenHidden">
       <ul>
         <li>
-          <a
-            href="#dashboard"
-            aria-label="dashboard"
-            onClick={() => props.onDashboard()}
-          >
+          <Link to="/dashboard">
             Dashboard
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#profile"
-            aria-label="profile"
-            onClick={() => props.onProfile()}
-          >
+          <Link to="/profile">
             Profile
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#add-edit-job"
-            aria-label="add or edit job"
-            onClick={() => props.onAddJob()}
-            >
-            Add/Edit Job
-          </a>
+          <Link to="/add-job">
+          Add Job
+          </Link>
         </li>
         <li>
-          <a
-            href="#job-collection"
-            aria-label="job collection"
-            onClick={() => props.onJobCollection()}
-          >
+          <Link to="/job-collection">
           Job Collection
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#log-out"
-            aria-label="log out"
-            onClick={() => props.onLogOut()}
-          >
-          Log Out
-          </a>
+          <Link to="/">
+          Log out
+          </Link>
         </li>
       </ul>
     </div>
