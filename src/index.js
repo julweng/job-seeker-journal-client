@@ -6,7 +6,7 @@ import './index.css';
 import './grid.css';
 import Landing from './components/landing-page/landing';
 import Dashboard from './components/dashboard';
-import Profile from './components/profile';
+import Profile from './components/profile-page/profile';
 import AddJob from './components/addJob';
 import JobCollection from './components/jobCollection'
 import EditJob from './components/editJob';
