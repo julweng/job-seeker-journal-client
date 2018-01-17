@@ -1,10 +1,11 @@
 import React from 'react';
+
 import { shallow } from 'enzyme';
 
-import Profile from './profile';
+import SaveButton from './saveButton';
 
-describe('<Profile />', () => {
+describe('<SaveButton />', () => {
   it('Renders without crashing', () => {
-    shallow(<Profile />);
+    shallow(<SaveButton />);
   });
 });
