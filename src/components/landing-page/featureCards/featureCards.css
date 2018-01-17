@@ -1,0 +1,30 @@
+section {
+  min-height: 13rem;
+  padding: 1.2rem;
+  background-color: #FFF;
+}
+
+section:nth-child(even) {
+  background-color: #FFF;
+}
+
+#about div {
+  margin: 1rem 0;
+}
+
+p {
+  margin: 0 auto;
+  margin: 1rem 0;
+}
+
+.fa-user {
+  color: #379392;
+}
+
+.fa-plus-circle {
+  color: #FFD256;
+}
+
+.fa-pencil-square-o {
+  color: #E36397;
+}
