@@ -3,13 +3,6 @@ import React from 'react';
 import './navigation-bar.css';
 import DropDownTopNav from '../dropDownTopNav/dropDownTopNav';
 
-function contentClass(isShow) {
-  if (isShow) {
-    return "smallScreenDisplay";
-  }
-  return "smallScreenHidden";
-}
-
 export default class TopNav extends React.Component {
   constructor(props) {
     super(props);
@@ -18,9 +11,17 @@ export default class TopNav extends React.Component {
   }
 
   handleClick() {
-    this.setState(function(prevState) {
-      return {isShow: !prevState.isShow};
+    this.setState({
+      isShow: !this.state.isShow
     });
+  }
+
+  smallScreenDisplay() {
+    return "smallScreenDisplay";
+  }
+
+  smallScreenHidden() {
+    return "smallScreenHidden";
   }
 
   render() {
@@ -61,7 +62,11 @@ export default class TopNav extends React.Component {
             </a>
           </li>
         </ul>
-        <div className={contentClass(this.state.isShow)}>
+        <div
+        className={this.state.isShow ?
+          this.smallScreenDisplay() : 
+          this.smallScreenHidden()}
+        >
           <DropDownTopNav />
         </div>
       </nav>

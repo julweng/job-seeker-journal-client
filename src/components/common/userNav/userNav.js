@@ -19,8 +19,8 @@ export default class UserNav extends React.Component {
   }
 
   handleClick() {
-    this.setState(function(prevState) {
-      return {isShow: !prevState.isShow};
+    this.setState((state) => {
+      return {isShow: !state.isShow};
     });
   }
 

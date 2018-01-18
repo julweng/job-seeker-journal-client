@@ -24,7 +24,7 @@ export default function DropDownTopNav(props) {
         </li>
         <li>
           <a
-            href="#log-in-demo"
+            href="#auth-form"
             aria-label="log in or demo"
           >
           Log In/Demo

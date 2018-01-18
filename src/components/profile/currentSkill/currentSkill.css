@@ -17,7 +17,7 @@
   text-align: left;
 }
 
-.individual-skill-container:not(:last-child) {
+.individual-skill-container {
   border-bottom: .125rem dotted #282E34;
 }
 

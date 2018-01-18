@@ -1,10 +1,9 @@
 import React from 'react';
 
-import '../../addJob/addJobForm/addJobForm.css';
+import './editJobForm.css';
 
 import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
 import DateInput from '../../common/dateInput/dateInput';
-import AdditionalJobInfo from '../../common/additionalJobInfo/additionalJobInfo';
 import CancelButton from '../../common/cancelButton/cancelButton';
 import ResetButton from '../../common/resetButton/resetButton';
 import SaveButton from '../../common/saveButton/saveButton';
@@ -25,27 +24,59 @@ export default function EditJobForm(props) {
   }
 
   return (
-    <form className="row">
-      <fieldset className="col-12">
-        <JobDetailEntry name={props.title} placeholder={props.titlePlaceholder} />
-        <JobDetailEntry name={props.company} placeholder={props.companyPlaceholder} />
-        <JobDetailEntry name={props.location} placeholder={props.locationPlaceholder} />
-        <AdditionalJobInfo name={props.contact} placeholder={props.contactPlaceholder} />
-        <AdditionalJobInfo name={props.contactEmail} placeholder={props.contactEmailPlaceholder} />
-        <DateInput />
-        <AdditionalJobInfo name={props.referrer} placeholder={props.referrerPlaceholder} />
-        <AdditionalJobInfo name={props.referrerEmail} placeholder={props.referrerEmailPlaceholder} />
+    <form className="row" id="edit-job-form">
+      <fieldset>
         <div className="col-6">
-          {skills}
+          <JobDetailEntry
+            name={props.title}
+            placeholder={props.titlePlaceholder}
+          />
         </div>
         <div className="col-6">
-          {experiences}
+          <JobDetailEntry
+            name={props.company}
+            placeholder={props.companyPlaceholder}
+          />
         </div>
-        <AddProgress />
+
+        <div className="col-6">
+          <JobDetailEntry
+            name={props.location}
+            placeholder={props.locationPlaceholder}
+          />
+        </div>
+
+        <div className="col-6">
+          <DateInput />
+        </div>
+
+
+        <div className="col-12">
+          <div className="col-6">
+            {skills}
+          </div>
+          <div className="col-6">
+            {experiences}
+          </div>
+        </div>
+
+        <div className="col-12">
+          <AddProgress />
+        </div>
+
       </fieldset>
-        <SaveButton />
-        <ResetButton />
-        <CancelButton />
+
+      <div className="row">
+        <div className="col-4">
+          <SaveButton />
+        </div>
+        <div className="col-4">
+          <ResetButton />
+        </div>
+        <div className="col-4">
+          <CancelButton />
+        </div>
+      </div>
     </form>
   );
 }
