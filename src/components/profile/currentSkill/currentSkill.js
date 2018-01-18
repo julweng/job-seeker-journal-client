@@ -29,6 +29,7 @@ export default class CurrentSkill extends React.Component {
   }
 
   render () {
+    if(this.props.skills) {
     const skillData = this.props.skills.map((skill, index) => (
       <div className="col-12 individual-skill-container" data-id={skill.id} key={index}>
         <p key={`${skill.skill}${index}`} className="col-4">
@@ -58,7 +59,7 @@ export default class CurrentSkill extends React.Component {
         </div>
       </div>
     ));
-
+  }
 
     const warning = <p>~* <a
       href="#profile">Add skills</a> to build your profile *~</p>;
