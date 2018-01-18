@@ -5,9 +5,9 @@ import './viewJob.css';
 import JobReq from '../jobReq/jobReq';
 import AnalysisChart from '../analysisChart/analysisChart';
 import ProgressBar from '../progressBar/progressBar';
-import DeleteButton from '../deleteButton/deleteButton';
-import CancelButton from '../cancelButton/cancelButton';
-import EditButton from '../editButton/editButton';
+import DeleteButton from '../../common/deleteButton/deleteButton';
+import CancelButton from '../../common/cancelButton/cancelButton';
+import EditButton from '../../common/editButton/editButton';
 import EditJobForm from '../editJobForm/editJobForm';
 
 export default function ViewJob(props) {

@@ -2,15 +2,15 @@ import React from 'react';
 
 import './addJobForm.css';
 
-import JobDetailEntry from '../jobDetailEntry/jobDetailEntry';
-import DateInput from '../dateInput/dateInput';
-import AdditionalJobInfo from '../additionalJobInfo/additionalJobInfo';
-import AddButton from '../addButton/addButton';
-import ResetButton from '../resetButton/resetButton';
-import SaveButton from '../saveButton/saveButton';
-import SkillEntry from '../skillEntry/skillEntry';
-import ExperienceLevel from '../experienceLevel/experienceLevel';
-import AddProgress from '../addProgress/addProgress';
+import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
+import DateInput from '../../common/dateInput/dateInput';
+import AdditionalJobInfo from '../../common/additionalJobInfo/additionalJobInfo';
+import AddButton from '../../common/addButton/addButton';
+import ResetButton from '../../common/resetButton/resetButton';
+import SaveButton from '../../common/saveButton/saveButton';
+import SkillEntry from '../../common/skillEntry/skillEntry';
+import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
+import AddProgress from '../../common/addProgress/addProgress';
 
 export default function AddJobForm(props) {
   return (
