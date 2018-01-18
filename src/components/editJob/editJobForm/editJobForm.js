@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../addJob-page/addJobForm/addJobForm.css';
+import '../../addJob/addJobForm/addJobForm.css';
 
 import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
 import DateInput from '../../common/dateInput/dateInput';
