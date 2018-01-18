@@ -2,11 +2,11 @@ import React from 'react';
 
 import './addSkillForm.css';
 
-import SkillEntry from '../common/skillEntry/skillEntry';
-import ExperienceLevel from '../common/experienceLevel/experienceLevel';
-import AddButton from '../common/addButton/addButton';
-import ResetButton from '../common/resetButton/resetButton';
-import SaveButton from '../common/saveButton/saveButton';
+import SkillEntry from '../../common/skillEntry/skillEntry';
+import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
+import AddButton from '../../common/addButton/addButton';
+import ResetButton from '../../common/resetButton/resetButton';
+import SaveButton from '../../common/saveButton/saveButton';
 
 export default function AddSkillForm(props) {
   return(

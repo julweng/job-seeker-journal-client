@@ -6,10 +6,10 @@ import './index.css';
 import './grid.css';
 import Landing from './components/landing-page/landing';
 import Dashboard from './components/dashboard/dashboard';
-import Profile from './components/profile-page/profile';
-import AddJob from './components/addJob-page/addJob';
+import Profile from './components/profile/profile';
+import AddJob from './components/addJob/addJob';
 import JobCollection from './components/jobCollection/jobCollection'
-import EditJob from './components/editJob';
+import EditJob from './components/editJob/editJob';
 
 
 const routes = (

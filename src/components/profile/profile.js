@@ -2,8 +2,8 @@ import React from 'react';
 
 import UserNav from '../common/userNav/userNav';
 import UserHeader from '../common/userHeader/userHeader';
-import CurrentSkill from '../../components/currentSkill/currentSkill';
-import AddSkillForm from '../../components/addSkillForm/addSkillForm';
+import CurrentSkill from './currentSkill/currentSkill';
+import AddSkillForm from './addSkillForm/addSkillForm';
 import Footer from '../common/footer/footer';
 
 const headerText = 'Edit Profile';
