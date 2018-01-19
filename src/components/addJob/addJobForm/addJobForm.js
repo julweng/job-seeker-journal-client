@@ -15,21 +15,19 @@ export default class AddJobForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addSkill: false,
+      addSkill: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.setState((state) => {
-      return {
-        addSkill: !state.addSkill,
-      }
+    this.setState({
+      addSkill: !this.state.addSkill
     });
   }
 
-  showForm(editSkill) {
-    if(editSkill) {
+  showForm(addSkill) {
+    if(addSkill) {
       return (
         <div className="col-12">
           <div className="col-6">
@@ -42,6 +40,7 @@ export default class AddJobForm extends React.Component {
       );
     }
   }
+
   render() {
       return (
         <form className="row" id="add-job-form">
@@ -70,7 +69,6 @@ export default class AddJobForm extends React.Component {
               <DateInput />
             </div>
 
-
             <div className="col-12">
               <div className="col-6">
                 <SkillEntry />
@@ -79,6 +77,24 @@ export default class AddJobForm extends React.Component {
                 <ExperienceLevel />
               </div>
             </div>
+            <div className="col-12">
+              <div className="col-6">
+                <SkillEntry />
+              </div>
+              <div className="col-6">
+                <ExperienceLevel />
+              </div>
+            </div>
+            <div className="col-12">
+              <div className="col-6">
+                <SkillEntry />
+              </div>
+              <div className="col-6">
+                <ExperienceLevel />
+              </div>
+            </div>
+              {this.showForm(this.state.addSkill)}
+              {this.showForm(this.state.addSkill)}
               {this.showForm(this.state.addSkill)}
             <div className="col-12">
               <AddProgress />

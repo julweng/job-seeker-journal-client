@@ -11,7 +11,7 @@ export default class AddSkillForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false,
+      editing: false
     }
   }
 
@@ -28,7 +28,7 @@ export default class AddSkillForm extends React.Component {
           <button
             type="button"
             className="add-skill-button"
-            onClick={() => this.setEditing(true)}
+            onClick={()=>this.setEditing(true)}
           >
             +Skills
           </button>
@@ -57,7 +57,7 @@ export default class AddSkillForm extends React.Component {
               <button
                 type="button"
                 className="cancel-add-skill-button"
-                onClick={() => this.setEditing(false)}
+                onClick={()=>this.setEditing(false)}
               >
                 cancel
               </button>

@@ -7,7 +7,7 @@ import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 import ResetButton from '../../common/resetButton/resetButton';
 import SaveButton from '../../common/saveButton/saveButton';
 
-export default class AddSkillForm extends React.Component {
+export default class EditSkillForm extends React.Component {
   render () {
     return (
       <form className="row" id="add-skill-form">

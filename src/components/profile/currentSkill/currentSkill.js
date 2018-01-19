@@ -14,16 +14,14 @@ export default class CurrentSkill extends React.Component {
   }
 
   handleClick() {
-    this.setState((state) => {
-      return {
-        editSkill: !state.editSkill,
-      }
+    this.setState({
+      editSkill: !this.state.editSkill
     });
   }
 
   showForm(editSkill) {
     if(editSkill) {
-        return <EditSkillForm handleClick={this.handleClick}/>;
+        return <EditSkillForm handleClick={this.handleClick} />;
     }
     return <AddSkillForm />;
   }

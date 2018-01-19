@@ -37,3 +37,13 @@
   margin-top: .7rem;
   margin-bottom: .7rem;
 }
+
+.cancel-button-container {
+  text-align: center;
+}
+
+.cancel-button {
+  background-color: #04afed;
+  color: #FFF;
+  width: 70%;
+}
