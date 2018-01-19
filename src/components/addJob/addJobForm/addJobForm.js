@@ -15,20 +15,21 @@ export default class AddJobForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addSkill: 0
+      addSkill: false
     }
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
     this.setState({
-      addSkill: this.state.addSkill + 1
+      addSkill: !this.state.addSkill
     });
     console.log(this.state.addSkill)
   }
 
   showForm(addSkill) {
-    while(addSkill > 0) {
+    if(addSkill) {
+      console.log(this.state.addSkill)
       return (
         <div className="col-12">
           <div className="col-6">
@@ -40,7 +41,6 @@ export default class AddJobForm extends React.Component {
         </div>
       );
     }
-    return <div></div>
   }
 
   render() {

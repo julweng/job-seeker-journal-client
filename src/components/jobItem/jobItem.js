@@ -14,5 +14,14 @@ export default function JobItem(props) {
 }
 
 JobItem.defaultProps = {
-  title: 'front-end web developer'
+  {
+    id: 1,
+    title: 'front-end web developer',
+    date: Date.now()
+  },
+  {
+    id: 2,
+    title: 'lorem',
+    date: Date.now()
+  }
 }
