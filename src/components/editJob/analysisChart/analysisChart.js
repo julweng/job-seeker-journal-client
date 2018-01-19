@@ -17,13 +17,13 @@ const data = [
 
 export default function CompareSkillChart(props) {
   return (
-    <div className="col-6 chart-container">
+    <div className="col-12 chart-container">
       <h4>Skill Chart</h4>
       <p>(years of experience)</p>
       <ResponsiveContainer aspect={2}>
        <RadarChart data={data}>
-        <Radar name="current skills" dataKey="A" stroke="#3AB7FF" fill="#3AB7FF" fillOpacity={0.5}/>
-        <Radar name="required skills" dataKey="B" stroke="#FFD256" fill="#FFD256" fillOpacity={0.5}/>
+        <Radar name="current skills" dataKey="A" stroke="#3AB7FF" fill="#3AB7FF" fillOpacity={0.4}/>
+        <Radar name="required skills" dataKey="B" stroke="#FFD256" fill="#FFD256" fillOpacity={0.4}/>
         <PolarGrid />
         <Legend />
         <PolarAngleAxis dataKey="subject" />

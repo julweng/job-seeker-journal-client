@@ -11,35 +11,26 @@ import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 import AddProgress from '../../common/addProgress/addProgress';
 
-export default function AddJobForm(props) {
-  return (
-    <form className="row" id="add-job-form">
-      <fieldset className="col-12">
-        <div className="col-6">
-          <JobDetailEntry
-            name={props.title}
-            placeholder={props.titlePlaceholder}
-          />
-        </div>
-        <div className="col-6">
-          <JobDetailEntry
-            name={props.company}
-            placeholder={props.companyPlaceholder}
-          />
-        </div>
+export default class AddJobForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addSkill: false,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-        <div className="col-6">
-          <JobDetailEntry
-            name={props.location}
-            placeholder={props.locationPlaceholder}
-          />
-        </div>
+  handleClick() {
+    this.setState((state) => {
+      return {
+        addSkill: !state.addSkill,
+      }
+    });
+  }
 
-        <div className="col-6">
-          <DateInput />
-        </div>
-
-
+  showForm(editSkill) {
+    if(editSkill) {
+      return (
         <div className="col-12">
           <div className="col-6">
             <SkillEntry />
@@ -48,23 +39,64 @@ export default function AddJobForm(props) {
             <ExperienceLevel />
           </div>
         </div>
+      );
+    }
+  }
+  render() {
+      return (
+        <form className="row" id="add-job-form">
+          <fieldset className="col-12">
+            <div className="col-6">
+              <JobDetailEntry
+                name={this.props.title}
+                placeholder={this.props.titlePlaceholder}
+              />
+            </div>
+            <div className="col-6">
+              <JobDetailEntry
+                name={this.props.company}
+                placeholder={this.props.companyPlaceholder}
+              />
+            </div>
 
-        <div className="col-12">
-          <AddProgress />
-        </div>
+            <div className="col-6">
+              <JobDetailEntry
+                name={this.props.location}
+                placeholder={this.props.locationPlaceholder}
+              />
+            </div>
 
-      </fieldset>
-      <div className="col-4">
-        <SaveButton />
-      </div>
-      <div className="col-4">
-        <AddButton />
-      </div>
-      <div className="col-4">
-        <ResetButton />
-      </div>
-    </form>
-  );
+            <div className="col-6">
+              <DateInput />
+            </div>
+
+
+            <div className="col-12">
+              <div className="col-6">
+                <SkillEntry />
+              </div>
+              <div className="col-6">
+                <ExperienceLevel />
+              </div>
+            </div>
+              {this.showForm(this.state.addSkill)}
+            <div className="col-12">
+              <AddProgress />
+            </div>
+
+          </fieldset>
+          <div className="col-4">
+            <SaveButton />
+          </div>
+          <div className="col-4">
+            <AddButton handleClick={this.handleClick} />
+          </div>
+          <div className="col-4">
+            <ResetButton />
+          </div>
+        </form>
+    );
+  }
 }
 
 AddJobForm.defaultProps = {

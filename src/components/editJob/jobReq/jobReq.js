@@ -1,8 +1,7 @@
 import React from 'react';
 
 import './jobReq.css';
-
-import JobDetail from '../jobDetail/jobDetail';
+import ProgressBar from '../progressBar/progressBar';
 
 export default function JobReq(props) {
   let jobReqs = [];
@@ -12,12 +11,16 @@ export default function JobReq(props) {
     )
   }
   return (
-    <div className="col-6">
+    <div className="col-12 job-req-container">
+    <div className="col-12">
       <h4>Job Requirements</h4>
+    </div>
+      <div className="col-12">
         <ul className="job-req-list-container">
           {jobReqs}
         </ul>
-        <JobDetail />
+        <ProgressBar />
+      </div>
     </div>
   )
 }

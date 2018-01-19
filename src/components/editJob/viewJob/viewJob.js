@@ -4,7 +4,6 @@ import './viewJob.css';
 
 import JobReq from '../jobReq/jobReq';
 import AnalysisChart from '../analysisChart/analysisChart';
-import ProgressBar from '../progressBar/progressBar';
 import DeleteButton from '../../common/deleteButton/deleteButton';
 import CancelButton from '../../common/cancelButton/cancelButton';
 import EditButton from '../../common/editButton/editButton';
@@ -17,13 +16,24 @@ export default function ViewJob(props) {
         <h3>{props.title}</h3>
         <h4>{props.company}, {props.location}</h4>
       </div>
-      <JobReq />
-      <AnalysisChart />
-      <ProgressBar />
+      <div className="col-12">
+        <div className="col-6">
+          <JobReq />
+        </div>
+      <div className="col-6">
+        <AnalysisChart />
+      </div>
+      </div>
       <div className="col-12 edit-job-button-container">
-        <EditButton />
-        <DeleteButton />
-        <CancelButton />
+        <div className="col-4">
+          <EditButton />
+        </div>
+        <div className="col-4">
+          <DeleteButton />
+        </div>
+        <div className="col-4">
+          <CancelButton />
+        </div>
       </div>
       <div className="col-12">
         <h4>Edit Job</h4>

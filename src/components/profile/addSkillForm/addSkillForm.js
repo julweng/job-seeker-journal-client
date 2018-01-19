@@ -11,7 +11,7 @@ export default class AddSkillForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false
+      editing: false,
     }
   }
 
