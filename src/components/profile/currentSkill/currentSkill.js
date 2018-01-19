@@ -29,8 +29,9 @@ export default class CurrentSkill extends React.Component {
   }
 
   render () {
+    let skillData = [];
     if(this.props.skills) {
-    const skillData = this.props.skills.map((skill, index) => (
+      skillData = this.props.skills.map((skill, index) => (
       <div className="col-12 individual-skill-container" data-id={skill.id} key={index}>
         <p key={`${skill.skill}${index}`} className="col-4">
           {skill.skill}

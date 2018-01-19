@@ -4,13 +4,6 @@ import { Link } from 'react-router-dom';
 import '../topNav/navigation-bar.css';
 import DropDownUserNav from '../dropDownUserNav/dropDownUserNav';
 
-function contentClass(isShow) {
-  if (isShow) {
-    return "smallScreenDisplay";
-  }
-  return "smallScreenHidden";
-}
-
 export default class UserNav extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +12,17 @@ export default class UserNav extends React.Component {
   }
 
   handleClick() {
-    this.setState((state) => {
-      return {isShow: !state.isShow};
+    this.setState({
+      isShow: !this.state.isShow
     });
+  }
+
+  smallScreenDisplay() {
+    return "smallScreenDisplay";
+  }
+
+  smallScreenHidden() {
+    return "smallScreenHidden";
   }
 
   render() {
@@ -62,7 +63,13 @@ export default class UserNav extends React.Component {
             </a>
           </li>
         </ul>
-        <div className={contentClass(this.state.isShow)}>
+        <div
+          className={
+            this.state.isShow ?
+            this.smallScreenDisplay() :
+            this.smallScreenHidden()
+          }
+        >
           <DropDownUserNav />
         </div>
       </nav>

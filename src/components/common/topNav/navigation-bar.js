@@ -63,9 +63,11 @@ export default class TopNav extends React.Component {
           </li>
         </ul>
         <div
-        className={this.state.isShow ?
-          this.smallScreenDisplay() : 
-          this.smallScreenHidden()}
+          className={
+            this.state.isShow ?
+            this.smallScreenDisplay() :
+            this.smallScreenHidden()
+          }
         >
           <DropDownTopNav />
         </div>
