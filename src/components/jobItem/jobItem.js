@@ -4,24 +4,17 @@ import './jobItem.css';
 
 export default function JobItem(props) {
   return (
-    <li className="col-12 job-item">
+    <div className="col-12 job-item">
       <i className="fa fa-caret-right" aria-hidden="true"></i>
       &nbsp;&nbsp;
-      <a href={`#${props.title}`}>{props.title}&nbsp;{props.date}</a>
-    </li>
-
+      <a href={`/${props.id}`}>{props.title}</a>
+      
+    </div>
   );
 }
 
 JobItem.defaultProps = {
-  {
     id: 1,
     title: 'front-end web developer',
-    date: ''
-  },
-  {
-    id: 2,
-    title: 'lorem',
-    date: ''
-  }
-}
+    date: '01/08/2018'
+};

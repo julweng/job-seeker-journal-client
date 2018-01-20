@@ -1,4 +1,4 @@
-import { ADD_SKILL, UPDATE_SKILL, DELETE_SKILL } from '../actions/skill';
+import { ADD_SKILL, UPDATE_SKILL, DELETE_SKILL } from '../actions/crud';
 
 const initialState = {
   skills: [{

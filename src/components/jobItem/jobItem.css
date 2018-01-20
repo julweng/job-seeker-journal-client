@@ -1,4 +1,4 @@
-.job-item {
+.job-item a {
   color: #282E34;
   padding-top: 1%;
   padding-bottom: 1%;
@@ -6,6 +6,10 @@
 }
 
 .job-item:hover {
-  font-size: 1.1rem;
+  font-size: 1rem;
   background-color: #E8E8E8;
+}
+
+.job-item {
+  font-size: 0.9rem;
 }
