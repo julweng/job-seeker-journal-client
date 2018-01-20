@@ -15,3 +15,15 @@
   font-size: 2rem;
   font-weight: bolder;
 }
+
+#user-header-title {
+  margin-top: 6rem;
+  text-align: center;
+  color: #524632;
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: bolder;
+}
+
+#user-header {
+  padding: 1rem;
+}

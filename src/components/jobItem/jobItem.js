@@ -17,11 +17,11 @@ JobItem.defaultProps = {
   {
     id: 1,
     title: 'front-end web developer',
-    date: Date.now()
+    date: ''
   },
   {
     id: 2,
     title: 'lorem',
-    date: Date.now()
+    date: ''
   }
 }

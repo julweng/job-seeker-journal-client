@@ -6,7 +6,10 @@ import DropDownTopNav from '../dropDownTopNav/dropDownTopNav';
 export default class TopNav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isShow: false};
+    this.state = {
+      isShow: false,
+      links: []
+    };
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -16,61 +19,43 @@ export default class TopNav extends React.Component {
     });
   }
 
-  smallScreenDisplay() {
-    return "smallScreenDisplay";
-  }
-
-  smallScreenHidden() {
+  displayDropDown(isShow) {
+    if(isShow) {
+      return "smallScreenDisplay";
+    }
     return "smallScreenHidden";
   }
 
   render() {
+    let links = this.props.links.map((link, index) => (
+      <li className="smallScreenHidden" key={index}>
+        <a
+          href={link.href}
+          aria-label={link.text}
+        >
+          {link.text}
+        </a>
+      </li>
+    ));
     return (
       <nav>
         <ul>
-          <li className="smallScreenHidden">
-            <a
-              href="#about"
-              aria-label="about"
-            >
-              About
-            </a>
-          </li>
-          <li className="smallScreenHidden">
-            <a
-              href="#register"
-              aria-label="register"
-            >
-            Register
-            </a>
-          </li>
-          <li className="smallScreenHidden">
-            <a
-              href="#login-button"
-              aria-label="log in or demo"
-            >
-            Log In/Demo
-            </a>
-          </li>
-          <li className="smallScreenDisplay">
-            <a
-              href="#more"
-              aria-label="more"
-              onClick={this.handleClick}
-            >
-              <i className="fa fa-bars" aria-hidden="true"></i>
-            </a>
-          </li>
-        </ul>
-        <div
-          className={
-            this.state.isShow ?
-            this.smallScreenDisplay() :
-            this.smallScreenHidden()
-          }
-        >
-          <DropDownTopNav />
-        </div>
+        {links}
+        <li className="smallScreenDisplay">
+          <a
+            href="#more"
+            aria-label="more"
+            onClick={this.handleClick}
+          >
+            <i className="fa fa-bars" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+      <div
+        className={this.displayDropDown(this.state.isShow)}
+      >
+        <DropDownTopNav links={this.props.links} />
+      </div>
       </nav>
     )
   }

@@ -28,7 +28,7 @@ export default function MonthlyJobCollections(props) {
   }
 
   return (
-    <div className="row">
+    <div className="row month-collection-container">
       <div className="col-4 month-card-container">
         <h3>Jan</h3>
         <ul className="col-12 job-item-list">
