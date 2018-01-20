@@ -1,0 +1,48 @@
+model scheme
+
+userAuth:
+
+{
+  -id: 123,
+  username: abc,
+  password: 321
+}
+
+
+userdata:
+
+{
+  _id: 123,
+  username: abc,
+  skills: [
+    {
+      skill: '',
+      exp: 1
+
+    },
+    {
+      skill: '',
+      exp: 2
+    },
+  ],
+  jobs: [
+    {
+      title: title,
+      company: inc,
+      location: USA,
+      skills: [
+        {
+          skill: '',
+          exp:
+        },
+        {
+          skill: '',
+          exp:
+        },
+      ],
+      dateSubmitted: {
+        date: jan/20/2018
+      }
+    }
+  ]
+}

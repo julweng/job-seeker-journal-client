@@ -59,7 +59,7 @@ export default class ViewJob extends React.Component {
             <AnalysisChart />
           </div>
         </div>
-        <div className="row edit-job-button-container">
+        <div className="col-12 edit-job-button-container">
           <div className="col-4">
             <EditButton handleClick={this.handleClick} />
           </div>

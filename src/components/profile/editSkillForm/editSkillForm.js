@@ -6,6 +6,7 @@ import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 import ResetButton from '../../common/resetButton/resetButton';
 import SaveButton from '../../common/saveButton/saveButton';
+import CancelButton from '../../common/cancelButton/cancelButton';
 
 export default class EditSkillForm extends React.Component {
   render () {
@@ -27,13 +28,8 @@ export default class EditSkillForm extends React.Component {
               <SaveButton />
             </div>
             <div className="col-4 cancel-add-skill-button-container">
-              <button
-                type="button"
-                className="cancel-add-skill-button"
-                onClick={this.props.handleClick}
-              >
-                cancel
-              </button>
+              <CancelButton handleClick={this.props.handleClick} />
+
             </div>
             <div className="col-4">
               <ResetButton />

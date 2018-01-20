@@ -15,23 +15,59 @@ export default class AddJobForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addSkill: false
-    }
+      addSkill: 0,
+    };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
     this.setState({
-      addSkill: !this.state.addSkill
+      addSkill: this.state.addSkill + 1
     });
     console.log(this.state.addSkill)
   }
 
   showForm(addSkill) {
-    if(addSkill) {
-      console.log(this.state.addSkill)
-      return (
+    let skillForm = [];
+    for(let i = 0; i < addSkill; i++) {
+      skillForm.push(
         <div className="col-12">
+          <div className="col-6">
+            <SkillEntry />
+          </div>
+          <div className="col-6">
+            <ExperienceLevel />
+          </div>
+        </div>
+      )
+    }
+    return skillForm
+  }
+/*
+  handleClick() {
+    this.setState({
+      ...this.state,
+      skills: [...this.state.skills, newSkill] //add empty array
+    });
+  }
+*/
+/* showForm() { return this.state.skills.map( (s, key) =>
+    <SkillForm key={key} skill={s} updateSkill={this.updateSkill} />
+    <div className="col-12">
+      <div className="col-6">
+        <SkillEntry />
+      </div>
+      <div className="col-6">
+        <ExperienceLevel />
+      </div>
+    </div>
+  }
+*/
+  render() {
+    const addJobSkill = [];
+    for(let i = 0; i < this.state.addSkill; i++) {
+      addJobSkill.push(
+        <div className="col-12" key={i}>
           <div className="col-6">
             <SkillEntry />
           </div>
@@ -41,9 +77,6 @@ export default class AddJobForm extends React.Component {
         </div>
       );
     }
-  }
-
-  render() {
       return (
         <form className="row" id="add-job-form">
           <fieldset className="col-12">
@@ -79,23 +112,9 @@ export default class AddJobForm extends React.Component {
                 <ExperienceLevel />
               </div>
             </div>
-            <div className="col-12">
-              <div className="col-6">
-                <SkillEntry />
-              </div>
-              <div className="col-6">
-                <ExperienceLevel />
-              </div>
-            </div>
-            <div className="col-12">
-              <div className="col-6">
-                <SkillEntry />
-              </div>
-              <div className="col-6">
-                <ExperienceLevel />
-              </div>
-            </div>
-              {this.showForm(this.state.addSkill)}
+
+            {addJobSkill}
+
             <div className="col-12">
               <AddProgress />
             </div>

@@ -52,21 +52,6 @@ export default class EditJobForm extends React.Component {
     console.log(this.state.addSkill)
   }
 
-  showForm(addSkill) {
-    while(addSkill > 0) {
-      return (
-        <div className="col-12">
-          <div className="col-6">
-            <SkillEntry />
-          </div>
-          <div className="col-6">
-            <ExperienceLevel />
-          </div>
-        </div>
-    );
-  }
-}
-
   render() {
     let skills = [];
     let experiences = [];
@@ -76,6 +61,19 @@ export default class EditJobForm extends React.Component {
       experiences = this.state.experiences.map((experience, index) =>
         <ExperienceLevel months={experience.months} years={experience.years} key={index} />
       )
+    const addJobSkill = [];
+    for(let i = 0; i < this.state.addSkill; i++) {
+      addJobSkill.push(
+        <div className="col-12" key={`add-skill-container-${i}`}>
+          <div className="col-6">
+            <SkillEntry />
+          </div>
+          <div className="col-6">
+            <ExperienceLevel />
+          </div>
+        </div>
+      )
+    }
 
     return (
       <form className="row" id="edit-job-form">
@@ -113,7 +111,7 @@ export default class EditJobForm extends React.Component {
               {experiences}
             </div>
           </div>
-            {this.showForm(this.state.addSkill)}
+            {addJobSkill}
           <div className="col-12">
             <AddProgress />
           </div>

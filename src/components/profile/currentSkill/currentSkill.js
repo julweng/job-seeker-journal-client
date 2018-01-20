@@ -23,7 +23,7 @@ export default class CurrentSkill extends React.Component {
     if(editSkill) {
         return <EditSkillForm handleClick={this.handleClick} />;
     }
-    return <AddSkillForm />;
+    return <AddSkillForm handleClick={this.handleClick} />;
   }
 
   render () {
