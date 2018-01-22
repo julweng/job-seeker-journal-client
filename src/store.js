@@ -1,3 +1,8 @@
+import { createStore } from 'redux';
+import rootReducer from './reducers/rootReducer';
+
+const store = createStore (rootReducer);
+/*
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
@@ -22,5 +27,5 @@ if (authToken) {
     store.dispatch(setAuthToken(token));
     store.dispatch(refreshAuthToken());
 }
-
+*/
 export default store;

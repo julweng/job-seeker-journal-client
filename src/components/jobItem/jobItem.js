@@ -4,11 +4,10 @@ import './jobItem.css';
 
 export default function JobItem(props) {
   return (
-    <div className="col-12 job-item">
+    <div className="job-item">
       <i className="fa fa-caret-right" aria-hidden="true"></i>
       &nbsp;&nbsp;
-      <a href={`/${props.id}`}>{props.title}</a>
-      
+      <a href={`/${props.id}`}>{props.company}: {props.title}</a>
     </div>
   );
 }
@@ -16,5 +15,5 @@ export default function JobItem(props) {
 JobItem.defaultProps = {
     id: 1,
     title: 'front-end web developer',
-    date: '01/08/2018'
+    company: 'Microsoft'
 };

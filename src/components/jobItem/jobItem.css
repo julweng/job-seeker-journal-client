@@ -3,13 +3,19 @@
   padding-top: 1%;
   padding-bottom: 1%;
   cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 1.2rem;
+  width: 14rem;
 }
 
 .job-item:hover {
-  font-size: 1rem;
   background-color: #E8E8E8;
 }
 
 .job-item {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  width: 100%;
 }

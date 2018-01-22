@@ -6,21 +6,6 @@ import FeatureCards from './featureCards/featureCards';
 import SignUp from './signUp/signUp';
 import Footer from '../common/footer/footer';
 
-const links = [
-  {
-    text: 'About',
-    href: '#about',
-  },
-  {
-    text: 'Register',
-    href: '#register'
-  },
-  {
-    text: 'Log In/Demo',
-    href: '#login-button'
-  }
-];
-
 const header = {
   headerId: 'landing-header',
   h1Id: 'app-title',
@@ -31,7 +16,7 @@ const header = {
 export default function Landing() {
     return (
         <div>
-          <TopNav links={links} />
+          <TopNav />
           <main role="main">
             <Header
               headerId={header.headerId}

@@ -22,17 +22,19 @@ export default class MonthlyJobCollections extends React.Component {
         <JobItem
           id={job.id}
           title={job.title}
-          date={job.date}
+          company={job.company}
         />
       </li>
     )
 
     return (
       <div className="col-12 month-card-container">
-        <h3>{this.props.month}</h3>
-        <ul className="col-4 job-item-list">
-          {jobs}
-        </ul>
+        <div className="col-4 month-collection-container">
+          <h3>{this.props.month}</h3>
+          <ul className="col-12 job-item-list">
+            {jobs}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -43,12 +45,12 @@ MonthlyJobCollections.defaultProps = {
     {
       id: 1,
       title: 'front-end web developer',
-      date: '01/08/2018'
+      company: 'illumina'
     },
     {
       id: 2,
       title: 'front-end web developer',
-      date: '01/18/2018'
+      company: 'amazon'
     }
   ]
 }

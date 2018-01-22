@@ -5,29 +5,6 @@ import Header from '../common/header/header';
 import ViewJob from './viewJob/viewJob';
 import Footer from '../common/footer/footer';
 
-const links = [
-  {
-    text: 'Dashboard',
-    href: '/dashboard'
-  },
-  {
-    text: 'Profile',
-    href: '/profile'
-  },
-  {
-    text: 'Add Job',
-    href: '/add-job'
-  },
-  {
-    text: 'Job Collection',
-    href: '/job-collection'
-  },
-  {
-    text: 'Log out',
-    href: '/'
-  }
-];
-
 const header = {
   headerId: 'user-header',
   h1Id: 'user-header-title',
@@ -38,7 +15,7 @@ const header = {
 export default function EditJob(Props) {
   return (
     <div>
-      <TopNav links={links} />
+      <TopNav />
       <main role="main">
       <Header
         headerId={header.headerId}

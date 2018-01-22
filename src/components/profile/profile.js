@@ -5,28 +5,7 @@ import Header from '../common/header/header';
 import CurrentSkill from './currentSkill/currentSkill';
 import Footer from '../common/footer/footer';
 
-const links = [
-  {
-    text: 'Dashboard',
-    href: '/dashboard'
-  },
-  {
-    text: 'Profile',
-    href: '/profile'
-  },
-  {
-    text: 'Add Job',
-    href: '/add-job'
-  },
-  {
-    text: 'Job Collection',
-    href: '/job-collection'
-  },
-  {
-    text: 'Log out',
-    href: '/'
-  }
-];
+
 
 const skills = [
   {
@@ -57,7 +36,7 @@ const header = {
 export default function Profile(Props) {
   return (
     <div>
-      <TopNav links={links} />
+      <TopNav />
       <main role="main">
         <Header
           headerId={header.headerId}
