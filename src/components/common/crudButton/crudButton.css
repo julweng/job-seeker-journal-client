@@ -1,0 +1,44 @@
+.big-button-container {
+  text-align: center;
+}
+
+.big-button-container button {
+  width: 70%;
+  height: 1.8rem;
+  padding: 0.3rem;
+  margin-top: .7rem;
+  margin-bottom: .7rem;
+}
+
+.add-button {
+  background-color: #FFD256;
+  color: #282E34;
+}
+
+.cancel-button {
+  background-color: #04afed;
+  color: #FFF;
+}
+
+.reset-button {
+  background-color: #FFAFB6;
+  color: #000;
+}
+
+.save-button {
+  background-color: #379392;
+  color: #FFF;
+}
+
+.delete-skill-button {
+  color: #E36397;
+}
+
+.edit-skill-button {
+  color: #1374C4;
+}
+
+.edit-skill-button, .delete-skill-button {
+  margin-top: 1rem;
+  background-color: transparent;
+}

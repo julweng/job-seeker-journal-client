@@ -10,10 +10,3 @@ export default function Header(props) {
     </header>
   );
 }
-
-Header.defaultProps = {
-  headerId: '',
-  h1Id: '',
-  h1Text: '',
-  h2Text: ''
-}

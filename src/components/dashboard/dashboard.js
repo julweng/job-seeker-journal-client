@@ -5,23 +5,17 @@ import Header from '../common/header/header';
 import SkillChart from './skillChart/skillChart'
 import ProgressBarChart from './progressBarChart/progressBarChart';
 import Footer from '../common/footer/footer';
+import { connect } from 'react-redux';
 
-const header = {
-  headerId: 'user-header',
-  h1Id: 'user-header-title',
-  h1Text: 'Profile Summary',
-  h2Text: ''
-}
-
-export default function Dashboard(props) {
+export function Dashboard(props) {
   return (
     <div>
       <TopNav />
       <main role="main">
       <Header
-        headerId={header.headerId}
-        h1Id={header.h1Id}
-        h1Text={header.h1Text}
+        headerId={props.header.headerId}
+        h1Id={props.header.h1Id}
+        h1Text={props.header.h1Text}
       />
         <SkillChart />
         <ProgressBarChart />
@@ -29,4 +23,20 @@ export default function Dashboard(props) {
       <Footer />
     </div>
   );
+}
+
+const mapStateToProps = state => ({
+  header: state.markup.header.dashboard
+});
+
+export default connect(mapStateToProps)(Dashboard);
+
+Dashboard.defaultProps = {
+  header: {
+    dashboard: {
+      headerId: '',
+      h1Id: '',
+      h1Text: ''
+    }
+  }
 }

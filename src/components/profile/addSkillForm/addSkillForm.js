@@ -4,38 +4,12 @@ import './addSkillForm.css';
 
 import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
-import ResetButton from '../../common/resetButton/resetButton';
-import SaveButton from '../../common/saveButton/saveButton';
+import CrudButton from '../../common/crudButton/crudButton';
 
-export default class AddSkillForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: false
+export default function AddSkillForm(props) {
+    if(props.addSkill) {
+      return false;
     }
-  }
-
-  setEditing(editing) {
-    this.setState({
-      editing
-    });
-  }
-
-  render() {
-    if(!this.state.editing) {
-      return (
-        <div className="col-12 add-button-container">
-          <button
-            type="button"
-            className="add-skill-button"
-            onClick={()=>this.setEditing(true)}
-          >
-            +Skills
-          </button>
-        </div>
-      );
-    }
-
     return (
       <form className="row" id="add-skill-form">
         <div className="col-12" id="form-title-container">
@@ -50,23 +24,29 @@ export default class AddSkillForm extends React.Component {
                 <ExperienceLevel />
               </div>
             </fieldset>
-            <div className="col-4">
-              <SaveButton />
             </div>
-            <div className="col-4 cancel-add-skill-button-container">
-              <button
-                type="button"
-                className="cancel-add-skill-button"
-                onClick={()=>this.setEditing(false)}
-              >
-                cancel
-              </button>
-            </div>
-            <div className="col-4">
-              <ResetButton />
-            </div>
+            <div className="row">
+              <div className="col-4">
+                <CrudButton
+                  type={`submit`}
+                  text={`Save`}
+                  className={`save-button`} />
+              </div>
+              <div className="col-4">
+                <CrudButton
+                  type={`button`}
+                  text={`Cancel`}
+                  className={`cancel-button`}
+                />
+              </div>
+              <div className="col-4">
+                <CrudButton
+                  type={`button`}
+                  text={`Reset`}
+                  className={`reset-button`}
+                />
+              </div>
           </div>
         </form>
     );
   }
-}

@@ -5,23 +5,17 @@ import Header from '../common/header/header';
 import MonthlyJobCollections from './monthlyJobCollections/monthlyJobCollections';
 import MonthButton from './monthButton/monthButton';
 import Footer from '../common/footer/footer';
+import { connect } from 'react-redux';
 
-const header = {
-  headerId: 'user-header',
-  h1Id: 'user-header-title',
-  h1Text: 'Job Collection',
-  h2Text: ''
-}
-
-export default function JobCollection(Props) {
+export function JobCollection(props) {
   return (
     <div>
       <TopNav />
       <main role="main">
       <Header
-        headerId={header.headerId}
-        h1Id={header.h1Id}
-        h1Text={header.h1Text}
+        headerId={props.header.headerId}
+        h1Id={props.header.h1Id}
+        h1Text={props.header.h1Text}
       />
         <section>
           <div className="row">
@@ -37,4 +31,20 @@ export default function JobCollection(Props) {
       <Footer />
     </div>
   );
+}
+
+const mapStateToProps = state => ({
+  header: state.markup.header.jobCollection
+});
+
+export default connect(mapStateToProps)(JobCollection);
+
+JobCollection.defaultProps = {
+  header: {
+    jobCollection: {
+      headerId: '',
+      h1Id: '',
+      h1Text: ''
+    }
+  }
 }

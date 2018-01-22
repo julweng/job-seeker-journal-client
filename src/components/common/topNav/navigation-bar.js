@@ -1,18 +1,14 @@
 import React from 'react';
-import  { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleOpen } from '../../../actions/handler'
-import './navigation-bar.css';
 
+import './navigation-bar.css';
 import DropDownTopNav from '../dropDownTopNav/dropDownTopNav';
 
-class TopNav extends React.Component {
-
-  render() {
-
+export function TopNav(props) {
     let loggedIn = true; //check this later
-    const links = loggedIn ? this.props.markup.userNav : this.props.markup.landingNav;
-
+    const links = loggedIn ? props.nav.userNav : props.nav.landingNav;
     const topNav = (
       <ul>
         {
@@ -31,7 +27,7 @@ class TopNav extends React.Component {
             <a
               href="#more"
               aria-label="more"
-              onClick={() => this.props.toggleOpen(this.props.isOpen)}
+              onClick={() => props.toggleOpen(props.isOpen)}
             >
               <i className="fa fa-bars" aria-hidden="true"></i>
             </a>
@@ -39,7 +35,7 @@ class TopNav extends React.Component {
         </ul>
       );
 
-      const displayDropDown = this.props.isOpen ? 'smallScreenDisplay' : 'smallScreenHidden';
+      const displayDropDown = props.isOpen ? 'smallScreenDisplay' : 'smallScreenHidden';
 
     return (
       <nav>
@@ -50,10 +46,9 @@ class TopNav extends React.Component {
       </nav>
     )
   }
-}
 
 const mapStateToProps = state => ({
-  markup: state.markup,
+  nav: state.markup.nav,
   isOpen: state.handlers.isOpen
 });
 
@@ -62,61 +57,11 @@ const mapDispatchToProps = dispatch => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopNav);
-/*
-   constructor(props) {
-    super(props);
-    this.state = {
-      isShow: false,
-      links: []
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
 
-  handleClick() {
-    this.setState({
-      isShow: !this.state.isShow
-    });
-  }
-
-  displayDropDown(isShow) {
-    if(isShow) {
-      return "smallScreenDisplay";
-    }
-    return "smallScreenHidden";
-  }
-
-  render() {
-    const links = this.state.links.map((link, index) => (
-      <li className="smallScreenHidden" key={index}>
-        <a
-          href={link.href}
-          aria-label={link.text}
-        >
-          {link.text}
-        </a>
-      </li>
-    ));
-    return (
-      <nav>
-        <ul>
-        {links}
-        <li className="smallScreenDisplay">
-          <a
-            href="#more"
-            aria-label="more"
-            onClick={this.handleClick}
-          >
-            <i className="fa fa-bars" aria-hidden="true"></i>
-          </a>
-        </li>
-      </ul>
-      <div
-        className={this.displayDropDown(this.state.isShow)}
-      >
-        <DropDownTopNav links={this.props.links} />
-      </div>
-      </nav>
-    )
-  }
+TopNav.defaultProps = {
+  nav: {
+    userNav: [],
+    landingNav: []
+  },
+  isOpen: false
 }
-*/

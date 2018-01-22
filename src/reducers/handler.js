@@ -1,7 +1,8 @@
-import { TOGGLE_OPEN } from '../actions/handler';
+import { TOGGLE_OPEN, OPEN_ADD_SKILL_FORM } from '../actions/handler';
 
 const initialState = {
-  isOpen: false
+  isOpen: false,
+  addSkill: false
 }
 
 export const handlers = (state = initialState, action) => {
@@ -10,6 +11,12 @@ export const handlers = (state = initialState, action) => {
       return {
         ...state,
         isOpen: !state.isOpen
+      }
+
+    case OPEN_ADD_SKILL_FORM:
+      return {
+        ...state,
+        addSkill: true
       }
     default:
       return state;

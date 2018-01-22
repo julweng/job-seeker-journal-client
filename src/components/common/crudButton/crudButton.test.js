@@ -2,10 +2,10 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import AddButton from './addButton';
+import CrudButton from './crudButton';
 
-describe('<AddButton />', () => {
+describe('<CrudButton />', () => {
   it('Renders without crashing', () => {
-    shallow(<AddButton />);
+    shallow(<CrudButton />);
   });
 });
