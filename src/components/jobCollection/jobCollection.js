@@ -17,6 +17,7 @@ export class JobCollection extends React.Component {
   handleClick(e) {
     console.log(e.currentTarget.id)
       //get request
+      //jobList2.filter(job => moment(job.dateApplied).isBetween(dateStart, dateEnd))
   }
   render() {
     const { header, monthButton } = this.props
