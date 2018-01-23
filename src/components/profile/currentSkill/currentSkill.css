@@ -17,6 +17,6 @@
   text-align: left;
 }
 
-.individual-skill-container {
-  border-bottom: .125rem dotted #282E34;
+.current-skill-container a:hover {
+  font-size: 100%;
 }

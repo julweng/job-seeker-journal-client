@@ -4,12 +4,10 @@ import './editJobForm.css';
 
 import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
 import DateInput from '../../common/dateInput/dateInput';
-import ResetButton from '../../common/resetButton/resetButton';
-import SaveButton from '../../common/saveButton/saveButton';
+import CrudButton from '../../common/crudButton/crudButton';
 import AddProgress from '../../common/addProgress/addProgress';
 import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
-import AddButton from '../../common/addButton/addButton';
 
 export default class EditJobForm extends React.Component {
   constructor(props) {
@@ -120,23 +118,35 @@ export default class EditJobForm extends React.Component {
 
         <div className="row">
           <div className="col-3">
-            <SaveButton />
+          <CrudButton
+            type={`submit`}
+            text={`Save`}
+            className={`save-button`}
+          />
           </div>
           <div className="col-3">
-            <AddButton handleClick={this.handleClick} />
+            <CrudButton
+              type={`button`}
+              text={`+Skill`}
+              className={`add-button`}
+              handleClick={this.handleClick}
+            />
           </div>
           <div className="col-3">
-            <ResetButton />
+            <CrudButton
+              type={`button`}
+              text={`Reset`}
+              className={`reset-button`}
+            />
           </div>
           <div className="col-3 cancel-button-container">
-            <button
-              type="button"
-              className="cancel-button"
+            <CrudButton
+              type={`button`}
+              text={`Cancel`}
+              className={`canel-button`}
               onClick={this.props.handleClick}
-            >
-              Cancel
-            </button>
-          </div>
+              />
+            </div>
         </div>
       </form>
     );

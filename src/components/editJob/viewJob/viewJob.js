@@ -4,9 +4,7 @@ import './viewJob.css';
 
 import JobReq from '../jobReq/jobReq';
 import AnalysisChart from '../analysisChart/analysisChart';
-import DeleteButton from '../../common/deleteButton/deleteButton';
-import CancelButton from '../../common/cancelButton/cancelButton';
-import EditButton from '../../common/editButton/editButton';
+import CrudButton from '../../common/crudButton/crudButton';
 import EditJobForm from '../editJobForm/editJobForm';
 
 export default class ViewJob extends React.Component {
@@ -61,14 +59,27 @@ export default class ViewJob extends React.Component {
         </div>
         <div className="col-12 edit-job-button-container">
           <div className="col-4">
-            <EditButton handleClick={this.handleClick} />
+            <CrudButton
+              type={`button`}
+              className={`edit-button`}
+              text={`Edit`}
+              handleClick={this.handleClick}
+            />
           </div>
           <div className="col-4">
-            <DeleteButton />
+            <CrudButton
+              type={`button`}
+              className={`delete-button`}
+              text={`Delete`}
+            />
           </div>
           <div className="col-4">
             <Link to="/job-collection">
-              <CancelButton />
+              <CrudButton
+                type={`button`}
+                className={`cancel-button`}
+                text={`Cancel`}
+              />
             </Link>
           </div>
         </div>

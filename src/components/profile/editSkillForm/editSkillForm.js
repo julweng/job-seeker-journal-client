@@ -1,15 +1,23 @@
 import React from 'react';
-
-import '../addSkillForm/addSkillForm.css';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { closeEditSkillForm } from '../../../actions/handler';
 import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
-import ResetButton from '../../common/resetButton/resetButton';
-import SaveButton from '../../common/saveButton/saveButton';
-import CancelButton from '../../common/cancelButton/cancelButton';
+import CrudButton from '../../common/crudButton/crudButton';
 
-export default class EditSkillForm extends React.Component {
+export class EditSkillForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCancelClick = this.handleCancelClick.bind(this);
+  }
+
+  handleCancelClick() { this.props.closeEditSkillForm(this.props.editSkill) }
+
   render () {
+    if(!this.props.editSkill) {
+      return false;
+    }
     return (
       <form className="row" id="add-skill-form">
         <div className="col-12" id="form-title-container">
@@ -25,17 +33,45 @@ export default class EditSkillForm extends React.Component {
               </div>
             </fieldset>
             <div className="col-4">
-              <SaveButton />
-            </div>
-            <div className="col-4 cancel-add-skill-button-container">
-              <CancelButton handleClick={this.props.handleClick} />
-
+              <CrudButton
+                type={`button`}
+                text={`Save`}
+                className={`save-button`}
+              />
             </div>
             <div className="col-4">
-              <ResetButton />
+              <CrudButton
+                type={`button`}
+                text={`Cancel`}
+                className={`cancel-button`}
+                handleCancelClick={this.handleCancelClick}
+              />
+            </div>
+            <div className="col-4">
+              <CrudButton
+                type={`button`}
+                text={`Reset`}
+                className={`reset-button`}
+              />
             </div>
           </div>
         </form>
-    );
+    )
   }
+}
+
+const mapStateToProps = state => ({
+  editSkill: state.handlers.editSkill,
+  skills: state.markup.skills
+});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    closeEditSkillForm: closeEditSkillForm
+  }, dispatch));
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditSkillForm);
+
+EditSkillForm.defaultProps = {
+  editSkill: true,
 }

@@ -1,13 +1,24 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { closeAddSkillForm } from '../../../actions/handler';
 import './addSkillForm.css';
 
 import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 import CrudButton from '../../common/crudButton/crudButton';
 
-export default function AddSkillForm(props) {
-    if(props.addSkill) {
+
+export class AddSkillForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCancelClick = this.handleCancelClick.bind(this);
+  }
+
+  handleCancelClick() { this.props.closeAddSkillForm(this.props.addSkill) }
+
+  render() {
+    if(!this.props.addSkill) {
       return false;
     }
     return (
@@ -37,6 +48,7 @@ export default function AddSkillForm(props) {
                   type={`button`}
                   text={`Cancel`}
                   className={`cancel-button`}
+                  handleCancelClick={this.handleCancelClick}
                 />
               </div>
               <div className="col-4">
@@ -50,3 +62,21 @@ export default function AddSkillForm(props) {
         </form>
     );
   }
+}
+
+const mapStateToProps = state => ({
+  addSkill: state.handlers.addSkill,
+  skills: state.markup.skills
+});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    closeAddSkillForm: closeAddSkillForm
+  }, dispatch));
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddSkillForm);
+
+AddSkillForm.defaultProps = {
+  addSkill: true,
+  skills: []
+}

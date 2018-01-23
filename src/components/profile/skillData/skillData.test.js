@@ -2,10 +2,10 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import SaveButton from './saveButton';
+import { SkillData } from './skillData';
 
-describe('<SaveButton />', () => {
+describe('<SkillData />', () => {
   it('Renders without crashing', () => {
-    shallow(<SaveButton />);
+    shallow(<SkillData />);
   });
 });

@@ -4,9 +4,7 @@ import './addJobForm.css';
 
 import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
 import DateInput from '../../common/dateInput/dateInput';
-import AddButton from '../../common/addButton/addButton';
-import ResetButton from '../../common/resetButton/resetButton';
-import SaveButton from '../../common/saveButton/saveButton';
+import CrudButton from '../../common/crudButton/crudButton';
 import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 import AddProgress from '../../common/addProgress/addProgress';
@@ -121,13 +119,26 @@ export default class AddJobForm extends React.Component {
 
           </fieldset>
           <div className="col-4">
-            <SaveButton />
+            <CrudButton
+              type={`submit`}
+              className={`save-button`}
+              text={`Save`}
+            />
           </div>
           <div className="col-4">
-            <AddButton handleClick={this.handleClick} />
+            <CrudButton
+              type={`click`}
+              className={`add-button`}
+              text={`+Skills`}
+              handleClick={this.handleClick}
+            />
           </div>
           <div className="col-4">
-            <ResetButton />
+          <CrudButton
+            type={`click`}
+            className={`reset-button`}
+            text={`Reset`}
+          />
           </div>
         </form>
     );

@@ -42,3 +42,14 @@
   margin-top: 1rem;
   background-color: transparent;
 }
+
+.edit-button {
+  background-color: #379392;
+  color: #FFF;
+}
+
+.delete-button {
+  background-color: #FFAFB6;
+  color: #000;
+  width: 70%;
+}
