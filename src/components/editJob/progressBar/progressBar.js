@@ -3,10 +3,11 @@ import React from 'react';
 import './progressBar.css';
 
 export default function ProgressBar(props) {
+
   let progressBar = [];
   if(props.progress) {
     progressBar = props.progress.map((goal, index) =>
-      <div className="col-3 progress-triangle" key={`${goal}${index}`}>
+      <div className="col-3 progress-triangle" key={`${index}`}>
         {goal}
       </div>
     )

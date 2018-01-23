@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
-import EditJobForm from './editJobForm';
+import { EditJobForm } from './editJobForm';
 
 describe('<EditJobForm />', () => {
   it('Renders without crashing', () => {

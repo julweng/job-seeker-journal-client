@@ -1,79 +1,148 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { closeEditJobForm } from '../../../actions/handler';
 
-import '../../addJob/addJobForm/addJobForm.css';
-
+import './editJobForm.css';
 import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
 import DateInput from '../../common/dateInput/dateInput';
-import AdditionalJobInfo from '../../common/additionalJobInfo/additionalJobInfo';
-import CancelButton from '../../common/cancelButton/cancelButton';
-import ResetButton from '../../common/resetButton/resetButton';
-import SaveButton from '../../common/saveButton/saveButton';
+import CrudButton from '../../common/crudButton/crudButton';
 import AddProgress from '../../common/addProgress/addProgress';
 import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 
-export default function EditJobForm(props) {
-  let skills = [];
-  let experiences = [];
-  if(props) {
-    skills = props.skills.map((skill, index) =>
-      <SkillEntry skill={skill} key={index} />
-    )
-    experiences = props.experiences.map((experience, index) =>
-      <ExperienceLevel months={experience.months} years={experience.years} key={index} />
-    )
+export class EditJobForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCancelClick = this.handleCancelClick.bind(this);
   }
 
-  return (
-    <form className="row">
-      <fieldset className="col-12">
-        <JobDetailEntry name={props.title} placeholder={props.titlePlaceholder} />
-        <JobDetailEntry name={props.company} placeholder={props.companyPlaceholder} />
-        <JobDetailEntry name={props.location} placeholder={props.locationPlaceholder} />
-        <AdditionalJobInfo name={props.contact} placeholder={props.contactPlaceholder} />
-        <AdditionalJobInfo name={props.contactEmail} placeholder={props.contactEmailPlaceholder} />
-        <DateInput />
-        <AdditionalJobInfo name={props.referrer} placeholder={props.referrerPlaceholder} />
-        <AdditionalJobInfo name={props.referrerEmail} placeholder={props.referrerEmailPlaceholder} />
-        <div className="col-6">
-          {skills}
-        </div>
-        <div className="col-6">
-          {experiences}
-        </div>
-        <AddProgress />
-      </fieldset>
-        <SaveButton />
-        <ResetButton />
-        <CancelButton />
-    </form>
-  );
+  handleCancelClick() {
+    this.props.closeEditJobForm(this.props.editJob)
+    console.log(this.props.editJob)}
+
+  jobSkillEntry(editJob, jobSkillCount, jobSkill) {
+    if(editJob && jobSkillCount > 0) {
+      for(let i = 0; i < jobSkillCount; i++) {
+        jobSkill.push(
+          <div className="col-12" key={i}>
+            <div className="col-6">
+              <SkillEntry />
+            </div>
+            <div className="col-6">
+              <ExperienceLevel />
+            </div>
+          </div>
+        )
+      }
+      return jobSkill;
+    }
+    return false;
+  }
+
+  render() {
+    const { job, editJob, jobSkillCount } = this.props;
+
+
+    const skills = job.skills.map((skill, index) =>
+        <SkillEntry skill={skill} key={index} />);
+
+    const experiences = job.experiences.map((experience, index) =>
+        <ExperienceLevel months={experience.months} years={experience.years} key={index} />
+      );
+
+    const jobSkill = [];
+
+    if(editJob && jobSkillCount >= 0) {
+      return (
+        <form className="row" id="edit-job-form">
+          <fieldset>
+            <div className="col-6">
+              <JobDetailEntry
+                placeholder={job.title}
+              />
+            </div>
+            <div className="col-6">
+              <JobDetailEntry
+                placeholder={job.company}
+              />
+            </div>
+
+            <div className="col-6">
+              <JobDetailEntry
+                placeholder={job.location}
+              />
+            </div>
+
+            <div className="col-6">
+              <DateInput />
+            </div>
+
+            <div className="col-12">
+              <div className="col-6">
+                {skills}
+              </div>
+              <div className="col-6">
+                {experiences}
+              </div>
+              {this.jobSkillEntry(editJob, jobSkillCount, jobSkill)}
+            </div>
+            <div className="col-12">
+              <AddProgress />
+            </div>
+          </fieldset>
+
+          <div className="row">
+            <div className="col-4">
+            <CrudButton
+              type={`submit`}
+              text={`Save`}
+              className={`save-button`}
+            />
+            </div>
+            <div className="col-4">
+              <CrudButton
+                type={`button`}
+                text={`Reset`}
+                className={`reset-button`}
+              />
+            </div>
+            <div className="col-4">
+              <CrudButton
+                type={`button`}
+                text={`Cancel`}
+                className={`cancel-button`}
+                handleCancelClick={this.handleCancelClick}
+              />
+              </div>
+          </div>
+        </form>
+      );
+    }
+    return false;
+  }
 }
 
+const mapStateToProps = state => ({
+  editJob: state.handlers.editJob,
+  job: state.user.job,
+  jobSkillCount: state.handlers.jobSkillCount
+});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    closeEditJobForm: closeEditJobForm
+  }, dispatch));
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditJobForm);
+
 EditJobForm.defaultProps = {
-  title: 'Job Title',
-  titlePlaceholder: 'Front-end web developer',
-  company: 'Company',
-  companyPlaceholder: 'Amazon',
-  location: 'Location',
-  locationPlaceholder: 'Seattle, WA',
-  contact: 'Contact',
-  contactPlaceholder: 'Mary Anderson',
-  contactEmail: 'Email',
-  contactEmailPlaceholder: 'manderson@amazon.com',
-  referrer: 'Referrer',
-  referrerPlaceholder: 'Alice Smith',
-  referrerEmail: 'Email',
-  referrerEmailPlaceholder: 'asmith@gmail.com',
-  skills: ['HTML5', 'CSS3'],
-  experiences: [
-    {
-      months: 1,
-      years: 1
-    },
-    {
-      months: 2,
-      years: 1
-    }
-  ]
+  job: {
+    title: '',
+    company: '',
+    location: '',
+    dateApplied: '',
+    skills: [],
+    experiences: []
+  }
 }

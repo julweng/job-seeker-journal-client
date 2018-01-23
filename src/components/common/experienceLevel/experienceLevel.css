@@ -1,14 +1,3 @@
-.date {
-  display: inline-block;
-  text-align: left;
-  font-size: 1rem;
-  color: #524632;
-}
-
-.date-input {
-  width: 100%;
-}
-
-.experience-label {
+#date-month, #date-year {
   text-align: left;
 }

@@ -17,19 +17,6 @@
   text-align: left;
 }
 
-.individual-skill-container:not(:last-child) {
-  border-bottom: .125rem dotted #282E34;
-}
-
-.edit-skill-button, .delete-skill-button {
-  margin-top: 1rem;
-  background-color: transparent;
-}
-
-.delete-skill-button {
-  color: #E36397;
-}
-
-.edit-skill-button {
-  color: #1374C4;
+.current-skill-container a:hover {
+  font-size: 100%;
 }

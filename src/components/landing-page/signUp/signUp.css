@@ -43,3 +43,17 @@
   background-color: #E36397;
   color: #FFF;
 }
+
+@media screen and (min-width: 40rem) {
+
+}
+
+@media screen and (max-width: 40rem) {
+  #auth-form input {
+    width: 50%;
+  }
+  #auth-form button {
+    width: 50%;
+  }
+
+}

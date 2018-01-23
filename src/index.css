@@ -30,7 +30,7 @@ nav, footer {
 }
 
 footer {
-  margin-top: 5rem;
+  margin-top: 8rem;
 }
 
 button:focus {
@@ -55,8 +55,8 @@ input::placeholder {
 /*------------------------------------------------------------------------------
   Animations for typography & form elements
 ------------------------------------------------------------------------------*/
-h1, h2, h3, p, a, input, button, ol, ul, div {
-  transition: all .2s linear;
+h1, h2, h3, p, a, input, button, ol, ul, div, form {
+  transition: all .1s linear;
 }
 
 /*------------------------------------------------------------------------------
@@ -64,8 +64,8 @@ h1, h2, h3, p, a, input, button, ol, ul, div {
 ------------------------------------------------------------------------------*/
 
 @media screen and (min-width: 40rem) {
-  h1, h2, h3, p, a, input, button, ol, ul, div {
-    transition: all .2s linear;
+  h1, h2, h3, p, a, input, button, ol, ul, div, form {
+    transition: all .1s linear;
   }
   .smallScreenDisplay {
     display: none;

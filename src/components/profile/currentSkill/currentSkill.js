@@ -1,59 +1,116 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  openAddSkillForm,
+  closeAddSkillForm,
+} from '../../../actions/handler';
 
 import './currentSkill.css';
+import AddSkillForm from '../addSkillForm/addSkillForm';
+import EditSkillForm from '../editSkillForm/editSkillForm';
+import CrudButton from '../../common/crudButton/crudButton';
+import SkillData from '../skillData/skillData';
 
-export default function CurrentSkill(props) {
-  let skillData = [];
-    if(props.skills) {
-      skillData = props.skills.map((skill, index) =>
-      <div className="col-12 individual-skill-container" key={index}>
-        <p key={`${skill.skill}${index}`} className="col-4">
-          {skill.skill}
-        </p>
-        <p key={`${skill.experience.months}${skill.experience.months}${index}`} className="col-4">
-          {skill.experience.years} years {skill.experience.months} months
-        </p>
-        <div className="col-2" key={`editButton-${index}`}>
-          <button className="edit-skill-button" key={`edit-button${index}`} type="button">Edit</button>
-        </div>
-        <div className="col-2" key={`deleteButton-${index}`}>
-          <button className="delete-skill-button" key={`delete-button${index}`} type="button">Delete</button>
-        </div>
-      </div>
-  )}
-
-  const warning = <p>~* <a
-    href="#profile">Add skills</a> to build your profile *~</p>;
-
-  if(!props.skills || props.skills.length === 0) {
-    return (
-    <div className="row profile-warning-container">
-      <div className="col-12">
-        {warning}
-      </div>
-    </div>
-    );
+export class CurrentSkill extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddClick = this.handleAddClick.bind(this);
   }
 
-  return (
-    <div className="row current-skill-container">
+  handleAddClick(){ this.props.openAddSkillForm(this.props.addSkill) }
+
+  showForm(addSkill, editSkill) {
+    if(addSkill) {
+      return <AddSkillForm />
+    } else if(editSkill) {
+      return <EditSkillForm />
+    } else {
+      return false;
+    }
+  }
+
+  render() {
+    const { skills, addSkill, editSkill } = this.props;
+    const warning = (
       <div className="col-12">
-        <h3>Current Skills</h3>
+        <p>~* <a href="#profile">Add skills</a> to build your profile *~</p>
       </div>
-      <div className="row">
-        <div className="col-4">
-          <p><strong>Skill</strong></p>
+    );
+
+    if(!skills || skills.length === 0) {
+      return (
+        <div className="row profile-warning-container">{warning}</div>
+      )
+    }
+
+    return (
+      <div className="row current-skill-container">
+        <div className="row">
+          <h3>Current Skills</h3>
         </div>
-        <div className="col-4">
-          <p><strong>Experience Level</strong></p>
+        <div className="row">
+          <div className="col-4">
+            <p><strong>Skill</strong></p>
+          </div>
+          <div className="col-4">
+            <p><strong>Experience Level</strong></p>
+          </div>
+          <div className="col-4">
+            <p><strong>Actions</strong></p>
+          </div>
         </div>
-        <div className="col-4">
-          <p><strong>Actions</strong></p>
+        <div className="row">
+          <SkillData />
         </div>
+        <div className="row">
+          <div className="col-4">
+            <CrudButton
+              type={`button`}
+              text={`+Skill`}
+              className={`add-button`} handleAddClick={this.handleAddClick}
+            />
+          </div>
+          <div className="col-4">
+            <CrudButton
+              type={`submit`}
+              text={`Submit`}
+              className={`save-button`}
+            />
+          </div>
+          <div className="col-4">
+            <Link to="/dashboard">
+              <CrudButton
+                type={`button`}
+                text={`Cancel`}
+                className={`cancel-button`}
+              />
+            </Link>
+          </div>
+        </div>
+        {this.showForm(addSkill, editSkill)}
       </div>
-      <div className="row">
-        {skillData}
-      </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  addSkill: state.handlers.addSkill,
+  editSkill: state.handlers.editSkill,
+  skills: state.markup.skills
+});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    openAddSkillForm: openAddSkillForm,
+    closeAddSkillForm: closeAddSkillForm,
+  }, dispatch));
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentSkill);
+
+CurrentSkill.defaultProps = {
+  addSkill: false,
+  editSkill: false,
+  skills: []
 }

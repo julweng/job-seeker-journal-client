@@ -1,0 +1,32 @@
+#edit-job-form {
+  text-align: left;
+}
+
+#edit-job-form fieldset {
+  border: none;
+  border-radius: 0.188rem;
+  margin-bottom: 1rem 0;
+}
+
+#edit-job-form input {
+  width: 90%;
+  border: none;
+  border-bottom: .125rem solid #524632;
+  background-color: transparent;
+  padding: .5rem;
+}
+
+#edit-job-form input:focus {
+  border-bottom: 2px solid #FFD256;
+  outline: none;
+}
+
+#edit-job-form input[type=date] {
+  padding: .3rem;
+}
+
+#edit-job-form label {
+  display: block;
+  color: #524632;
+  margin-top: 1rem;
+}

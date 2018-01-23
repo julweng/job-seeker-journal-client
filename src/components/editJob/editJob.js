@@ -1,18 +1,21 @@
 import React from 'react';
 
-import UserNav from '../common/userNav/userNav';
-import UserHeader from '../common/userHeader/userHeader';
+import TopNav from '../common/topNav/navigation-bar';
+import Header from '../common/header/header';
 import ViewJob from './viewJob/viewJob';
 import Footer from '../common/footer/footer';
+import { connect } from 'react-redux';
 
-const headerText = 'Edit Job';
-
-export default function EditJob(Props) {
+export function EditJob(props) {
   return (
     <div>
-      <UserNav />
+      <TopNav />
       <main role="main">
-        <UserHeader text={headerText}/>
+      <Header
+        headerId={props.header.headerId}
+        h1Id={props.header.h1Id}
+        h1Text={props.header.h1Text}
+      />
         <section>
           <ViewJob />
         </section>
@@ -20,4 +23,20 @@ export default function EditJob(Props) {
       <Footer />
     </div>
     );
+}
+
+const mapStateToProps = state => ({
+  header: state.markup.header.editJob
+});
+
+export default connect(mapStateToProps)(EditJob);
+
+EditJob.defaultProps = {
+  header: {
+    editJob: {
+      headerId: '',
+      h1Id: '',
+      h1Text: ''
+    }
+  }
 }

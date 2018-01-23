@@ -1,3 +1,7 @@
+.month-collection-container {
+  height: 18rem;
+}
+
 .profile-warning-container {
   text-align: center;
 }
@@ -6,41 +10,19 @@
   color: #4CA6EF;
 }
 
-
 .month-card-container {
   margin: 1% 0;
-  height: 16rem;
+  height: 20rem;
 }
 
 .month-card-container h3 {
   text-align: center;
-  margin: 2% 0;
+  margin: 1.5% 0;
   text-decoration: underline #282E34;
 }
 
 .month-card-container:nth-child(-n+3) {
   background-color: #4AC9C7;
-}
-
-.job-item-list {
-  background-color: #FFF;
-  text-overflow: ellipsis;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: 70%;
-  text-align: left;
-  margin: 1% 0;
-}
-
-.job-item a {
-  color: #282E34;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  cursor: pointer;
-}
-
-.job-item:hover {
-  background-color: #E8E8E8;
 }
 
 .month-card-container:nth-child(-n+6):not(:nth-child(-n+3))  {
@@ -53,4 +35,20 @@
 
 .month-card-container:nth-child(-n+12):not(:nth-child(-n+9)):not(:nth-child(-n+6)):not(:nth-child(-n+3)) {
   background-color: #4CA6EF;
+}
+
+.job-item-list {
+  background-color: #FFF;
+  text-overflow: ellipsis;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 80%;
+  text-align: left;
+  margin: 2% 0;
+  padding: 1%
+}
+
+.job-item-list li {
+  margin: 1% 0;
+  text-overflow: ellipsis;
 }

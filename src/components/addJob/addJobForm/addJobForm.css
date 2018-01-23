@@ -5,10 +5,11 @@
 #add-job-form fieldset {
   border: none;
   border-radius: 0.188rem;
+  margin: 1rem 0;
 }
 
 input {
-  width: 100%;
+  width: 90%;
   border: none;
   border-bottom: .125rem solid #524632;
   background-color: transparent;
@@ -35,4 +36,14 @@ input[type=date] {
   padding: 0.3rem;
   margin-top: .7rem;
   margin-bottom: .7rem;
+  width: 70%;
+}
+
+.undo-add-button {
+  background-color: #04afed;
+  color: #FFF;
+}
+.add-button {
+  background-color: #FFD256;
+  color: #282E34;
 }

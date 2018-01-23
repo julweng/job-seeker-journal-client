@@ -1,106 +1,66 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './monthlyJobCollections.css';
+import JobItem from '../../jobItem/jobItem';
 
-export default function MonthlyJobCollections(props) {
-  let jobTitleList = [];
-  if(props.titles) {
-    jobTitleList = props.titles.map((title, index) =>
-      <li className="col-12 job-item" key={index}>
-        <a
-          href={`#${title}`} key={`${title}-${index}`}>
-            &#9656;&nbsp;&nbsp;&nbsp;{title}
-        </a>
+export class MonthlyJobCollections extends React.Component {
+  render() {
+    const { jobList } = this.props;
+    const warning = <p>~*<a href="/add-job">Add jobs</a> to your collection *~</p>;
+
+    if(!jobList || jobList.length === 0) {
+      return (
+      <div className="row profile-warning-container">
+        <div className="col-12">
+          {warning}
+        </div>
+      </div>
+      );
+    }
+
+    const jobs = jobList.map((job, index) =>
+      <li key={index}>
+        <JobItem
+          id={job.id}
+          title={job.title}
+          company={job.company}
+        />
       </li>
     )
-  }
 
-  const warning = <p>~*<a href="#add-edit-job">Add jobs</a> to your collection *~</p>;
-
-  if(!props.titles || props.titles.length === 0) {
     return (
-    <div className="row profile-warning-container">
-      <div className="col-12">
-        {warning}
+      <div className="col-12 month-card-container">
+        <div className="col-4 month-collection-container">
+          <h3>{jobList.month}</h3>
+          <ul className="col-12 job-item-list">
+            {jobs}
+          </ul>
+        </div>
       </div>
-    </div>
     );
   }
+}
 
-  return (
-    <div className="row">
-      <div className="col-4 month-card-container">
-        <h3>Jan</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Feb</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Mar</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Apr</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>May</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Jun</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Jul</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Aug</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Sept</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Oct</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Nov</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-      <div className="col-4 month-card-container">
-        <h3>Dec</h3>
-        <ul className="col-12 job-item-list">
-          {jobTitleList}
-        </ul>
-      </div>
-    </div>
-  );
+const mapStateToProps = state => ({
+  jobList: state.user.jobList,
+});
+
+export default connect(mapStateToProps)(MonthlyJobCollections);
+
+MonthlyJobCollections.defaultProps = {
+  month: '',
+  jobs: [
+    {
+      id: 1,
+      title: 'front-end web developer',
+      company: 'illumina'
+
+    },
+    {
+      id: 2,
+      title: 'front-end web developer',
+      company: 'amazon'
+    }
+  ]
 }
