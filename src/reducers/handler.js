@@ -3,7 +3,8 @@ import {
   OPEN_ADD_SKILL_FORM,
   CLOSE_ADD_SKILL_FORM,
   OPEN_EDIT_SKILL_FORM,
-  CLOSE_EDIT_SKILL_FORM
+  CLOSE_EDIT_SKILL_FORM,
+
 } from '../actions/handler';
 
 const initialState = {
