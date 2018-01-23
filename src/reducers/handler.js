@@ -4,13 +4,16 @@ import {
   CLOSE_ADD_SKILL_FORM,
   OPEN_EDIT_SKILL_FORM,
   CLOSE_EDIT_SKILL_FORM,
-
+  OPEN_EDIT_JOB_FORM,
+  CLOSE_EDIT_JOB_FORM,
 } from '../actions/handler';
 
 const initialState = {
   isOpen: false,
   addSkill: false,
-  editSkill: false
+  editSkill: false,
+  editJob: false,
+  jobSkillCount: 6,
 }
 
 export const handlers = (state = initialState, action) => {
@@ -34,11 +37,22 @@ export const handlers = (state = initialState, action) => {
       return {
         ...state,
         editSkill: true
-      }
+      };
     case CLOSE_EDIT_SKILL_FORM:
       return {
         ...state,
         editSkill: false
+      };
+    case OPEN_EDIT_JOB_FORM:
+      return {
+        ...state,
+        editJob: !state.editJob
+      };
+
+    case CLOSE_EDIT_JOB_FORM:
+      return {
+        ...state,
+        editJob: false
       }
     default:
       return state;

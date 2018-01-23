@@ -32,13 +32,14 @@ export class CurrentSkill extends React.Component {
   }
 
   render() {
+    const { skills, addSkill, editSkill } = this.props;
     const warning = (
       <div className="col-12">
         <p>~* <a href="#profile">Add skills</a> to build your profile *~</p>
       </div>
     );
 
-    if(!this.props.skills || this.props.skills.length === 0) {
+    if(!skills || skills.length === 0) {
       return (
         <div className="row profile-warning-container">{warning}</div>
       )
@@ -88,7 +89,7 @@ export class CurrentSkill extends React.Component {
             </Link>
           </div>
         </div>
-        {this.showForm(this.props.addSkill, this.props.editSkill)}
+        {this.showForm(addSkill, editSkill)}
       </div>
     );
   }

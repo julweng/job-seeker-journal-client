@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './monthlyJobCollections.css';
 import JobItem from '../../jobItem/jobItem';
 
-export default class MonthlyJobCollections extends React.Component {
+export class MonthlyJobCollections extends React.Component {
   render() {
+    const { jobList } = this.props;
     const warning = <p>~*<a href="/add-job">Add jobs</a> to your collection *~</p>;
 
-    if(!this.props.jobs || this.props.jobs.length === 0) {
+    if(!jobList || jobList.length === 0) {
       return (
       <div className="row profile-warning-container">
         <div className="col-12">
@@ -17,7 +19,7 @@ export default class MonthlyJobCollections extends React.Component {
       );
     }
 
-    const jobs = this.props.jobs.map((job, index) =>
+    const jobs = jobList.map((job, index) =>
       <li key={index}>
         <JobItem
           id={job.id}
@@ -30,7 +32,7 @@ export default class MonthlyJobCollections extends React.Component {
     return (
       <div className="col-12 month-card-container">
         <div className="col-4 month-collection-container">
-          <h3>{this.props.month}</h3>
+          <h3>{jobList.month}</h3>
           <ul className="col-12 job-item-list">
             {jobs}
           </ul>
@@ -39,13 +41,21 @@ export default class MonthlyJobCollections extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  jobList: state.user.jobList,
+});
+
+export default connect(mapStateToProps)(MonthlyJobCollections);
+
 MonthlyJobCollections.defaultProps = {
-  month: 'Jan',
+  month: '',
   jobs: [
     {
       id: 1,
       title: 'front-end web developer',
       company: 'illumina'
+
     },
     {
       id: 2,

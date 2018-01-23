@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-    switcc (action.type) {
+    switch (action.type) {
       case: FETCH_PROTECTED_DATA_SUCCESS
         return {
             ...state,

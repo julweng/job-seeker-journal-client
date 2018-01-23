@@ -30,20 +30,3 @@
   color: #524632;
   margin-top: 1rem;
 }
-
-#edit-job-form button {
-  height: 1.8rem;
-  padding: 0.3rem;
-  margin-top: .7rem;
-  margin-bottom: .7rem;
-}
-
-.cancel-button-container {
-  text-align: center;
-}
-
-.cancel-button {
-  background-color: #04afed;
-  color: #FFF;
-  width: 70%;
-}

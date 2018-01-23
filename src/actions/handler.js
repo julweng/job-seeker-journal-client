@@ -45,9 +45,27 @@ export const closeEditSkillForm = editSkill => {
 
 export const OPEN_EDIT_JOB_FORM = 'OPEN_EDIT_JOB_FORM';
 export const openEditJobForm = editJob => {
-  console.log('you clicked on close edit Skill')
+  console.log('you clicked on open edit job')
   return {
     type: OPEN_EDIT_JOB_FORM,
     editJob
+  }
+}
+
+export const CLOSE_EDIT_JOB_FORM = 'CLOSE_EDIT_JOB_FORM';
+export const closeEditJobForm = editJob => {
+  console.log('you clicked on open edit job')
+  return {
+    type: CLOSE_EDIT_JOB_FORM,
+    editJob
+  }
+}
+
+export const ADD_JOB_SKILL_ENTRY = 'ADD_JOB_SKILL_ENTRY';
+export const addJobSkillEntry = jobSkillCount => {
+  console.log('you clicked on add job skill')
+  return {
+    type: ADD_JOB_SKILL_ENTRY,
+    jobSkillCount
   }
 }

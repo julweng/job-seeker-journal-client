@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './addJobForm.css';
+import { connect } from 'react-redux';
 
 import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
 import DateInput from '../../common/dateInput/dateInput';
@@ -9,92 +10,53 @@ import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 import AddProgress from '../../common/addProgress/addProgress';
 
-export default class AddJobForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      addSkill: 0,
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+export class AddJobForm extends React.Component {
 
-  handleClick() {
-    this.setState({
-      addSkill: this.state.addSkill + 1
-    });
-    console.log(this.state.addSkill)
-  }
-
-  showForm(addSkill) {
-    let skillForm = [];
-    for(let i = 0; i < addSkill; i++) {
-      skillForm.push(
-        <div className="col-12">
-          <div className="col-6">
-            <SkillEntry />
+  jobSkillEntry(jobSkillCount, jobSkill) {
+    if(jobSkillCount > 0) {
+      for(let i = 0; i < jobSkillCount; i++) {
+        jobSkill.push(
+          <div className="col-12" key={i}>
+            <div className="col-6">
+              <SkillEntry />
+            </div>
+            <div className="col-6">
+              <ExperienceLevel />
+            </div>
           </div>
-          <div className="col-6">
-            <ExperienceLevel />
-          </div>
-        </div>
-      )
+        )
+      }
+      return jobSkill;
     }
-    return skillForm
+    return false;
   }
-/*
-  handleClick() {
-    this.setState({
-      ...this.state,
-      skills: [...this.state.skills, newSkill] //add empty array
-    });
-  }
-*/
-/* showForm() { return this.state.skills.map( (s, key) =>
-    <SkillForm key={key} skill={s} updateSkill={this.updateSkill} />
-    <div className="col-12">
-      <div className="col-6">
-        <SkillEntry />
-      </div>
-      <div className="col-6">
-        <ExperienceLevel />
-      </div>
-    </div>
-  }
-*/
+
   render() {
-    const addJobSkill = [];
-    for(let i = 0; i < this.state.addSkill; i++) {
-      addJobSkill.push(
-        <div className="col-12" key={i}>
-          <div className="col-6">
-            <SkillEntry />
-          </div>
-          <div className="col-6">
-            <ExperienceLevel />
-          </div>
-        </div>
-      );
+    const jobSkill = [];
+    const { jobFormLabel, jobSkillCount } = this.props;
+    if(!jobFormLabel) {
+      return false;
     }
       return (
         <form className="row" id="add-job-form">
           <fieldset className="col-12">
             <div className="col-6">
               <JobDetailEntry
-                name={this.props.title}
-                placeholder={this.props.titlePlaceholder}
+                name={jobFormLabel.title}
+                placeholder={jobFormLabel.title}
               />
             </div>
             <div className="col-6">
               <JobDetailEntry
-                name={this.props.company}
-                placeholder={this.props.companyPlaceholder}
+                name={jobFormLabel.company}
+                placeholder={jobFormLabel.company}
               />
             </div>
 
             <div className="col-6">
               <JobDetailEntry
-                name={this.props.location}
-                placeholder={this.props.locationPlaceholder}
+                name={jobFormLabel.location}
+                placeholder={jobFormLabel.location}
               />
             </div>
 
@@ -111,26 +73,19 @@ export default class AddJobForm extends React.Component {
               </div>
             </div>
 
-            {addJobSkill}
+            {this.jobSkillEntry(jobSkillCount, jobSkill)}
 
             <div className="col-12">
               <AddProgress />
             </div>
 
           </fieldset>
+          <div className="col-2">&nbsp;</div>
           <div className="col-4">
             <CrudButton
               type={`submit`}
               className={`save-button`}
               text={`Save`}
-            />
-          </div>
-          <div className="col-4">
-            <CrudButton
-              type={`click`}
-              className={`add-button`}
-              text={`+Skills`}
-              handleClick={this.handleClick}
             />
           </div>
           <div className="col-4">
@@ -140,16 +95,22 @@ export default class AddJobForm extends React.Component {
             text={`Reset`}
           />
           </div>
+          <div className="col-2">&nbsp;</div>
         </form>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  jobFormLabel: state.markup.jobFormLabel,
+  jobSkillCount: state.handlers.jobSkillCount
+});
+
+
+export default connect(mapStateToProps)(AddJobForm);
+
 AddJobForm.defaultProps = {
   title: 'Job Title',
-  titlePlaceholder: 'Front-end web developer',
   company: 'Company',
-  companyPlaceholder: 'Amazon',
-  location: 'Location',
-  locationPlaceholder: 'Seattle, WA',
+  location: 'Location'
 }

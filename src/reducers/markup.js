@@ -82,6 +82,12 @@ export default function () {
           years: 1
         }
       }
-    ]
+    ],
+    jobFormLabel: {
+      title: 'Job Title',
+      company: 'Company',
+      location: 'Location'
+    },
+    monthButton: ['Jan-Mar', 'Apr-Jun', 'Jul-Sept', 'Oct-Dec'],
   }
 }

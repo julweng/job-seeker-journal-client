@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { closeEditJobForm } from '../../../actions/handler';
 
 import './editJobForm.css';
-
 import JobDetailEntry from '../../common/jobDetailEntry/jobDetailEntry';
 import DateInput from '../../common/dateInput/dateInput';
 import CrudButton from '../../common/crudButton/crudButton';
@@ -9,146 +11,138 @@ import AddProgress from '../../common/addProgress/addProgress';
 import SkillEntry from '../../common/skillEntry/skillEntry';
 import ExperienceLevel from '../../common/experienceLevel/experienceLevel';
 
-export default class EditJobForm extends React.Component {
+export class EditJobForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: 'Job Title',
-      titlePlaceholder: 'Front-end web developer',
-      company: 'Company',
-      companyPlaceholder: 'Amazon',
-      location: 'Location',
-      locationPlaceholder: 'Seattle, WA',
-      contact: 'Contact',
-      contactPlaceholder: 'Mary Anderson',
-      contactEmail: 'Email',
-      contactEmailPlaceholder: 'manderson@amazon.com',
-      referrer: 'Referrer',
-      referrerPlaceholder: 'Alice Smith',
-      referrerEmail: 'Email',
-      referrerEmailPlaceholder: 'asmith@gmail.com',
-      skills: ['HTML5', 'CSS3'],
-      experiences: [
-        {
-          months: 1,
-          years: 1
-        },
-        {
-          months: 2,
-          years: 1
-        }
-      ],
-      addSkill: 0
-    }
-    this.handleClick = this.handleClick.bind(this);
+    this.handleCancelClick = this.handleCancelClick.bind(this);
   }
 
-  handleClick() {
-    this.setState({
-      addSkill: this.state.addSkill + 1
-    });
-    console.log(this.state.addSkill)
+  handleCancelClick() {
+    this.props.closeEditJobForm(this.props.editJob)
+    console.log(this.props.editJob)}
+
+  jobSkillEntry(editJob, jobSkillCount, jobSkill) {
+    if(editJob && jobSkillCount > 0) {
+      for(let i = 0; i < jobSkillCount; i++) {
+        jobSkill.push(
+          <div className="col-12" key={i}>
+            <div className="col-6">
+              <SkillEntry />
+            </div>
+            <div className="col-6">
+              <ExperienceLevel />
+            </div>
+          </div>
+        )
+      }
+      return jobSkill;
+    }
+    return false;
   }
 
   render() {
-    let skills = [];
-    let experiences = [];
-      skills = this.state.skills.map((skill, index) =>
-        <SkillEntry skill={skill} key={index} />
-      )
-      experiences = this.state.experiences.map((experience, index) =>
+    const { job, editJob, jobSkillCount } = this.props;
+
+
+    const skills = job.skills.map((skill, index) =>
+        <SkillEntry skill={skill} key={index} />);
+
+    const experiences = job.experiences.map((experience, index) =>
         <ExperienceLevel months={experience.months} years={experience.years} key={index} />
-      )
-    const addJobSkill = [];
-    for(let i = 0; i < this.state.addSkill; i++) {
-      addJobSkill.push(
-        <div className="col-12" key={`add-skill-container-${i}`}>
-          <div className="col-6">
-            <SkillEntry />
-          </div>
-          <div className="col-6">
-            <ExperienceLevel />
-          </div>
-        </div>
-      )
-    }
+      );
 
-    return (
-      <form className="row" id="edit-job-form">
-        <fieldset>
-          <div className="col-6">
-            <JobDetailEntry
-              name={this.state.title}
-              placeholder={this.state.titlePlaceholder}
-            />
-          </div>
-          <div className="col-6">
-            <JobDetailEntry
-              name={this.state.company}
-              placeholder={this.state.companyPlaceholder}
-            />
-          </div>
+    const jobSkill = [];
 
-          <div className="col-6">
-            <JobDetailEntry
-              name={this.state.location}
-              placeholder={this.state.locationPlaceholder}
-            />
-          </div>
-
-          <div className="col-6">
-            <DateInput />
-          </div>
-
-
-          <div className="col-12">
+    if(editJob && jobSkillCount >= 0) {
+      return (
+        <form className="row" id="edit-job-form">
+          <fieldset>
             <div className="col-6">
-              {skills}
-            </div>
-            <div className="col-6">
-              {experiences}
-            </div>
-          </div>
-            {addJobSkill}
-          <div className="col-12">
-            <AddProgress />
-          </div>
-
-        </fieldset>
-
-        <div className="row">
-          <div className="col-3">
-          <CrudButton
-            type={`submit`}
-            text={`Save`}
-            className={`save-button`}
-          />
-          </div>
-          <div className="col-3">
-            <CrudButton
-              type={`button`}
-              text={`+Skill`}
-              className={`add-button`}
-              handleClick={this.handleClick}
-            />
-          </div>
-          <div className="col-3">
-            <CrudButton
-              type={`button`}
-              text={`Reset`}
-              className={`reset-button`}
-            />
-          </div>
-          <div className="col-3 cancel-button-container">
-            <CrudButton
-              type={`button`}
-              text={`Cancel`}
-              className={`canel-button`}
-              onClick={this.props.handleClick}
+              <JobDetailEntry
+                placeholder={job.title}
               />
             </div>
-        </div>
-      </form>
-    );
+            <div className="col-6">
+              <JobDetailEntry
+                placeholder={job.company}
+              />
+            </div>
+
+            <div className="col-6">
+              <JobDetailEntry
+                placeholder={job.location}
+              />
+            </div>
+
+            <div className="col-6">
+              <DateInput />
+            </div>
+
+            <div className="col-12">
+              <div className="col-6">
+                {skills}
+              </div>
+              <div className="col-6">
+                {experiences}
+              </div>
+              {this.jobSkillEntry(editJob, jobSkillCount, jobSkill)}
+            </div>
+            <div className="col-12">
+              <AddProgress />
+            </div>
+          </fieldset>
+
+          <div className="row">
+            <div className="col-4">
+            <CrudButton
+              type={`submit`}
+              text={`Save`}
+              className={`save-button`}
+            />
+            </div>
+            <div className="col-4">
+              <CrudButton
+                type={`button`}
+                text={`Reset`}
+                className={`reset-button`}
+              />
+            </div>
+            <div className="col-4">
+              <CrudButton
+                type={`button`}
+                text={`Cancel`}
+                className={`cancel-button`}
+                handleCancelClick={this.handleCancelClick}
+              />
+              </div>
+          </div>
+        </form>
+      );
+    }
+    return false;
+  }
+}
+
+const mapStateToProps = state => ({
+  editJob: state.handlers.editJob,
+  job: state.user.job,
+  jobSkillCount: state.handlers.jobSkillCount
+});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    closeEditJobForm: closeEditJobForm
+  }, dispatch));
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditJobForm);
+
+EditJobForm.defaultProps = {
+  job: {
+    title: '',
+    company: '',
+    location: '',
+    dateApplied: '',
+    skills: [],
+    experiences: []
   }
 }
