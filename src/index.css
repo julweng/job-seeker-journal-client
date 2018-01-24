@@ -31,6 +31,7 @@ nav, footer {
 
 footer {
   margin-top: 8rem;
+  padding-bottom: 3%;
 }
 
 button:focus {
@@ -45,7 +46,7 @@ button {
   cursor: pointer;
   border: none;
   border-radius: 0.188rem;
-  transition-duration: 200ms;
+  transition-duration: 100ms;
 }
 
 input::placeholder {

@@ -1,0 +1,57 @@
+.register-form-container {
+  text-align: center;
+}
+
+#register {
+  text-align: left;
+}
+
+#register button {
+  width: 40%;
+  height: 2rem;
+  margin: 0;
+  background-color: #379392;
+  color: #FFF;
+}
+
+#register input {
+  width: 98%;
+  border: none;
+  border-bottom: .15rem solid #524632;
+  background-color: transparent;
+  padding: .5rem;
+}
+
+#register input:focus {
+  border-bottom: .15rem solid #FFD256;
+  outline: none;
+}
+
+.register-button-container {
+  text-align: center;
+}
+
+#register-button {
+  background-color: #379392;
+  color: #FFF;
+}
+
+#login-button {
+  background-color: #FFD256;
+  color: #282E34;
+}
+
+#demo-button {
+  background-color: #E36397;
+  color: #FFF;
+}
+
+@media screen and (max-width: 40rem) {
+  #register input {
+    width: 100%;
+  }
+  #register button {
+    width: 60%;
+  }
+
+}

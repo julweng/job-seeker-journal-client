@@ -7,7 +7,7 @@ import './navigation-bar.css';
 import DropDownTopNav from '../dropDownTopNav/dropDownTopNav';
 
 export function TopNav(props) {
-    let loggedIn = true; //check this later
+    let loggedIn = false; //check this later
     const links = loggedIn ? props.nav.userNav : props.nav.landingNav;
     const topNav = (
       <ul>

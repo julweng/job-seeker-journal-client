@@ -7,6 +7,8 @@ import store from './store';
 import './index.css';
 import './grid.css';
 import Landing from './components/landing-page/landing';
+import LoginPage from './components/login-page/login-page';
+import RegisterPage from './components/register-page/register-page';
 import Dashboard from './components/dashboard/dashboard';
 import Profile from './components/profile/profile';
 import AddJob from './components/addJob/addJob';
@@ -19,6 +21,8 @@ const routes = (
     <Router>
       <div>
         <Route exact path='/' component={Landing} />
+        <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/register' component={RegisterPage} />
 		    <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/edit-job' component={EditJob} />

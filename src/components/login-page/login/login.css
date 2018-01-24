@@ -1,0 +1,52 @@
+.login-form-container {
+  text-align: center;
+}
+
+#login {
+  text-align: left;
+}
+
+#login button {
+  width: 40%;
+  height: 2rem;
+  margin: 0;
+  background-color: #379392;
+  color: #FFF;
+}
+
+#login input {
+  width: 98%;
+  border: none;
+  border-bottom: .15rem solid #524632;
+  background-color: transparent;
+  padding: .5rem;
+}
+
+#login input:focus {
+  border-bottom: .15rem solid #FFD256;
+  outline: none;
+}
+
+.login-button-container {
+  text-align: center;
+}
+
+#login-button {
+  background-color: #FFD256;
+  color: #282E34;
+}
+
+.demo {
+  text-align: center;
+  color: #E36397;
+}
+
+@media screen and (max-width: 40rem) {
+  #login input {
+    width: 100%;
+  }
+  #login button {
+    width: 60%;
+  }
+
+}

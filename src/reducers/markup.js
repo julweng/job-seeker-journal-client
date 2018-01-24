@@ -25,16 +25,16 @@ export default function () {
       }
     ],
     landingNav: [{
-        text: 'About',
-        href: '#about',
+        text: 'Home',
+        href: '/',
       },
       {
         text: 'Register',
-        href: '#register'
+        href: '/register'
       },
       {
         text: 'Log In/Demo',
-        href: '#login-button'
+        href: '/login'
       }]
     },
     header: {

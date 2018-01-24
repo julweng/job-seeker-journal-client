@@ -1,0 +1,12 @@
+.form-input {
+  margin-bottom: 1rem;
+}
+
+.form-input-label {
+  text-align: left;
+}
+
+.form-error, .form-warning {
+  font-size: 0.8rem;
+  color: #E36397;
+}

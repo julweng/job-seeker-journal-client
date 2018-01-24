@@ -1,11 +1,10 @@
 import React from 'react';
+import  { connect } from 'react-redux';
 
 import TopNav from '../common/topNav/navigation-bar';
 import Header from '../common/header/header';
 import FeatureCards from './featureCards/featureCards';
-import SignUp from './signUp/signUp';
 import Footer from '../common/footer/footer';
-import  { connect } from 'react-redux';
 
 export function Landing(props) {
   return (
@@ -19,7 +18,6 @@ export function Landing(props) {
           h2Text={props.header.h2Text}
         />
         <FeatureCards />
-        <SignUp />
       </main>
       <Footer />
     </div>
@@ -28,6 +26,7 @@ export function Landing(props) {
 
 const mapStateToProps = state => ({
   header: state.markup.header.landing
+
 });
 
 export default connect(mapStateToProps)(Landing);
