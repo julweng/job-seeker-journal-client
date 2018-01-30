@@ -4,6 +4,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../../../actions/users';
 import { login } from '../../../actions/auth';
 import { required, nonEmpty, matches, length, isTrimmed } from '../../../validators';
+
 import './signUp.css';
 
 const usernameLength = length({ min: 3, max: 8 });

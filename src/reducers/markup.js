@@ -18,10 +18,6 @@ export default function () {
       {
         text: 'Job Collection',
         href: '/job-collection'
-      },
-      {
-        text: 'Log out',
-        href: '/'
       }
     ],
     landingNav: [{

@@ -5,7 +5,7 @@ import {
   OPEN_EDIT_SKILL_FORM,
   CLOSE_EDIT_SKILL_FORM,
   OPEN_EDIT_JOB_FORM,
-  CLOSE_EDIT_JOB_FORM,
+  CLOSE_EDIT_JOB_FORM
 } from '../actions/handler';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
   addSkill: false,
   editSkill: false,
   editJob: false,
-  jobSkillCount: 6,
+  jobSkillCount: 6
 }
 
 export const handlers = (state = initialState, action) => {

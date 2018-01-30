@@ -1,39 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './store';
 
 import './index.css';
 import './grid.css';
-import Landing from './components/landing-page/landing';
-import LoginPage from './components/login-page/login-page';
-import RegisterPage from './components/register-page/register-page';
-import Dashboard from './components/dashboard/dashboard';
-import Profile from './components/profile/profile';
-import AddJob from './components/addJob/addJob';
-import JobCollection from './components/jobCollection/jobCollection'
-import EditJob from './components/editJob/editJob';
-
-
-const routes = (
-  <Provider store={store}>
-    <Router>
-      <div>
-        <Route exact path='/' component={Landing} />
-        <Route exact path='/login' component={LoginPage} />
-        <Route exact path='/register' component={RegisterPage} />
-		    <Route exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/profile' component={Profile} />
-        <Route exact path='/edit-job' component={EditJob} />
-		    <Route exact path='/add-job' component={AddJob} />
-        <Route exact path='/job-collection' component={JobCollection} />
-      </div>
-    </Router>
-  </Provider>
-);
+import App from './components/app'
 
 ReactDOM.render(
-    routes,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );

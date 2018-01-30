@@ -1,6 +1,6 @@
+import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
-
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
@@ -33,12 +33,18 @@ export const authError = error => ({
     error
 });
 
+export const AUTH_GET_USER_ID_ON_SUCCESS = 'AUTH_GET_USER_ID_ON_SUCCESS';
+export const authGetUserIdOnSuccess = userId => ({
+    type: AUTH_GET_USER_ID_ON_SUCCESS,
+    userId
+});
+
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
-    dispatch(authSuccess(decodedToken.user));
+    dispatch(authSuccess(decodedToken.user)); // currentUser
     saveAuthToken(authToken);
 };
 

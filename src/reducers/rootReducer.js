@@ -10,5 +10,5 @@ export default combineReducers({
   markup: markup,
   user: user,
   form: formReducer,
-  auth: auth
+  auth: auth,
 });

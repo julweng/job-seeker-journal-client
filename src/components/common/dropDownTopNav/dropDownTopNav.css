@@ -6,3 +6,18 @@
   margin-bottom: 7%;
   text-align: center;
 }
+
+#log-out-button {
+  color: #FFF;
+  background-color: transparent;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  border: none;
+}
+
+#log-out-button:hover {
+  color: #F9564F;
+  font-size: 1.2rem;
+  opacity: 1;
+}

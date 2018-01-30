@@ -18,3 +18,18 @@ a:hover {
   color: #FFD256;
   font-size: 1.2rem;
 }
+
+#log-out-button {
+  color: #FFF;
+  background-color: transparent;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  border: none;
+}
+
+#log-out-button:hover {
+  color: #00A7E1;
+  font-size: 1.2rem;
+  opacity: 1;
+}
