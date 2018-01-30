@@ -1,21 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { itemFetchData } from '../../../actions/users';
+import { getSkills } from '../../../actions/users';
+import { bindActionCreators } from 'redux';
 import {
   Radar, RadarChart, PolarGrid,
   ResponsiveContainer, PolarAngleAxis, PolarRadiusAxis
 } from 'recharts';
-import { API_BASE_URL } from '../../../config';
-import { bindActionCreators } from 'redux';
 import './skillChart.css';
 
 export class SkillChart extends React.Component {
   componentDidMount() {
-    const userId = this.props.userId;
-    const url = `${API_BASE_URL}/users/skills/${userId}`;
-    console.log(url)
-    console.log(userId)
+    const user_id = localStorage.getItem('userId')
+    this.props.getSkills(user_id);
   }
   render () {
     let currentSkills = [];
@@ -26,7 +23,7 @@ export class SkillChart extends React.Component {
       return <p>Loading ...</p>;
     } else if (this.props.skills.length === 0) {
       return (
-        <p>You have no recorded skills. Please add some skills! </p>
+        <p>You have no recorded skills. Please add some skills in your profile!</p>
       )
     } else {
       currentSkills = this.props.skills.map(skill => {
@@ -64,16 +61,17 @@ export class SkillChart extends React.Component {
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators ({
-    fetchData: url => itemFetchData(url)
+    getSkills: user_id => getSkills(user_id)
   }, dispatch)
 )
 
 const mapStateToProps = state => {
-return {
-  skills: state.users.items,
-  hasError: state.users.itemHasErrored,
-  isLoading: state.users.itemIsLoading,
-  userId: state.auth.currentUser.id
+  return {
+    skills: state.users.items,
+    hasError: state.users.itemHasErrored,
+    isLoading: state.users.itemIsLoading,
+    currentUser: state.auth.currentUser
+
   }
 }
 

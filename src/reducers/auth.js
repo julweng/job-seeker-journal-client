@@ -3,8 +3,7 @@ import {
     CLEAR_AUTH,
     AUTH_REQUEST,
     AUTH_SUCCESS,
-    AUTH_ERROR,
-    AUTH_GET_USER_ID_ON_SUCCESS
+    AUTH_ERROR
 } from '../actions/auth';
 
 const initialState = {
@@ -12,7 +11,7 @@ const initialState = {
     currentUser: null,
     loading: false,
     error: null,
-    //userId: null
+    userId: null
 };
 
 export const auth = (state = initialState, action) => {
@@ -45,11 +44,6 @@ export const auth = (state = initialState, action) => {
           ...state,
           loading: false,
           error: action.error
-        }
-      case AUTH_GET_USER_ID_ON_SUCCESS:
-        return {
-          ...state,
-          userId: action.userId
         }
       default:
         return state;

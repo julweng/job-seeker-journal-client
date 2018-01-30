@@ -18,7 +18,7 @@ export class SkillData extends React.Component {
       this.props.skills.map((skill, index) => (
         <div className="col-12 individual-skill-container" data-id={skill.id} key={index}>
           <p className="col-4">{skill.skill}</p>
-          <p className="col-4">{skill.experience.years} years {skill.experience.months} months</p>
+          <p className="col-4">{skill.experience} years</p>
           <div className="col-2">
             <CrudButton
               type={`button`}
@@ -42,7 +42,7 @@ export class SkillData extends React.Component {
 
 const mapStateToProps = state => ({
   editSkill: state.handlers.editSkill,
-  skills: state.markup.skills
+  skills: state.users.items
 });
 
 const mapDispatchToProps = dispatch => (

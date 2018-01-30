@@ -1,34 +1,61 @@
 import {
-  ITEM_HAS_ERRORED,
-  ITEM_IS_LOADING,
-  ITEM_FETCH_DATA_SUCCESS
+  GET_SKILL_ERROR,
+  GET_SKILL_SUCCESS,
+  ADD_SKILL,
+  ADD_SKILL_ERROR,
+  UPDATE_SKILL,
+  DELETE_SKILL
+
 } from '../actions/users';
 
 const initialState = {
-  hasErrored: false,
   isLoading: false,
-  item: []
+  item: [],
+  skills: [],
+  err: {}
 }
 
 export const users = (state = initialState, action) => {
   switch (action.type) {
-    case ITEM_HAS_ERRORED:
-      return action.hasError;
-    case ITEM_IS_LOADING:
-      return action.isLoading;
-    case ITEM_FETCH_DATA_SUCCESS:
-      return action.items;
+    case GET_SKILL_ERROR:
+      return {
+        ...state,
+        ...action.err
+      }
+
+    case GET_SKILL_SUCCESS:
+      return {
+        ...state.skills,
+        ...action.skills
+      }
+
+
+    case ADD_SKILL:
+      return  {
+        ...state,
+        skills: [...state.skills, action.skill]
+      }
+
+    case ADD_SKILL_ERROR:
+      return {
+        ...state,
+        ...action.err
+      }
+
+    case UPDATE_SKILL:
+      return {
+        ...state,
+        skills: state.skills.map(skill =>
+        skill.id === action.skill.id ? action.skill : skill)
+       }
+
+    case DELETE_SKILL:
+      return {
+        ...state,
+        skills: state.skills.filter(skill => skill.id !== action.skill.id)
+      };
+
     default:
       return state;
   }
-}
-
-
-export function items(state = initialState, action) {
-  switch (action.type) {
-    case ITEM_FETCH_DATA_SUCCESS:
-      return action.items;
-    default:
-      return state;
-    }
 }

@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   isOpen: false,
-  addSkill: false,
+  addSkill: true,
   editSkill: false,
   editJob: false,
   jobSkillCount: 6

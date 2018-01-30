@@ -13,7 +13,6 @@
 #add-skill-form fieldset {
   border: none;
   border-radius: 0.188rem;
-  background-color: #F4F4F4;
 }
 
 #add-skill-form input:focus {

@@ -15,3 +15,8 @@ export const matches = field => (value, allValues) =>
     field in allValues && value.trim() === allValues[field].trim()
         ? undefined
         : 'Does not match';
+
+export const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
+
+export const minValue = min => value =>
+  value && value < min ? `Must be at least ${min}` : undefined

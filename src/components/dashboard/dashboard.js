@@ -8,10 +8,8 @@ import Footer from '../common/footer/footer';
 import requiresLogin from '../common/requiresLogin/requiresLogin';
 
 export class Dashboard extends React.Component {
-
   render() {
-    const { header, username, userId } = this.props;
-    console.log(userId)
+    const { header, username } = this.props;
     return (
       <div>
         <TopNav />
@@ -31,12 +29,12 @@ export class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { currentUser } = state.auth;
-    return {
-      username: currentUser.username,
-      userId: currentUser.id,
-      header: state.markup.header.dashboard
-    };
+  return {
+    username: state.auth.currentUser.username,
+    currentUser: state.auth.currentUser,
+    header: state.markup.header.dashboard,
+    user: () => localStorage.setItem('userId', state.auth.currentUser.id)
+  };
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
