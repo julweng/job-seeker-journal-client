@@ -4,6 +4,7 @@ import { auth } from './auth';
 import markup from './markup';
 import user from './user';
 import { reducer as formReducer } from 'redux-form';
+import { users } from './users';
 
 export default combineReducers({
   handlers: handlers,
@@ -11,4 +12,5 @@ export default combineReducers({
   user: user,
   form: formReducer,
   auth: auth,
+  users: users
 });

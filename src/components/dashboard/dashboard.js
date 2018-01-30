@@ -10,7 +10,8 @@ import requiresLogin from '../common/requiresLogin/requiresLogin';
 export class Dashboard extends React.Component {
 
   render() {
-    const { header, username } = this.props;
+    const { header, username, userId } = this.props;
+    console.log(userId)
     return (
       <div>
         <TopNav />

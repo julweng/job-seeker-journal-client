@@ -1,4 +1,3 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
@@ -45,6 +44,7 @@ const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(authSuccess(decodedToken.user)); // currentUser
+    dispatch(authGetUserIdOnSuccess(decodedToken.user.id))
     saveAuthToken(authToken);
 };
 

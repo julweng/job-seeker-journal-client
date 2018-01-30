@@ -1,25 +1,29 @@
-import {SubmissionError} from 'redux-form';
+import axios from 'axios';
+import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
-import {normalizeResponseErrors} from './utils';
+import { normalizeResponseErrors } from './utils';
 
-export function skillsHasErrored(bool) {
+export const ITEM_HAS_ERRORED = 'ITEM_HAS_ERRORED';
+export function itemHasErrored(bool) {
   return {
-    type: 'SKILLS_HAS_ERRORED',
+    type: 'ITEM_HAS_ERRORED',
     hasErrored: bool
   };
 }
 
-export function skillsIsLoading(bool) {
+export const ITEM_IS_LOADING = 'ITEM_IS_LOADING';
+export function itemIsLoading(bool) {
   return {
-    type: 'SKILLS_IS_LOADING',
+    type: 'ITEM_IS_LOADING',
     isLoading: bool
   }
 }
 
-export function skillsFetchDataSuccess(skills) {
+export const ITEM_FETCH_DATA_SUCCESS = 'ITEM_FETCH_DATA_SUCCESS';
+export function itemFetchDataSuccess(items) {
   return {
-    type: 'SKILLS_FETCH_DATA_SUCCESS',
-    skills
+    type: 'ITEM_FETCH_DATA_SUCCESS',
+    items
   }
 }
 
@@ -45,27 +49,20 @@ export const registerUser = user => dispatch => {
             }
         });
 };
-/*
-export const getUserSkills = user => dispatch => {
-    return fetch(`${API_BASE_URL}/users/skills/${userId}`, {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .catch(err => {
-            const {reason, message, location} = err;
-            if (reason === 'ValidationError') {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-        });
-};
-*/
+
+// for gets
+export function itemFetchData(url) {
+  return (dispatch) => {
+    dispatch(itemIsLoading(true));
+      axios.get(url)
+        .then((response) => {
+          if (response.status !== 200) {
+            throw Error(response.statusText);
+          }
+          dispatch(itemIsLoading(false));
+            return response;
+          })
+          .then((response) => dispatch(itemFetchDataSuccess(response.data)))
+          .catch(() => dispatch(itemHasErrored(true)));
+        };
+    }

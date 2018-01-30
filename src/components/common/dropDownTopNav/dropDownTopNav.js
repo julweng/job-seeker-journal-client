@@ -54,7 +54,7 @@ const mapStateToProps = state => {
     isOpen: state.handlers.isOpen,
     loggedIn: state.auth.currentUser !== null
   }
-};
+}
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
