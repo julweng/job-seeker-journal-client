@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import Login from '../login/login';
+import  Login  from '../login/login';
 import './logInContainer.css';
 
 export function LogInContainer(props) {

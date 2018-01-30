@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {clearAuth} from '../../../actions/auth';
-import {clearAuthToken} from '../../../local-storage';
+import { clearAuth } from '../../../actions/auth';
+import { clearAuthToken } from '../../../local-storage';
 
 import './dropDownTopNav.css';
 
@@ -25,18 +25,22 @@ export class DropDownTopNav extends React.Component {
   }
 
   render () {
-    const links = this.props.links.map((link, index) => (
+    const links = this.props.loggedIn ? this.props.nav.userNav : this.props.nav.landingNav;
+
+    const menu = (
+      links.map((link, index) => (
       <li key={index}>
         <a href={link.href}>
           {link.text}
         </a>
       </li>
-    ));
+    ))
+  )
 
     return (
       <div className="drop-down-top-nav largeScreenHidden">
         <ul>
-          {links}
+          {menu}
           { this.logOutLink(this.props.loggedIn) }
         </ul>
       </div>
@@ -60,3 +64,10 @@ const mapDispatchToProps = dispatch => (
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropDownTopNav);
+
+DropDownTopNav.defaultProps = {
+  nav: {
+    userNav: [],
+    landingNav: []
+  }
+}

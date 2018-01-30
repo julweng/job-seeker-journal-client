@@ -12,7 +12,7 @@ const initialState = {
     currentUser: null,
     loading: false,
     error: null,
-    userId: null
+    //userId: null
 };
 
 export const auth = (state = initialState, action) => {
