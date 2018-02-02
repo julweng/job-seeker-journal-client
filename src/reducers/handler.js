@@ -5,15 +5,19 @@ import {
   OPEN_EDIT_SKILL_FORM,
   CLOSE_EDIT_SKILL_FORM,
   OPEN_EDIT_JOB_FORM,
-  CLOSE_EDIT_JOB_FORM
+  CLOSE_EDIT_JOB_FORM,
+  LOAD_SKILL_DATA,
+  LOAD_JOB_DATA,
+  TO_REDIRECT
 } from '../actions/handler';
 
 const initialState = {
   isOpen: false,
-  addSkill: true,
+  addSkill: false,
   editSkill: false,
   editJob: false,
-  jobSkillCount: 6
+  jobData: {},
+  redirect: false,
 }
 
 export const handlers = (state = initialState, action) => {
@@ -53,6 +57,23 @@ export const handlers = (state = initialState, action) => {
       return {
         ...state,
         editJob: false
+      };
+
+    case LOAD_SKILL_DATA:
+      return {
+        ...state,
+        skillData: action.skillData
+      };
+
+    case LOAD_JOB_DATA:
+      return {
+        jobData: action.jobData
+      };
+
+    case TO_REDIRECT:
+      return {
+        ...state,
+        redirect: !state.redirect
       }
     default:
       return state;

@@ -43,22 +43,27 @@ export default function () {
       profile: {
         headerId: 'user-header',
         h1Id: 'user-header-title',
-        h1Text: 'Edit Profile',
+        h1Text: 'Edit Profile'
       },
       dashboard: {
         headerId: 'user-header',
         h1Id: 'user-header-title',
-        h1Text: 'Profile Summary',
+        h1Text: 'Profile Summary'
       },
       editJob: {
         headerId: 'user-header',
         h1Id: 'user-header-title',
-        h1Text: 'Edit Job',
+        h1Text: ''
       },
       jobCollection: {
         headerId: 'user-header',
         h1Id: 'user-header-title',
         h1Text: 'Job Collection',
+      },
+      addJob: {
+        headerId: 'user-header',
+        h1Id: 'user-header-title',
+        h1Text: 'Add Job'
       }
     },
     skills: [

@@ -5,9 +5,10 @@ import './jobItem.css';
 export default function JobItem(props) {
   return (
     <div className="job-item">
+      <button id={props.id}>
       <i className="fa fa-caret-right" aria-hidden="true"></i>
-      &nbsp;&nbsp;
-      <a href={`/${props.id}`}>{props.company}: {props.title}</a>
+      &nbsp;
+      {props.company}: {props.title}</button>
     </div>
   );
 }

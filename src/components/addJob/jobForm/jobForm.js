@@ -1,48 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 import { Field, reduxForm, focus } from 'redux-form';
-import Input from '../../common/input/input';
-import { loadData } from '../../../actions/users';
+import Input from '../../common/input/input'
+import DateInput from '../../common/dateInput/dateInput';
+import { postJob } from '../../../actions/users';
 import { bindActionCreators } from 'redux';
 import { required } from '../../../validators';
-import { postJob } from '../../../actions/users';
+import { toRedirect } from '../../../actions/handler';
 import CrudButton from  '../../common/crudButton/crudButton';
-import './editJobForm.css';
+import './jobForm.css';
 
 const user_id = localStorage.getItem('user_id');
 
-const data = {
-  title: 'front-end web developer',
-  company: 'Illumina',
-  location: 'SD, CA',
-  dateApplied: '2018-01-08',
-  progress: 'on-site interview'
-}
 const progress = ['resume submitted', 'phone interview', 'on-site interview', 'offer received']
 
 export class JobForm extends React.Component {
-  componentWillMount() {
-    return this.props.loadData(this.props.data);
-  }
 
   onSubmit(values) {
-    const { title, company, location, link, dateApplied, progress } = values;
-
-    return this.props
-      .dispatch(postJob(user_id, title, company, location, link, dateApplied, progress))
+    const { title, company, location, dateApplied, progress } = values;
+    console.log(title, company, location, new Date(dateApplied), progress)
+    const date = new Date (dateApplied);
+    console.log(date)
+    //this.props.postJob(user_id, title, company, location, date, progress));
+    //this.props.toRedirect(this.props.redirect);
   }
 
   render() {
-    const { hasError, handleSubmit, pristine, submitting, reset } = this.props
+    const { redirect, hasError, handleSubmit, pristine, submitting, reset } = this.props;
 
     if(hasError) {
       return <p>Sorry! Something went horribly wrong </p>
-    }
+    } else if(redirect) {
+      return <Redirect to="/job-collection" />
+    } else {
     return (
       <form className="row" id="add-job-form" onSubmit={handleSubmit(values =>
         this.onSubmit(values)
     )}>
     <fieldset className="col-12">
+      <div className="col-12">
       <div className="col-6">
         <Field
           component={Input}
@@ -63,6 +60,8 @@ export class JobForm extends React.Component {
           validate={[required]}
         />
       </div>
+      </div>
+      <div className="col-12">
       <div className="col-6">
         <Field
           component={Input}
@@ -75,27 +74,30 @@ export class JobForm extends React.Component {
       </div>
       <div className="col-6">
         <Field
-          component={Input}
-          type="date"
+          component={DateInput}
           name="dateApplied"
-          id="date"
+          id="dateApplied"
           label="Date Applied"
           validate={[required]}
         />
       </div>
-      <div className="col-4">&nbsp;</div>
-      <div className="col-4">
-        <label>Job Application Progress </label>
-          <Field name="progress" component="select">
-            <option value="">Select your progress...</option>
-            {progress.map(progressOption => (
-              <option value={progressOption} key={progressOption}>
-                {progressOption}
-              </option>
-            ))}
-          </Field>
+      </div>
+      <div className="col-12">
+        {
+          progress.map(progressOption => (
+            <div className="col-3 progress-container" key={progressOption}>
+            <label>{progressOption}</label>
+              <Field
+                name="progress"
+                component="input"
+                type="radio"
+                value={`${progressOption}`}
+                validate={[required]}
+              />
+            </div>
+          ))
+        }
         </div>
-        <div className="col-4">&nbsp;</div>
           </fieldset>
           <div className="col-4">
             <CrudButton
@@ -104,27 +106,30 @@ export class JobForm extends React.Component {
               text={`Save`}
               disabled={pristine || submitting}
             />
+
           </div>
           <div className="col-4">
+          <Link to="/job-collection">
           <CrudButton
             type={`click`}
             className={`cancel-button`}
             text={`Cancel`}
           />
+          </Link>
           </div>
           <div className="col-4">
           <div className="col-12 big-button-container">
-            <button id="reset" disabled={pristine || submitting} onClick={reset}
+            <button className="reset-button" disabled={pristine || submitting} onClick={reset}
             >
               Reset
             </button>
           </div>
           </div>
         </form>
-  )
+      )}
+    }
 }
-}
-
+// Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 JobForm = reduxForm({
   form: 'addJobForm',
   enableReinitialize: true,
@@ -135,13 +140,13 @@ JobForm = reduxForm({
 const mapStateToProps = state => ({
   jobs: state.users.jobs,
   error: state.user.error,
-  initialValues: state.users.data
+  redirect: state.handlers.redirect
 })
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     postJob: postJob,
-    loadData: loadData
+    toRedirect: toRedirect
   }, dispatch));
 
 JobForm = connect(mapStateToProps, mapDispatchToProps)(JobForm);

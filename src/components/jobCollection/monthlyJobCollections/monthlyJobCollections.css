@@ -1,5 +1,9 @@
 .month-collection-container {
-  height: 18rem;
+  height: 20rem;
+}
+
+#select-month-form fieldset {
+  border: none;
 }
 
 .profile-warning-container {
@@ -10,9 +14,14 @@
   color: #4CA6EF;
 }
 
+.profile-warning-container a {
+  color: #4CA6EF;
+}
+
 .month-card-container {
   margin: 1% 0;
-  height: 20rem;
+  height: 24rem;
+  border-radius: 0.188rem;
 }
 
 .month-card-container h3 {
@@ -21,20 +30,8 @@
   text-decoration: underline #282E34;
 }
 
-.month-card-container:nth-child(-n+3) {
-  background-color: #4AC9C7;
-}
-
-.month-card-container:nth-child(-n+6):not(:nth-child(-n+3))  {
-  background-color: #FFD256;
-}
-
-.month-card-container:nth-child(-n+9):not(:nth-child(-n+6)):not(:nth-child(-n+3)) {
-  background-color: #FFAFB6;
-}
-
-.month-card-container:nth-child(-n+12):not(:nth-child(-n+9)):not(:nth-child(-n+6)):not(:nth-child(-n+3)) {
-  background-color: #4CA6EF;
+.month-card-container {
+  background-color: #379392;
 }
 
 .job-item-list {
@@ -51,4 +48,37 @@
 .job-item-list li {
   margin: 1% 0;
   text-overflow: ellipsis;
+}
+
+.select-style {
+  border: 0.125rem solid #379392;
+  border-radius: 0.188rem;
+  overflow: hidden;
+  background: #379392;
+  padding: 0.5rem 0;
+  color: #FFF
+}
+
+.select-style select {
+  padding: 0.2rem;
+  border: none;
+  box-shadow: none;
+  background: #FFF;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select: focus {
+  outline: none !important;
+}
+
+#send-button {
+  background: transparent;
+  color: #FFF;
+  font-size: 2.3rem;
+  padding-right: 0.5rem;
+}
+
+#send-button i {
+  vertical-align: sub;
 }

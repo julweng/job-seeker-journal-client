@@ -9,7 +9,7 @@ import CrudButton from '../../common/crudButton/crudButton';
 import { required, number, minValue } from '../../../validators';
 import { postSkill } from '../../../actions/users';
 
-const user_id = localStorage.getItem('userId');
+const user_id = localStorage.getItem('user_id');
 
 const minValueZero = minValue(0);
 
@@ -19,9 +19,11 @@ export class AddSkillForm extends React.Component {
     this.handleCancelClick = this.handleCancelClick.bind(this);
   }
 
-  handleCancelClick() { this.props.closeAddSkillForm(this.props.addSkill) }
+  handleCancelClick() { this.props.closeAddSkillForm(this.props.addSkill);
+  }
 
   onSubmit(values) {
+    this.props.closeAddSkillForm(this.props.addSkill);
     const { skill, experience } = values;
     return this.props
       .dispatch(postSkill(user_id, skill, experience))
@@ -39,7 +41,7 @@ export class AddSkillForm extends React.Component {
           this.onSubmit(values)
       )}>
       <div className="col-12" id="form-title-container">
-        <h3>Add/Edit Skills</h3>
+        <h3>Add Skills</h3>
       </div>
         <div className="col-12">
           <fieldset>
@@ -66,11 +68,14 @@ export class AddSkillForm extends React.Component {
           </fieldset>
           </div>
           <div className="row">
+          <div className="col-2">&nbsp;</div>
             <div className="col-4">
               <CrudButton
                 type={`submit`}
                 text={`Save`}
-                className={`save-button`} />
+                className={`save-button`}
+                disabled={this.props.pristine || this.props.submitting}
+              />
             </div>
             <div className="col-4">
               <CrudButton
@@ -80,28 +85,26 @@ export class AddSkillForm extends React.Component {
                 handleCancelClick={this.handleCancelClick}
               />
             </div>
-            <div className="col-4">
-              <CrudButton
-                type={`button`}
-                text={`Reset`}
-                className={`reset-button`}
-              />
-            </div>
+            <div className="col-2">&nbsp;</div>
         </div>
       </form>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  addSkill: state.handlers.addSkill,
-  skills: state.users.skills
-});
+const mapStateToProps = state => {
+  return {
+    addSkill: state.handlers.addSkill,
+    skills: state.users.skills,
+    error: state.users.err,
+    isAddSkill: state.handlers.isAddSKill
+  }
+};
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     closeAddSkillForm: closeAddSkillForm,
-    postSkill: (user_id, skill, experience) => postSkill(user_id, skill, experience)
+    postSkill: postSkill
   }, dispatch));
 
 AddSkillForm = connect(mapStateToProps, mapDispatchToProps)(AddSkillForm);
@@ -111,8 +114,3 @@ export default reduxForm({
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus('skillEntry', Object.keys(errors)[0]))
 })(AddSkillForm);
-
-AddSkillForm.defaultProps = {
-  addSkill: true,
-  skills: []
-}

@@ -11,7 +11,8 @@ export class TopNav extends React.Component {
   logOut() {
     this.props.clearAuth();
     clearAuthToken();
-    console.log(this.props.loggedIn)
+    localStorage.removeItem('userId');
+    localStorage.removeItem('skillId');
     }
 
   logOutLink(loggedIn) {

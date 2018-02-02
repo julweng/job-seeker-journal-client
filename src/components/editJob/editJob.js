@@ -14,7 +14,6 @@ export function EditJob(props) {
       <Header
         headerId={props.header.headerId}
         h1Id={props.header.h1Id}
-        h1Text={props.header.h1Text}
       />
         <section>
           <ViewJob />

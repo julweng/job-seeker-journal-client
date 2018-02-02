@@ -1,18 +1,22 @@
-.job-item a {
+.job-item button {
   color: #282E34;
   padding-top: 1%;
   padding-bottom: 1%;
   cursor: pointer;
-  display: inline-block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  height: 1.2rem;
-  width: 14rem;
+  height: 1.6rem;
+  width: 100%;
+  background: transparent;
+  text-align: left;
+  margin: 0;
 }
 
-.job-item:hover {
+.job-item button:hover {
   background-color: #E8E8E8;
+  color: #000;
+  font-size: 100%;
 }
 
 .job-item {

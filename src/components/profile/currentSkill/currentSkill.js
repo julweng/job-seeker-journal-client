@@ -2,17 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getSkills } from '../../../actions/users';
-import {
-  openAddSkillForm,
-  closeAddSkillForm,
-} from '../../../actions/handler';
-
+import { openAddSkillForm, closeAddSkillForm } from '../../../actions/handler';
 import './currentSkill.css';
 import AddSkillForm from '../addSkillForm/addSkillForm';
 import EditSkillForm from '../editSkillForm/editSkillForm';
 import CrudButton from '../../common/crudButton/crudButton';
 import SkillData from '../skillData/skillData';
+import { getSkills } from '../../../actions/users';
+
+const user_id = localStorage.getItem('user_id');
 
 export class CurrentSkill extends React.Component {
   constructor(props) {
@@ -21,7 +19,6 @@ export class CurrentSkill extends React.Component {
   }
 
   componentDidMount() {
-    const user_id = localStorage.getItem('userId');
     this.props.getSkills(user_id);
   }
 
@@ -29,15 +26,21 @@ export class CurrentSkill extends React.Component {
     this.props.openAddSkillForm(this.props.addSkill)
   }
 
-  showForm(addSkill, editSkill) {
+  showAddSkill(addSkill) {
     if(addSkill) {
       return <AddSkillForm />
-    } else if (editSkill) {
-      return <EditSkillForm />
     }
+    return <div></div>
   }
 
-  noSkill(skills) {
+  showEditSkill(editSkill) {
+    if(editSkill) {
+      return <EditSkillForm />
+    }
+    return <div></div>
+  }
+
+  skillTable(skills) {
     if(!skills || skills.length === 0) {
       return (
         <div className="no-skill-container">
@@ -48,12 +51,21 @@ export class CurrentSkill extends React.Component {
         </div>
       )
     }
-    return false;
+    return (
+      skills.map(skill =>
+        <SkillData
+          skill={skill.skill}
+          experience={skill.experience}
+          id={skill._id} key={`${skill.skill} ${skill.experience}`} />
+    ))
   }
 
   render() {
-    const { skills, addSkill, editSkill } = this.props;
-    console.log(skills)
+    const { skills, addSkill, editSkill, error } = this.props;
+
+    if(error) {
+      return <p>Oops! There was an error loading the items.</p>
+    }
     return (
       <div className="row current-skill-container">
       <div className="row">
@@ -71,22 +83,15 @@ export class CurrentSkill extends React.Component {
         </div>
       </div>
       <div className="row">
-        {this.noSkill(skills)}
-        <SkillData />
+        {this.skillTable(skills)}
       </div>
       <div className="row">
+        <div className="col-2">&nbsp;</div>
         <div className="col-4">
           <CrudButton
             type={`button`}
             text={`+Skill`}
             className={`add-button`} handleAddClick={this.handleAddClick}
-          />
-        </div>
-        <div className="col-4">
-          <CrudButton
-            type={`submit`}
-            text={`Submit`}
-            className={`save-button`}
           />
         </div>
         <div className="col-4">
@@ -98,8 +103,10 @@ export class CurrentSkill extends React.Component {
             />
           </Link>
         </div>
+        <div className="col-2">&nbsp;</div>
       </div>
-        {this.showForm(addSkill, editSkill)}
+        {this.showAddSkill(addSkill)}
+        {this.showEditSkill(editSkill)}
       </div>
     );
   }
@@ -110,8 +117,7 @@ const mapStateToProps = state => {
     addSkill: state.handlers.addSkill,
     editSkill: state.handlers.editSkill,
     skills: state.users.skills,
-    hasError: state.users.itemHasErrored,
-    isLoading: state.users.itemIsLoading
+    error: state.users.err,
   }
 };
 
@@ -119,13 +125,7 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators({
     openAddSkillForm: openAddSkillForm,
     closeAddSkillForm: closeAddSkillForm,
-    getSkills: user_id => getSkills(user_id)
+    getSkills: getSkills,
   }, dispatch));
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentSkill);
-
-CurrentSkill.defaultProps = {
-  addSkill: false,
-  editSkill: false,
-  skills: []
-}

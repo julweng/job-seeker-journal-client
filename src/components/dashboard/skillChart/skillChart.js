@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getSkills } from '../../../actions/users';
+import { getUser, getSkills } from '../../../actions/users';
 import { bindActionCreators } from 'redux';
 import {
   Radar, RadarChart, PolarGrid,
@@ -9,18 +9,21 @@ import {
 } from 'recharts';
 import './skillChart.css';
 
+const username = localStorage.getItem('username');
+
 export class SkillChart extends React.Component {
   componentDidMount() {
-    const user_id = localStorage.getItem('userId')
+    this.props.getUser(username);
+    const user_id = localStorage.getItem('user_id');
+    console.log(user_id)
     this.props.getSkills(user_id);
   }
+
   render () {
     let currentSkills = [];
 
-    if (this.props.hasError) {
-      return <p>Sorry! There was an error loading the items</p>;
-    } else if (this.props.isLoading) {
-      return <p>Loading ...</p>;
+    if (this.props.error) {
+      return <p>Oops! There was an error loading the items.</p>;
     } else if (this.props.skills.length === 0) {
       return (
         <p>You have no recorded skills. Please add some skills in your profile!</p>
@@ -28,26 +31,26 @@ export class SkillChart extends React.Component {
     } else {
       currentSkills = this.props.skills.map(skill => {
         return {
-          id: skill.id,
           skill: skill.skill,
-          experience: skill.experience
+          experience: skill.experience,
+          fullMark: 20
         }
       });
     }
-    console.log(this.props.skills);
+    console.log(currentSkills)
     return (
       <div className="row">
         <div className="col-12 chart-container">
           <h3>Skill Chart</h3>
-          <p>(experience in years)</p>
           <ResponsiveContainer aspect={2}>
     	     <RadarChart data={currentSkills}>
               <PolarGrid />
-              <PolarAngleAxis dataKey='name' />
+              <PolarAngleAxis dataKey='skill' />
               <PolarRadiusAxis/>
               <Radar dataKey='experience' stroke="#FFD256" fill="#FFD256" fillOpacity={0.5}/>
             </RadarChart>
           </ResponsiveContainer>
+          <p>(experience in years)</p>
         </div>
           <div className="col-12 edit-container">
             <Link to="/profile">
@@ -61,16 +64,17 @@ export class SkillChart extends React.Component {
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators ({
-    getSkills: user_id => getSkills(user_id)
+    getUser: getUser,
+    getSkills: getSkills
   }, dispatch)
 )
 
 const mapStateToProps = state => {
   return {
-    skills: state.users.items,
-    hasError: state.users.itemHasErrored,
-    isLoading: state.users.itemIsLoading,
-    currentUser: state.auth.currentUser
+    skills: state.users.skills,
+    error: state.users.err,
+    currentUser: state.auth.currentUser,
+    user: state.users.user
 
   }
 }

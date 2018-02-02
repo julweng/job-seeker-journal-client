@@ -3,25 +3,13 @@ import React from 'react';
 import TopNav from '../common/topNav/navigation-bar';
 import Header from '../common/header/header';
 import MonthlyJobCollections from './monthlyJobCollections/monthlyJobCollections';
-import MonthButton from './monthButton/monthButton';
 import Footer from '../common/footer/footer';
 import { connect } from 'react-redux';
-/*
-*/
-export class JobCollection extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
 
-  handleClick(e) {
-    console.log(e.currentTarget.id)
-      //get request
-      //jobList2.filter(job => moment(job.dateApplied).isBetween(dateStart, dateEnd))
-  }
+export class JobCollection extends React.Component {
   render() {
-    const { header, monthButton } = this.props
-    if(this.props) {
+    const { header } = this.props
+    if(header) {
       return (
         <div>
           <TopNav />
@@ -31,15 +19,8 @@ export class JobCollection extends React.Component {
             h1Id={header.h1Id}
             h1Text={header.h1Text}
           />
-            <section>
-              <div className="row">
-                <p>Select to view job items for a specific month</p>
-                <p>Click the job item to edit</p>
-                <MonthButton months={monthButton} handleClick={this.handleClick} />
-              </div>
-              <div className="row">
-                <MonthlyJobCollections />
-              </div>
+            <section className="row">
+              <MonthlyJobCollections />
             </section>
           </main>
           <Footer />

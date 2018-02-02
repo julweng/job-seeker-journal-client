@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
-import Input from '../../common/input/input';
-import { loadData } from '../../../actions/users';
+import Input from './common/input/input';
+import { load as loadAccount } from '../actions/account';
 import { bindActionCreators } from 'redux';
-import { required } from '../../../validators';
-import { postJob } from '../../../actions/users';
-import CrudButton from  '../../common/crudButton/crudButton';
-import './editJobForm.css';
+import { required, number, minValue } from '../validators';
+import { toRedirect } from '../actions/handler';
+import { postJob } from '../actions/users';
+import CrudButton from  './common/crudButton/crudButton';
+import './addJob/addJobForm/addJobForm.css';
 
 const user_id = localStorage.getItem('user_id');
 
@@ -20,14 +21,15 @@ const data = {
 }
 const progress = ['resume submitted', 'phone interview', 'on-site interview', 'offer received']
 
-export class JobForm extends React.Component {
+export class AddJobForm extends React.Component {
   componentWillMount() {
-    return this.props.loadData(this.props.data);
+    return this.props.load(data);
   }
 
   onSubmit(values) {
     const { title, company, location, link, dateApplied, progress } = values;
-
+    this.props.toRedirect(this.props.redirect);
+    console.log(this.props.toRedirect)
     return this.props
       .dispatch(postJob(user_id, title, company, location, link, dateApplied, progress))
   }
@@ -102,7 +104,6 @@ export class JobForm extends React.Component {
               type={`submit`}
               className={`save-button`}
               text={`Save`}
-              disabled={pristine || submitting}
             />
           </div>
           <div className="col-4">
@@ -114,7 +115,7 @@ export class JobForm extends React.Component {
           </div>
           <div className="col-4">
           <div className="col-12 big-button-container">
-            <button id="reset" disabled={pristine || submitting} onClick={reset}
+            <button id="reset" onClick={reset}
             >
               Reset
             </button>
@@ -124,26 +125,29 @@ export class JobForm extends React.Component {
   )
 }
 }
-
-JobForm = reduxForm({
+// Decorate with reduxForm(). It will read the initialValues prop provided by connect()
+AddJobForm = reduxForm({
   form: 'addJobForm',
   enableReinitialize: true,
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus('addJobForm', Object.keys(errors)[0]))
-})(JobForm)
+})(AddJobForm)
 
+// You have to connect() to any reducers that you wish to connect to yourself
 const mapStateToProps = state => ({
   jobs: state.users.jobs,
   error: state.user.error,
-  initialValues: state.users.data
+  redirect: state.handlers.redirect,
+  initialValues: state.account.data
 })
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     postJob: postJob,
-    loadData: loadData
+    toRedirect: toRedirect,
+    load: loadAccount,
   }, dispatch));
 
-JobForm = connect(mapStateToProps, mapDispatchToProps)(JobForm);
+AddJobForm = connect(mapStateToProps, mapDispatchToProps)(AddJobForm);
 
-export default JobForm
+export default AddJobForm

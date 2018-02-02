@@ -7,28 +7,18 @@
   margin: 1% 0;
 }
 
-.progress-triangle {
-  border: 0.1rem solid #E8E8E8;
-  text-align: center;
-  border: none;
+.progress-check:first-child {
+  color: #36BAC4 ;
 }
 
-.progress-triangle:first-child {
-  background-color: #EDFFF0 ;
+.progress-check:nth-child(2) {
+  color: #2CA39B;
 }
 
-.progress-triangle:nth-child(2) {
-  background-color: #C1FFF3;
+.progress-check:nth-child(3) {
+  color: #087CA7;
 }
 
-.progress-triangle:nth-child(3) {
-  background-color: #B1E9ED;
-}
-
-.progress-triangle:nth-child(4) {
-  background-color: #88DAE0;
-}
-
-.progress-triangle:last-child {
-  background-color: #59D7E0;
+.progress-check:nth-child(4) {
+  color: #004E64;
 }

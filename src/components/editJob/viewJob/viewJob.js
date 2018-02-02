@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { openEditJobForm } from '../../../actions/handler';
-
+import ProgressBar from '../progressBar/progressBar';
 import './viewJob.css';
-import JobReq from '../jobReq/jobReq';
-import AnalysisChart from '../analysisChart/analysisChart';
 import CrudButton from '../../common/crudButton/crudButton';
 import EditJobForm from '../editJobForm/editJobForm';
 
@@ -44,16 +42,15 @@ export class ViewJob extends React.Component {
         <div className="row view-job-container">
           <div className="col-12 view-job-title-container">
             <h3>{job.title}</h3>
-            <h4>{job.company}, {job.location}</h4>
           </div>
           <div className="col-12">
-            <div className="col-6">
-              <JobReq />
-            </div>
-            <div className="col-6">
-              <AnalysisChart />
-            </div>
+            <h4>{job.company}, {job.location}</h4>
+            <p>applied on: {job.dateApplied}</p>
           </div>
+            <div className="col-12">
+              <ProgressBar />
+            </div>
+
           <div className="col-12 edit-job-button-container">
             <div className="col-4">
               <CrudButton

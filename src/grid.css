@@ -32,7 +32,7 @@
   clear: both;
 }
 
-.col-2, .col-3, .col-4, .col-6, .col-8, .col-12 {
+.col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-12 {
   float: left;
 
   /* Gutters:
@@ -46,13 +46,17 @@
 }
 
 /* Mobile defaults */
-.col-2, .col-3, .col-4, .col-6, .col-8, .col-12 {
+.col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-12 {
   width: 100%;
 }
 
 
 /* Non-mobile, grid */
 @media only screen and (min-width: 40rem) {
+  /* 1 column, 1/12 in % */
+  .col-1 {
+    width: calc(1/12 * 100%);
+  }
   /* 2 columns, 2/12 in % */
   .col-2 {
     width: calc(2/12 * 100%);

@@ -6,25 +6,6 @@ import CurrentSkill from './currentSkill/currentSkill';
 import Footer from '../common/footer/footer';
 import { connect } from 'react-redux';
 
-const skills = [
-  {
-    id: '1',
-    skill: 'HTML',
-    experience: {
-      months: 0,
-      years: 1
-    }
-  },
-  {
-    id: '2',
-    skill: 'CSS3',
-    experience: {
-      months: 0,
-      years: 1
-    }
-  }
-];
-
 export function Profile(props) {
   return (
     <div>
@@ -36,7 +17,7 @@ export function Profile(props) {
           h1Text={props.header.h1Text}
         />
         <section>
-          <CurrentSkill skills={skills}/>
+          <CurrentSkill />
         </section>
       </main>
       <Footer />

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
-import { AddJobForm } from './addJobForm';
+import { JobForm } from './jobForm';
 
-describe('<AddJobForm />', () => {
+describe('<JobForm />', () => {
   it('Renders without crashing', () => {
-    shallow(<AddJobForm />);
+    shallow(<JobForm />);
   });
 });

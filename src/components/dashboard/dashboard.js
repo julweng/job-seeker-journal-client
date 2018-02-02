@@ -8,6 +8,7 @@ import Footer from '../common/footer/footer';
 import requiresLogin from '../common/requiresLogin/requiresLogin';
 
 export class Dashboard extends React.Component {
+
   render() {
     const { header, username } = this.props;
     return (
