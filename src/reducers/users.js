@@ -17,19 +17,19 @@ import {
   UPDATE_JOB_ERROR,
   DELETE_JOB_SUCCESS,
   DELETE_JOB_ERROR,
-  LOAD_DATA,
-  LOAD_MONTH,
-  RENDER_SKILL
+  GET_JOB_FILTER_BY_ID_SUCCESS,
+  GET_JOB_FILTER_BY_ID_ERROR,
+  GET_JOBS_FILTER_BY_MONTH_SUCCESS,
+  GET_JOBS_FILTER_BY_MONTH_ERROR
 } from '../actions/users';
 
 const initialState = {
   user: null,
   skills: [],
   jobs: [],
-  err: null,
-  data: {},
-  month: '',
-  skill: {}
+  job: {},
+  jobsByMonth: [],
+  err: null
 }
 
 export const users = (state = initialState, action) => {
@@ -53,7 +53,7 @@ export const users = (state = initialState, action) => {
 
     case GET_SKILL_SUCCESS:
       return {
-        ...state.skills,
+        ...state,
         skills: action.skills
       }
 
@@ -73,7 +73,8 @@ export const users = (state = initialState, action) => {
     case UPDATE_SKILL_SUCCESS:
       return {
         ...state,
-        skills: action.skills
+        skills: state.skills.map(skill =>
+          skill._id === action.skill.id ? action.skill : skill)
        }
 
     case UPDATE_SKILL_ERROR:
@@ -85,7 +86,7 @@ export const users = (state = initialState, action) => {
     case DELETE_SKILL_SUCCESS:
       return {
         ...state,
-        skills: action.skills
+        skills: state.skills.filter(skill => skill._id !== action.skill)
       };
 
     case DELETE_SKILL_ERROR:
@@ -109,7 +110,7 @@ export const users = (state = initialState, action) => {
     case ADD_JOB_SUCCESS:
       return {
         ...state,
-        jobs: action.jobs
+        jobs: [...state.jobs, action.jobs]
       }
 
     case ADD_JOB_ERROR:
@@ -121,7 +122,9 @@ export const users = (state = initialState, action) => {
     case UPDATE_JOB_SUCCESS:
       return {
         ...state,
-        jobs: action.jobs
+        jobs: state.jobs.map(job =>
+          job._id === action.job.id ? action.job : job),
+        job: state.job._id === action.job.id ? action.job : state.job
       }
 
     case UPDATE_JOB_ERROR:
@@ -133,7 +136,8 @@ export const users = (state = initialState, action) => {
     case DELETE_JOB_SUCCESS:
       return {
         ...state,
-        jobs: action.jobs
+        jobs: state.jobs.filter(job => job._id !== action.job),
+        job: state.job._id === action.job ? {} : state.job
       }
 
     case DELETE_JOB_ERROR:
@@ -141,13 +145,25 @@ export const users = (state = initialState, action) => {
         ...state,
         err: action.err
       }
-    case LOAD_DATA:
+    case GET_JOB_FILTER_BY_ID_SUCCESS:
       return {
-        data: action.data
+        ...state,
+        job: action.job[0]
       }
-    case LOAD_MONTH:
+    case GET_JOB_FILTER_BY_ID_ERROR:
       return {
-        month: action.month
+        ...state,
+        err: action.err
+      }
+    case GET_JOBS_FILTER_BY_MONTH_SUCCESS:
+      return {
+        ...state,
+        jobsByMonth: action.jobsByMonth
+      }
+    case GET_JOBS_FILTER_BY_MONTH_ERROR:
+      return {
+        ...state,
+        err: action.err
       }
     default:
       return state;

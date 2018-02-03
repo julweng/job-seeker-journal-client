@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from '../../common/input/input'
 import DateInput from '../../common/dateInput/dateInput';
@@ -19,22 +19,27 @@ export class JobForm extends React.Component {
 
   onSubmit(values) {
     const { title, company, location, dateApplied, progress } = values;
-    console.log(title, company, location, new Date(dateApplied), progress)
-    const date = new Date (dateApplied);
-    console.log(date)
-    //this.props.postJob(user_id, title, company, location, date, progress));
-    //this.props.toRedirect(this.props.redirect);
+    this.props.toRedirect(this.props.redirect);
+    return this.props.dispatch(postJob(user_id, title, company, location, dateApplied, progress));
   }
 
-  render() {
-    const { redirect, hasError, handleSubmit, pristine, submitting, reset } = this.props;
+  saveSuccess(redirect) {
+    if(redirect) {
+      return (
+        <p className="succes-text">Your job entry has been saved.</p>
+      )
+    }
+    return false;
+}
 
-    if(hasError) {
+  render() {
+    const { redirect, error, handleSubmit, pristine, submitting, reset } = this.props;
+
+    if (error) {
       return <p>Sorry! Something went horribly wrong </p>
-    } else if(redirect) {
-      return <Redirect to="/job-collection" />
-    } else {
+    }
     return (
+      <div>
       <form className="row" id="add-job-form" onSubmit={handleSubmit(values =>
         this.onSubmit(values)
     )}>
@@ -119,20 +124,22 @@ export class JobForm extends React.Component {
           </div>
           <div className="col-4">
           <div className="col-12 big-button-container">
-            <button className="reset-button" disabled={pristine || submitting} onClick={reset}
+            <button type="click" className="reset-button" disabled={pristine || submitting} onClick={reset}
             >
               Reset
             </button>
           </div>
           </div>
         </form>
-      )}
-    }
+        {this.saveSuccess(redirect)}
+      </div>
+    )
+  }
 }
-// Decorate with reduxForm(). It will read the initialValues prop provided by connect()
+
+
 JobForm = reduxForm({
   form: 'addJobForm',
-  enableReinitialize: true,
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus('addJobForm', Object.keys(errors)[0]))
 })(JobForm)

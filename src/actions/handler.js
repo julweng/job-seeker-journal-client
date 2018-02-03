@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const TOGGLE_OPEN = 'TOGGLE_OPEN';
 export const toggleOpen = isOpen => {
   return {
@@ -70,10 +72,10 @@ export const loadSkillData = skillData => {
   }
 }
 
-export const LOAD_JOB_DATA = 'LOAD_JOB_DATA';
-export const loadJobData = jobData => {
+export const LOAD_JOB_DATA_SUCCESS = 'LOAD_JOB_DATA';
+export const loadJobDataSuccess = jobData => {
   return {
-    type: LOAD_JOB_DATA,
+    type: LOAD_JOB_DATA_SUCCESS,
     jobData
   }
 }
@@ -83,5 +85,21 @@ export const toRedirect = redirect => {
   return {
     type: TO_REDIRECT,
     redirect
+  }
+}
+
+// for loading initial values into redux form
+export function getInitialJobValues(data) {
+  const { _id, user_id, title, location, company, progress, dateApplied } = data;
+  return (dispatch) => {
+    dispatch(loadJobDataSuccess({
+      id: _id,
+      user_id: user_id,
+      title: title,
+      location: location,
+      company: company,
+      progress: progress,
+      dateApplied: moment(dateApplied).format("YYYY-MM-DD")
+    }))
   }
 }

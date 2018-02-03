@@ -2,148 +2,160 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from '../../common/input/input';
-import { loadData } from '../../../actions/users';
 import { bindActionCreators } from 'redux';
 import { required } from '../../../validators';
-import { postJob } from '../../../actions/users';
+import { putJob, getJobFilterById } from '../../../actions/users';
 import CrudButton from  '../../common/crudButton/crudButton';
+import { closeEditJobForm, getInitialJobValues } from '../../../actions/handler';
+import DateInput from '../../common/dateInput/dateInput';
 import './editJobForm.css';
 
 const user_id = localStorage.getItem('user_id');
+const job_id = localStorage.getItem('jobId');
 
-const data = {
-  title: 'front-end web developer',
-  company: 'Illumina',
-  location: 'SD, CA',
-  dateApplied: '2018-01-08',
-  progress: 'on-site interview'
-}
 const progress = ['resume submitted', 'phone interview', 'on-site interview', 'offer received']
 
-export class JobForm extends React.Component {
-  componentWillMount() {
-    return this.props.loadData(this.props.data);
+export class EditJobForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCancelClick = this.handleCancelClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getJobFilterById(user_id, job_id);
+    this.props.getInitialJobValues(this.props.job);
+  }
+
+  handleCancelClick() { this.props.closeEditJobForm(this.props.editJob)
   }
 
   onSubmit(values) {
-    const { title, company, location, link, dateApplied, progress } = values;
-
-    return this.props
-      .dispatch(postJob(user_id, title, company, location, link, dateApplied, progress))
+    const { title, company, location, dateApplied, progress } = values;
+    console.log(title, company, location, dateApplied, progress)
+    return this.props.dispatch(putJob(user_id, job_id, title, company, location, dateApplied, progress))
   }
 
   render() {
-    const { hasError, handleSubmit, pristine, submitting, reset } = this.props
+    const { error, handleSubmit, pristine, submitting, reset } = this.props
 
-    if(hasError) {
+    if(error) {
       return <p>Sorry! Something went horribly wrong </p>
     }
     return (
       <form className="row" id="add-job-form" onSubmit={handleSubmit(values =>
         this.onSubmit(values)
     )}>
-    <fieldset className="col-12">
-      <div className="col-6">
-        <Field
-          component={Input}
-          type="text"
-          name="title"
-          id="title"
-          label="Title"
-          validate={[required]}
-        />
-      </div>
-      <div className="col-6">
-        <Field
-          component={Input}
-          type="text"
-          name="company"
-          id="company"
-          label="Company"
-          validate={[required]}
-        />
-      </div>
-      <div className="col-6">
-        <Field
-          component={Input}
-          type="text"
-          name="location"
-          id="location"
-          label="Location"
-          validate={[required]}
-        />
-      </div>
-      <div className="col-6">
-        <Field
-          component={Input}
-          type="date"
-          name="dateApplied"
-          id="date"
-          label="Date Applied"
-          validate={[required]}
-        />
-      </div>
-      <div className="col-4">&nbsp;</div>
-      <div className="col-4">
-        <label>Job Application Progress </label>
-          <Field name="progress" component="select">
-            <option value="">Select your progress...</option>
-            {progress.map(progressOption => (
-              <option value={progressOption} key={progressOption}>
-                {progressOption}
-              </option>
-            ))}
-          </Field>
+      <fieldset className="col-12">
+        <div className="col-6">
+          <Field
+            component={Input}
+            type="text"
+            name="title"
+            id="title"
+            label="Title"
+            validate={[required]}
+          />
+        </div>
+        <div className="col-6">
+          <Field
+            component={Input}
+            type="text"
+            name="company"
+            id="company"
+            label="Company"
+            validate={[required]}
+          />
+        </div>
+        <div className="col-6">
+          <Field
+            component={Input}
+            type="text"
+            name="location"
+            id="location"
+            label="Location"
+            validate={[required]}
+          />
+        </div>
+        <div className="col-6">
+          <Field
+            component={DateInput}
+            type="date"
+            name="dateApplied"
+            id="dateApplied"
+            label="Date Applied"
+            validate={[required]}
+          />
+        </div>
+        <div className="col-12">
+        {
+          progress.map(progressOption => (
+            <div className="col-3 progress-container" key={progressOption}>
+            <label>{progressOption}</label>
+              <Field
+                name="progress"
+                component="input"
+                type="radio"
+                value={`${progressOption}`}
+                validate={[required]}
+              />
+            </div>
+          ))
+        }
         </div>
         <div className="col-4">&nbsp;</div>
-          </fieldset>
-          <div className="col-4">
-            <CrudButton
-              type={`submit`}
-              className={`save-button`}
-              text={`Save`}
-              disabled={pristine || submitting}
-            />
-          </div>
-          <div className="col-4">
+      </fieldset>
+        <div className="col-4">
           <CrudButton
-            type={`click`}
-            className={`cancel-button`}
-            text={`Cancel`}
+            type={`submit`}
+            className={`save-button`}
+            text={`Save`}
+            disabled={pristine || submitting}
           />
-          </div>
-          <div className="col-4">
+        </div>
+        <div className="col-4">
           <div className="col-12 big-button-container">
-            <button id="reset" disabled={pristine || submitting} onClick={reset}
+            <button type="click" className="reset-button" disabled={pristine || submitting} onClick={reset}
             >
               Reset
             </button>
           </div>
-          </div>
-        </form>
-  )
-}
+        </div>
+        <div className="col-4">
+          <CrudButton
+            type={`click`}
+            className={`cancel-button`}
+            text={`Cancel`}
+            handleCancelClick={this.handleCancelClick}
+          />
+        </div>
+      </form>
+      )
+    }
 }
 
-JobForm = reduxForm({
-  form: 'addJobForm',
+EditJobForm = reduxForm({
+  form: 'EditJobForm',
   enableReinitialize: true,
   onSubmitFail: (errors, dispatch) =>
-    dispatch(focus('addJobForm', Object.keys(errors)[0]))
-})(JobForm)
+    dispatch(focus('EditJobForm', Object.keys(errors)[0]))
+})(EditJobForm)
 
 const mapStateToProps = state => ({
+  editJob: state.handlers.editJob,
   jobs: state.users.jobs,
+  job: state.users.job,
   error: state.user.error,
-  initialValues: state.users.data
+  initialValues: state.handlers.jobData
 })
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    postJob: postJob,
-    loadData: loadData
+    putJob: putJob,
+    getJobFilterById: getJobFilterById,
+    closeEditJobForm: closeEditJobForm,
+    getInitialJobValues: getInitialJobValues
   }, dispatch));
 
-JobForm = connect(mapStateToProps, mapDispatchToProps)(JobForm);
+EditJobForm = connect(mapStateToProps, mapDispatchToProps)(EditJobForm);
 
-export default JobForm
+export default EditJobForm

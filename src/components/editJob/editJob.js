@@ -29,13 +29,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(EditJob);
-
-EditJob.defaultProps = {
-  header: {
-    editJob: {
-      headerId: '',
-      h1Id: '',
-      h1Text: ''
-    }
-  }
-}

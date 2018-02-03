@@ -62,9 +62,10 @@ export class CurrentSkill extends React.Component {
 
   render() {
     const { skills, addSkill, editSkill, error } = this.props;
-
     if(error) {
-      return <p>Oops! There was an error loading the items.</p>
+      return (
+        <p>Sorry, something went horribly awry</p>
+      )
     }
     return (
       <div className="row current-skill-container">

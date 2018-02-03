@@ -96,8 +96,7 @@ const mapStateToProps = state => {
   return {
     addSkill: state.handlers.addSkill,
     skills: state.users.skills,
-    error: state.users.err,
-    isAddSkill: state.handlers.isAddSKill
+    error: state.users.err
   }
 };
 

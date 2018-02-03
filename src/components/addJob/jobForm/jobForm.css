@@ -41,3 +41,7 @@ input:focus {
   display: inline-block;
   margin-left: 48%;
 }
+
+.success-text {
+  color: #379392;
+}

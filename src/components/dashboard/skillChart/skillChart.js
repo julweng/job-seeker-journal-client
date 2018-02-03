@@ -20,16 +20,15 @@ export class SkillChart extends React.Component {
   }
 
   render () {
+    const { error, skills } = this.props;
     let currentSkills = [];
 
-    if (this.props.error) {
-      return <p>Oops! There was an error loading the items.</p>;
-    } else if (this.props.skills.length === 0) {
+    if (error) {
       return (
-        <p>You have no recorded skills. Please add some skills in your profile!</p>
+        <p>You may not have saved any skills. Please add some skills in your profile!</p>
       )
     } else {
-      currentSkills = this.props.skills.map(skill => {
+      currentSkills = skills.map(skill => {
         return {
           skill: skill.skill,
           experience: skill.experience,

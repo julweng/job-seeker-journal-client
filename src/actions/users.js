@@ -2,6 +2,7 @@ import axios from 'axios';
 import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
+import moment from 'moment';
 
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 export const getUserSuccess = user => ({
@@ -40,9 +41,9 @@ export const addSkillError = err => ({
 })
 
 export const UPDATE_SKILL_SUCCESS = 'UPDATE_SKILL_SUCCESS';
-export const updateSkillSuccess = skills => ({
+export const updateSkillSuccess = skill => ({
   type: UPDATE_SKILL_SUCCESS,
-  skills
+  skill
 })
 
 export const UPDATE_SKILL_ERROR = 'UPDATE_SKILL_ERROR';
@@ -52,9 +53,9 @@ export const updateSkillError = err => ({
 })
 
 export const DELETE_SKILL_SUCCESS = 'DELETE_SKILL_SUCCESS';
-export const deleteSkillSuccess = skills => ({
+export const deleteSkillSuccess = skill => ({
   type: DELETE_SKILL_SUCCESS,
-  skills
+  skill
 })
 
 export const DELETE_SKILL_ERROR = 'DELETE_SKILL_ERROR';
@@ -75,6 +76,18 @@ export const getJobSuccess = jobs => ({
   jobs
 })
 
+export const GET_JOB_FILTER_BY_ID_SUCCESS = 'GET_JOB_FILTER_BY_ID_SUCCESS';
+export const getJobFilterByIdSuccess = job => ({
+  type: 'GET_JOB_FILTER_BY_ID_SUCCESS',
+  job
+})
+
+export const GET_JOB_FILTER_BY_ID_ERROR = 'GET_JOB_FILTER_BY_ID_ERROR';
+export const getJobFilterByIdError = err => ({
+  type: 'GET_JOB_FILTER_BY_ID_ERROR',
+  err
+})
+
 export const ADD_JOB_SUCCESS = 'ADD_JOB_SUCCESS';
 export const addJobSuccess = jobs => ({
   type: ADD_JOB_SUCCESS,
@@ -88,9 +101,9 @@ export const addJobError = err => ({
 })
 
 export const UPDATE_JOB_SUCCESS = 'UPDATE_JOB_SUCCESS';
-export const updateJobSuccess = jobs => ({
+export const updateJobSuccess = job => ({
   type: UPDATE_JOB_SUCCESS,
-  jobs
+  job
 })
 
 export const UPDATE_JOB_ERROR = 'UPDATE_JOB_ERROR';
@@ -100,9 +113,9 @@ export const updateJobError = err => ({
 })
 
 export const DELETE_JOB_SUCCESS = 'DELETE_JOB_SUCCESS';
-export const deleteJobSuccess = jobs => ({
+export const deleteJobSuccess = job => ({
   type: DELETE_JOB_SUCCESS,
-  jobs
+  job
 })
 
 export const DELETE_JOB_ERROR = 'DELETE_JOB_ERROR';
@@ -111,16 +124,16 @@ export const deleteJobError = err => ({
   err
 })
 
-export const LOAD_DATA = 'LOAD_DATA';
-export const loadData = data => ({
-  type: LOAD_DATA,
-  data
+export const GET_JOBS_FILTER_BY_MONTH_SUCCESS = 'GET_JOBS_FILTER_BY_MONTH_SUCCESS';
+export const getJobsFilterByMonthSuccess = jobsByMonth => ({
+  type: GET_JOBS_FILTER_BY_MONTH_SUCCESS,
+  jobsByMonth
 })
 
-export const LOAD_MONTH = 'LOAD_MONTH';
-export const loadMonth = month => ({
-  type: LOAD_MONTH,
-  month
+export const GET_JOBS_FILTER_BY_MONTH_ERROR = 'GET_JOBS_FILTER_BY_MONTH_ERROR';
+export const getJobsFilterByMonthError = err => ({
+  type: GET_JOBS_FILTER_BY_MONTH_ERROR,
+  err
 })
 
 const headers = { 'content-type': 'application/json' }
@@ -195,12 +208,11 @@ export function postSkill(user_id, skill, experience) {
       experience: experience
     })
     .then(res => {
-      console.log(res);
       if(res.status !== 201) {
         throw Error(res.statusText);
       }
+      dispatch(addSkillSuccess(res.data.skills))
     })
-    .then(res => dispatch(addSkillSuccess(res.data)))
     .catch(err => {
       dispatch(addSkillError(err.message))
     })
@@ -210,19 +222,20 @@ export function postSkill(user_id, skill, experience) {
 // put skill
 export function putSkill(user_id, skill_id, skill, experience) {
   return (dispatch) => {
-    const url = `${API_BASE_URL}/users/edit/${user_id}/skills/${skill_id}`;
-    return axios.put(url, {
+    const updateSkill = {
+      id: skill_id,
       user_id: user_id,
       skill: skill,
       experience: experience
-    })
+    }
+    const url = `${API_BASE_URL}/users/edit/${user_id}/skills/${skill_id}`;
+    return axios.put(url, updateSkill)
     .then(res => {
-      console.log(res);
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
+    dispatch(updateSkillSuccess(updateSkill))
     })
-    .then(res => dispatch(updateSkillSuccess(res.data)))
     .catch(err => {
       dispatch(updateSkillError(err.message))
     })
@@ -235,12 +248,11 @@ export function deleteSkill(user_id, skill_id) {
     const url = `${API_BASE_URL}/users/delete/${user_id}/skills/${skill_id}`;
     return axios.delete(url)
     .then(res => {
-      console.log(res);
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
+      dispatch(deleteSkillSuccess(skill_id))
     })
-    .then(res => dispatch(deleteSkillSuccess(res.data)))
     .catch(err => {
       dispatch(deleteSkillError(err.message))
     })
@@ -264,8 +276,42 @@ export function getJobs(user_id) {
   }
 }
 
+// get job and filter by id
+export function getJobFilterById(user_id, job_id) {
+  return (dispatch) => {
+    const url = `${API_BASE_URL}/users/jobs/${user_id}`;
+    return axios.get(url)
+      .then(res => {
+        if(res.status !== 200) {
+          throw Error(res.statusText);
+        }
+        dispatch(getJobFilterByIdSuccess(res.data.filter(job => job._id === job_id)));
+      })
+      .catch(err => {
+        dispatch(getJobFilterByIdSuccess(err.message))
+      })
+  }
+}
+
+// get job and filter by month
+export function getJobsFilterByMonth(user_id, month) {
+  return (dispatch) => {
+    const url = `${API_BASE_URL}/users/jobs/${user_id}`;
+    return axios.get(url)
+      .then(res => {
+        if(res.status !== 200) {
+          throw Error(res.statusText);
+        }
+        dispatch(getJobsFilterByMonthSuccess(res.data.filter(job => parseInt(moment(job.dateApplied).format("M"), 10) === parseInt(moment().month(month).format("M"), 10))))
+      })
+      .catch(err => {
+        dispatch(getJobsFilterByMonthError(err.message))
+    })
+  }
+}
+
 // post job
-export function postJob(user_id, title, company, location, link, date, progress) {
+export function postJob(user_id, title, company, location, dateApplied, progress) {
   return (dispatch) => {
     const url = `${API_BASE_URL}/users/new/jobs/${user_id}`;
     return axios.post(url, {
@@ -273,18 +319,60 @@ export function postJob(user_id, title, company, location, link, date, progress)
       title: title,
       company: company,
       location: location,
-      dateApplied: date,
+      dateApplied: dateApplied,
       progress: progress
     })
     .then(res => {
-      console.log(res);
       if(res.status !== 201) {
         throw Error(res.statusText);
       }
+      dispatch(addJobSuccess(res.data.jobs))
     })
-    .then(res => dispatch(addSkillSuccess(res.data)))
     .catch(err => {
-      dispatch(addSkillError(err.message))
+      dispatch(addJobError(err.message))
+    })
+  }
+}
+
+// put job
+export function putJob(user_id, job_id, title, company, location, dateApplied, progress) {
+  return (dispatch) => {
+    const updateJob = {
+      id: job_id,
+      user_id: user_id,
+      title: title,
+      company: company,
+      location: location,
+      dateApplied: dateApplied,
+      progress: progress
+    }
+    const url = `${API_BASE_URL}/users/edit/${user_id}/jobs/${job_id}`;
+    return axios.put(url, updateJob)
+    .then(res => {
+      if(res.status !== 204) {
+        throw Error(res.statusText);
+      }
+    dispatch(updateJobSuccess(updateJob))
+    })
+    .catch(err => {
+      dispatch(updateJobError(err.message))
+    })
+  }
+}
+
+// delete job
+export function deleteJob(user_id, job_id) {
+  return (dispatch) => {
+    const url = `${API_BASE_URL}/users/delete/${user_id}/jobs/${job_id}`;
+    return axios.delete(url)
+    .then(res => {
+      if(res.status !== 204) {
+        throw Error(res.statusText);
+      }
+      dispatch(deleteSkillSuccess(job_id))
+    })
+    .catch(err => {
+      dispatch(deleteSkillError(err.message))
     })
   }
 }

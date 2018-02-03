@@ -17,3 +17,7 @@
   border-top: 0.1rem solid #E8E8E8;
   padding-top: 2%;
 }
+
+.view-job-container a:hover {
+  font-size: 100%;
+}

@@ -34,7 +34,7 @@ export class EditSkillForm extends React.Component {
   }
 
   render () {
-    const skill_id = localStorage.getItem('skillId')
+    const skill_id = localStorage.getItem('skillId');
     const skill = this.props.skills.filter(skill => skill._id === skill_id)
     const skillName = `Skill: ${skill[0].skill}`;
     const skillExperience = `Experience: ${skill[0].experience} year(s)`;

@@ -16,13 +16,3 @@ export default function CrudButton(props) {
     </div>
   );
 }
-
-CrudButton.defaultProps = {
-  className: '',
-  handleCancelClick: undefined,
-  handleAddClick: undefined,
-  handleEditClick: undefined,
-  text: '',
-  type: '',
-  id: ''
-}

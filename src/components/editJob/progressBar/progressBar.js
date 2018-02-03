@@ -28,8 +28,6 @@ export default function ProgressBar(props) {
     </div>
   ))
 
-  console.log(checks)
-
   return (
     <div className="col-12 progress-container">
       <div className="col-12 progress-title">
