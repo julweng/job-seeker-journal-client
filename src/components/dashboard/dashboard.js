@@ -21,7 +21,7 @@ export class Dashboard extends React.Component {
             h1Text={`${username}'s ${header.h1Text}`}
           />
           <SkillChart />
-          <ProgressBarChart />
+          <ProgressBarChart />      
         </main>
         <Footer />
       </div>

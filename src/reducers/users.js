@@ -20,7 +20,9 @@ import {
   GET_JOB_FILTER_BY_ID_SUCCESS,
   GET_JOB_FILTER_BY_ID_ERROR,
   GET_JOBS_FILTER_BY_MONTH_SUCCESS,
-  GET_JOBS_FILTER_BY_MONTH_ERROR
+  GET_JOBS_FILTER_BY_MONTH_ERROR,
+  GET_SKILL_FILTER_BY_ID_SUCCESS,
+  GET_SKILL_FILTER_BY_ID_ERROR
 } from '../actions/users';
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
   jobs: [],
   job: {},
   jobsByMonth: [],
+  skill: {},
   err: null
 }
 
@@ -161,6 +164,16 @@ export const users = (state = initialState, action) => {
         jobsByMonth: action.jobsByMonth
       }
     case GET_JOBS_FILTER_BY_MONTH_ERROR:
+      return {
+        ...state,
+        err: action.err
+      }
+    case GET_SKILL_FILTER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        skill: action.skill[0]
+      }
+    case GET_SKILL_FILTER_BY_ID_ERROR:
       return {
         ...state,
         err: action.err

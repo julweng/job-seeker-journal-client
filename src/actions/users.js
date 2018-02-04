@@ -64,6 +64,18 @@ export const deleteSkillError = err => ({
   err
 })
 
+export const GET_SKILL_FILTER_BY_ID_SUCCESS = 'GET_SKILL_FILTER_BY_ID_SUCCESS';
+export const getSkillFilterByIdSuccess = skill => ({
+  type: 'GET_SKILL_FILTER_BY_ID_SUCCESS',
+  skill
+})
+
+export const GET_SKILL_FILTER_BY_ID_ERROR = 'GET_SKILL_FILTER_BY_ID_ERROR';
+export const getSkillFilterByIdError = err => ({
+  type: 'GET_SKILL_FILTER_BY_ID_ERROR',
+  err
+})
+
 export const GET_JOB_ERROR = 'GET_JOB_ERROR';
 export const getJobError = err => ({
   type: 'GET_JOB_ERROR',
@@ -198,6 +210,23 @@ export function getSkills(user_id) {
   }
 }
 
+//get skill filter by id
+export function getSkillFilterById(user_id, skill_id) {
+  return (dispatch) => {
+    const url = `${API_BASE_URL}/users/skills/${user_id}`;
+    return axios.get(url)
+      .then(res => {
+        if(res.status !== 200) {
+          throw Error(res.statusText);
+        }
+        dispatch(getSkillFilterByIdSuccess(res.data.filter(skill => skill._id === skill_id)));
+      })
+      .catch(err => {
+        dispatch(getSkillFilterByIdError(err.message))
+      })
+    }
+  }
+
 // post skills
 export function postSkill(user_id, skill, experience) {
   return (dispatch) => {
@@ -288,7 +317,7 @@ export function getJobFilterById(user_id, job_id) {
         dispatch(getJobFilterByIdSuccess(res.data.filter(job => job._id === job_id)));
       })
       .catch(err => {
-        dispatch(getJobFilterByIdSuccess(err.message))
+        dispatch(getJobFilterByIdError(err.message))
       })
   }
 }

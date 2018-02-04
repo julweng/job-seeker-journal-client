@@ -18,9 +18,6 @@ export class MonthlyJobCollections extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentWillMount() {
-    this.props.getJobs(user_id)
-  }
   handleClick(e) {
     const job_id = e.target.getAttribute('id');
     localStorage.setItem('jobId', job_id);
@@ -28,23 +25,18 @@ export class MonthlyJobCollections extends React.Component {
 
   onSubmit(values) {
     const { selectedMonth } = values;
-    console.log(selectedMonth)
     this.props.getJobsFilterByMonth(user_id, selectedMonth);
   }
 
-  renderList(jobsByMonth, jobs) {
+  renderList(jobsByMonth) {
     if(jobsByMonth.length === 0) {
-      return (jobs.map(job =>
-        <li className="col-12" key={`${job._id}`}>
-          <Link to="/edit-job">
-            <JobItem
-              id={job._id}
-              title={job.title}
-              company={job.company}
-              handleClick={this.handleClick}
-            />
-          </Link>
-        </li>))
+      return (
+        <li className="col-12 empty-message">
+          <p>Have you applied any jobs this month?</p>
+          <p>Add some jobs in the
+          <Link to="/add-job"> Add Job </Link>
+          section</p>
+        </li>)
     } else if(jobsByMonth.length > 0) {
       return (jobsByMonth.map(job =>
         <li className="col-12" key={`${job._id}`}>
@@ -53,6 +45,7 @@ export class MonthlyJobCollections extends React.Component {
               id={job._id}
               title={job.title}
               company={job.company}
+              dateApplied={job.dateApplied}
               handleClick={this.handleClick}
             />
           </Link>
@@ -69,7 +62,7 @@ export class MonthlyJobCollections extends React.Component {
   }
 
   render() {
-    const { error, handleSubmit, jobsByMonth, jobs } = this.props
+    const { error, handleSubmit, jobsByMonth} = this.props
 
     if(error) {
       return <p>
@@ -85,7 +78,7 @@ export class MonthlyJobCollections extends React.Component {
           )}>
             <fieldset>
               <div className="col-12 select-style">
-                <label>Filter jobs by </label>
+                <label>Find jobs to edit by </label>
                 <Field name="selectedMonth" component="select">
                   <option value="">Selecting a month...</option>
                     {months.map(monthOption => (
@@ -96,11 +89,12 @@ export class MonthlyJobCollections extends React.Component {
                 </Field>
                 <button id="send-button"><i className="fa fa-caret-right"></i></button>
               </div>
+
             </fieldset>
           </form>
           <div className="col-12 month-collection-container">
             <ul className="col-12 job-item-list">
-              {this.renderList(jobsByMonth, jobs)}
+              {this.renderList(jobsByMonth)}
             </ul>
           </div>
         </div>

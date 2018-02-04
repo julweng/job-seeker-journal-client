@@ -72,7 +72,7 @@ export class EditSkillForm extends React.Component {
                 type="number"
                 name="experience"
                 id="experience"
-                value={`this.props.experience`}
+                value={this.props.experience}
                 validate={[required, number, minValueZero]}
               />
               </div>

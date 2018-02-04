@@ -26,7 +26,10 @@ export class JobForm extends React.Component {
   saveSuccess(redirect) {
     if(redirect) {
       return (
+        <div>
         <p className="succes-text">Your job entry has been saved.</p>
+        <p>Check it out in your <Link to="/job-collection">job collections</Link></p>
+        </div>
       )
     }
     return false;

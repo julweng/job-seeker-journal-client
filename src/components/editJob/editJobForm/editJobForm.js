@@ -9,6 +9,7 @@ import CrudButton from  '../../common/crudButton/crudButton';
 import { closeEditJobForm, getInitialJobValues } from '../../../actions/handler';
 import DateInput from '../../common/dateInput/dateInput';
 import './editJobForm.css';
+import { toRedirect } from '../../../actions/handler';
 
 const user_id = localStorage.getItem('user_id');
 const job_id = localStorage.getItem('jobId');
@@ -35,13 +36,25 @@ export class EditJobForm extends React.Component {
     return this.props.dispatch(putJob(user_id, job_id, title, company, location, dateApplied, progress))
   }
 
+  editSuccess(redirect) {
+    if(redirect) {
+      return (
+        <div>
+        <p className="succes-text">Your edit has been saved.</p>
+        </div>
+      )
+    }
+    return false;
+}
+
   render() {
-    const { error, handleSubmit, pristine, submitting, reset } = this.props
+    const { error, handleSubmit, pristine, submitting, reset, redirect } = this.props
 
     if(error) {
       return <p>Sorry! Something went horribly wrong </p>
     }
     return (
+      <div>
       <form className="row" id="add-job-form" onSubmit={handleSubmit(values =>
         this.onSubmit(values)
     )}>
@@ -129,6 +142,8 @@ export class EditJobForm extends React.Component {
           />
         </div>
       </form>
+      {this.editSuccess(redirect)}
+      </div>
       )
     }
 }
@@ -144,8 +159,9 @@ const mapStateToProps = state => ({
   editJob: state.handlers.editJob,
   jobs: state.users.jobs,
   job: state.users.job,
-  error: state.user.error,
-  initialValues: state.handlers.jobData
+  error: state.users.error,
+  initialValues: state.handlers.jobData,
+  redirect: state.handlers.redirect
 })
 
 const mapDispatchToProps = dispatch => (
@@ -153,7 +169,8 @@ const mapDispatchToProps = dispatch => (
     putJob: putJob,
     getJobFilterById: getJobFilterById,
     closeEditJobForm: closeEditJobForm,
-    getInitialJobValues: getInitialJobValues
+    getInitialJobValues: getInitialJobValues,
+    toRedirect: toRedirect
   }, dispatch));
 
 EditJobForm = connect(mapStateToProps, mapDispatchToProps)(EditJobForm);

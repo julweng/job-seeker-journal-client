@@ -82,3 +82,19 @@
 #send-button i {
   vertical-align: sub;
 }
+
+.white-text {
+  color: #FFF;
+}
+
+p > a {
+  color: #ea9341;
+}
+
+p > a:hover {
+  color: #ea9341;
+}
+
+.empty-message {
+  text-align: center;
+}

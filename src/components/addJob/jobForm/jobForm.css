@@ -45,3 +45,11 @@ input:focus {
 .success-text {
   color: #379392;
 }
+
+p > a {
+  color: #379392;
+}
+
+p > a:hover {
+  color: #379392;
+}

@@ -88,6 +88,14 @@ export const toRedirect = redirect => {
   }
 }
 
+export const LOAD_SKILL_DATA_SUCCESS = 'LOAD_SKILL_DATA_SUCCESS';
+export const loadSkillDataSuccess = skillData => {
+  return {
+    type: LOAD_SKILL_DATA_SUCCESS,
+    skillData
+  }
+}
+
 // for loading initial values into redux form
 export function getInitialJobValues(data) {
   const { _id, user_id, title, location, company, progress, dateApplied } = data;
@@ -100,6 +108,17 @@ export function getInitialJobValues(data) {
       company: company,
       progress: progress,
       dateApplied: moment(dateApplied).format("YYYY-MM-DD")
+    }))
+  }
+}
+
+// for loading initial values into redux form
+export function getInitialSkillValues(data) {
+  const { skill, experience } = data;
+  return (dispatch) => {
+    dispatch(loadSkillDataSuccess({
+      skill: skill,
+      experience: experience
     }))
   }
 }

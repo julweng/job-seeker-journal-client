@@ -30,9 +30,9 @@ nav, footer {
 }
 
 footer {
-  margin-top: 8rem;
+  margin-top: 10rem;
   padding-bottom: 3%;
-  height: 8rem;
+  height: 5rem;
 }
 
 button:focus {

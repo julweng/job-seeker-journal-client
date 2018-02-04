@@ -52,6 +52,7 @@ export class AddSkillForm extends React.Component {
                 type="text"
                 name="skill"
                 id="skill"
+                placeholder="HTML"
                 validate={[required]}
               />
             </div>
@@ -62,6 +63,7 @@ export class AddSkillForm extends React.Component {
               type="number"
               name="experience"
               id="experience"
+              placeholder="0.5"
               validate={[required, number, minValueZero]}
             />
             </div>

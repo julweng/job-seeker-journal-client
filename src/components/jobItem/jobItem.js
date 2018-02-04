@@ -11,7 +11,7 @@ export default function JobItem(props) {
       <button id={props.id} onClick={props.handleClick}>
       <i className="fa fa-caret-right" aria-hidden="true"></i>
       &nbsp;
-      {props.company}: {props.title}</button>
+      {props.company}:&nbsp;{props.title}&nbsp;&nbsp;&nbsp;{props.dateApplied}</button>
     </div>
   );
 }

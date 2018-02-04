@@ -15,7 +15,6 @@ export class SkillChart extends React.Component {
   componentDidMount() {
     this.props.getUser(username);
     const user_id = localStorage.getItem('user_id');
-    console.log(user_id)
     this.props.getSkills(user_id);
   }
 
@@ -36,20 +35,20 @@ export class SkillChart extends React.Component {
         }
       });
     }
-    console.log(currentSkills)
     return (
       <div className="row">
         <div className="col-12 chart-container">
           <h3>Skill Chart</h3>
+          <p>experience in years</p>
           <ResponsiveContainer aspect={2}>
     	     <RadarChart data={currentSkills}>
               <PolarGrid />
               <PolarAngleAxis dataKey='skill' />
               <PolarRadiusAxis/>
-              <Radar dataKey='experience' stroke="#FFD256" fill="#FFD256" fillOpacity={0.5}/>
+              <Radar dataKey='experience' stroke="#37b5bf" fill="#92d6db" fillOpacity={0.5}/>
             </RadarChart>
           </ResponsiveContainer>
-          <p>(experience in years)</p>
+
         </div>
           <div className="col-12 edit-container">
             <Link to="/profile">

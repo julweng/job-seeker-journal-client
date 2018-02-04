@@ -6,8 +6,8 @@ import {
   CLOSE_EDIT_SKILL_FORM,
   OPEN_EDIT_JOB_FORM,
   CLOSE_EDIT_JOB_FORM,
-  LOAD_SKILL_DATA,
   LOAD_JOB_DATA_SUCCESS,
+  LOAD_SKILL_DATA_SUCCESS,
   TO_REDIRECT
 } from '../actions/handler';
 
@@ -17,7 +17,9 @@ const initialState = {
   editSkill: false,
   editJob: false,
   jobData: {},
-  redirect: false
+  redirect: false,
+  chartData: [],
+  skillData: {}
 }
 
 export const handlers = (state = initialState, action) => {
@@ -59,7 +61,7 @@ export const handlers = (state = initialState, action) => {
         editJob: false
       };
 
-    case LOAD_SKILL_DATA:
+    case LOAD_SKILL_DATA_SUCCESS:
       return {
         ...state,
         skillData: action.skillData
@@ -76,6 +78,7 @@ export const handlers = (state = initialState, action) => {
         ...state,
         redirect: !state.redirect
       }
+
     default:
       return state;
   }
