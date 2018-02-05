@@ -10,10 +10,10 @@ describe('<Header />', () => {
 
   it('Renders the header props', () => {
     const headerId = "1";
-    const h1Id="1";
-    const h1Text="foo";
-    const h2Text=<h2>bar</h2>;
-    const component=<p>hi</p>;
+    const h1Id = "1";
+    const h1Text = "foo";
+    const h2Text = <h2>bar</h2>;
+    const component = <p>hi</p>;
     const wrapper = shallow(
       <Header
         headerId={headerId}

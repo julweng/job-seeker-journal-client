@@ -53,7 +53,7 @@ export default function () {
       editJob: {
         headerId: 'user-header',
         h1Id: 'user-header-title',
-        h1Text: ''
+        h1Text: '',
       },
       jobCollection: {
         headerId: 'user-header',
@@ -63,7 +63,7 @@ export default function () {
       addJob: {
         headerId: 'user-header',
         h1Id: 'user-header-title',
-        h1Text: 'Add Job'
+        h1Text: 'Add Job',
       }
     },
     skills: [

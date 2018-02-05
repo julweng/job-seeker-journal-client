@@ -73,13 +73,7 @@ const mapStateToProps = state => {
     error: state.users.err,
     currentUser: state.auth.currentUser,
     user: state.users.user
-
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillChart);
-
-SkillChart.defaultProps = {
-  skills: [],
-  userId: ''
-}

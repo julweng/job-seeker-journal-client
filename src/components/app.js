@@ -8,7 +8,7 @@ import RegisterPage from './register-page/register-page';
 import Dashboard from './dashboard/dashboard';
 import Profile from './profile/profile';
 import AddJob from './addJob/addJob';
-import JobCollection from './jobCollection/jobCollection'
+import JobCollection from './jobCollection/jobCollection';
 import EditJob from './editJob/editJob';
 import { refreshAuthToken } from '../actions/auth';
 

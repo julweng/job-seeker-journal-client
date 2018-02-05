@@ -1,6 +1,5 @@
 import React from 'react';
-
-import './crudButton.css'
+import './crudButton.css';
 
 export default function CrudButton(props) {
   return (

@@ -6,10 +6,11 @@ import Input from '../../common/input/input';
 import { Field, reduxForm, focus } from 'redux-form';
 import CrudButton from '../../common/crudButton/crudButton';
 import { required, number, minValue } from '../../../validators';
-import { getSkills, putSkill } from '../../../actions/users';
+import { getSkillFilterById, putSkill } from '../../../actions/users';
+import { getInitialSkillValues } from '../../../actions/handler';
 
 const user_id = localStorage.getItem('user_id');
-
+const skill_id = localStorage.getItem('skillId');
 const minValueZero = minValue(0);
 
 export class EditSkillForm extends React.Component {
@@ -19,7 +20,8 @@ export class EditSkillForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getSkills(user_id);
+    this.props.getSkillFilterById(user_id, skill_id);
+    this.props.getInitialSkillValues(this.props.skill);
   }
 
   handleCancelClick() { this.props.closeEditSkillForm(this.props.editSkill)
@@ -34,10 +36,10 @@ export class EditSkillForm extends React.Component {
   }
 
   render () {
-    const skill_id = localStorage.getItem('skillId');
-    const skill = this.props.skills.filter(skill => skill._id === skill_id)
-    const skillName = `Skill: ${skill[0].skill}`;
-    const skillExperience = `Experience: ${skill[0].experience} year(s)`;
+    const skillName = `Skill: ${this.props.skill.skill}`;
+    const skillExperience = `Experience: ${this.props.skill.experience} year(s)`;
+      console.log(this.props.skill)
+      console.log(this.props.skillData)
 
     if(!this.props.editSkill) {
       return false;
@@ -61,7 +63,7 @@ export class EditSkillForm extends React.Component {
                 type="text"
                 name="skill"
                 id="skill"
-                defaultValue={this.props.skill}
+
                 validate={[required]}
               />
               </div>
@@ -72,7 +74,7 @@ export class EditSkillForm extends React.Component {
                 type="number"
                 name="experience"
                 id="experience"
-                value={this.props.experience}
+
                 validate={[required, number, minValueZero]}
               />
               </div>
@@ -105,12 +107,16 @@ const mapStateToProps = (state) => ({
   editSkill: state.handlers.editSkill,
   skills: state.users.skills,
   error: state.users.err,
+  skill: state.users.skill,
+  skillData: state.handlers.skillData,
+  InitialValues: state.handlers.skillData
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
+    getSkillFilterById: getSkillFilterById,
     closeEditSkillForm: closeEditSkillForm,
-    getSkills: getSkills,
+    getInitialSkillValues: getInitialSkillValues,
     putSkill: putSkill
   }, dispatch));
 

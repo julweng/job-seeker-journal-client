@@ -32,7 +32,7 @@ export class EditJobForm extends React.Component {
 
   onSubmit(values) {
     const { title, company, location, dateApplied, progress } = values;
-    console.log(title, company, location, dateApplied, progress)
+    this.props.toRedirect(this.props.redirect);
     return this.props.dispatch(putJob(user_id, job_id, title, company, location, dateApplied, progress))
   }
 
@@ -160,6 +160,7 @@ const mapStateToProps = state => ({
   jobs: state.users.jobs,
   job: state.users.job,
   error: state.users.error,
+  jobData: state.handlers.jobData,
   initialValues: state.handlers.jobData,
   redirect: state.handlers.redirect
 })

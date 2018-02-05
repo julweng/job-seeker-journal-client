@@ -19,7 +19,7 @@ export class TopNav extends React.Component {
     if(loggedIn) {
       return (
         <li className="smallScreenHidden">
-          <a href="/" onClick={()=>this.logOut()}>Log out</a>
+          <a href="/" className="logout" onClick={()=>this.logOut()}>Log out</a>
         </li>
       )
     }
@@ -49,6 +49,7 @@ export class TopNav extends React.Component {
             <a
               href="#more"
               aria-label="more"
+              className="toggle-open"
               onClick={() => this.props.toggleOpen(this.props.isOpen)}
             >
               <i className="fa fa-bars" aria-hidden="true"></i>

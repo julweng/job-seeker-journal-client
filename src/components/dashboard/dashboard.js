@@ -21,7 +21,7 @@ export class Dashboard extends React.Component {
             h1Text={`${username}'s ${header.h1Text}`}
           />
           <SkillChart />
-          <ProgressBarChart />      
+          <ProgressBarChart />
         </main>
         <Footer />
       </div>
@@ -33,8 +33,7 @@ const mapStateToProps = state => {
   return {
     username: state.auth.currentUser.username,
     currentUser: state.auth.currentUser,
-    header: state.markup.header.dashboard,
-    user: () => localStorage.setItem('userId', state.auth.currentUser.id)
+    header: state.markup.header.dashboard
   };
 };
 

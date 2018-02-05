@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getJobsFilterByMonth, getJobs } from '../../../actions/users';
-
+import { toRedirect } from '../../../actions/handler';
 import './monthlyJobCollections.css';
 import JobItem from '../../jobItem/jobItem';
 import { Field, reduxForm, focus } from 'redux-form';
@@ -21,6 +21,7 @@ export class MonthlyJobCollections extends React.Component {
   handleClick(e) {
     const job_id = e.target.getAttribute('id');
     localStorage.setItem('jobId', job_id);
+    this.props.toRedirect(this.props.redirect);
   }
 
   onSubmit(values) {
@@ -40,7 +41,6 @@ export class MonthlyJobCollections extends React.Component {
     } else if(jobsByMonth.length > 0) {
       return (jobsByMonth.map(job =>
         <li className="col-12" key={`${job._id}`}>
-          <Link to="/edit-job">
             <JobItem
               id={job._id}
               title={job.title}
@@ -48,7 +48,6 @@ export class MonthlyJobCollections extends React.Component {
               dateApplied={job.dateApplied}
               handleClick={this.handleClick}
             />
-          </Link>
         </li>
       ))
     } else {
@@ -62,8 +61,10 @@ export class MonthlyJobCollections extends React.Component {
   }
 
   render() {
-    const { error, handleSubmit, jobsByMonth} = this.props
-
+    const { error, handleSubmit, jobsByMonth, redirect} = this.props
+    if(redirect) {
+      return <Redirect to="/edit-job" />
+    }
     if(error) {
       return <p>
       Sorry...your file is not here,
@@ -113,16 +114,19 @@ MonthlyJobCollections = reduxForm({
 
 const mapStateToProps = state => {
   return {
+    job: state.users.job,
     jobs: state.users.jobs,
     jobsByMonth: state.users.jobsByMonth,
-    error: state.users.err
+    error: state.users.err,
+    redirect: state.handlers.redirect
   }
 };
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getJobsFilterByMonth: getJobsFilterByMonth,
-    getJobs: getJobs
+    getJobs: getJobs,
+    toRedirect: toRedirect
   }, dispatch));
 
 MonthlyJobCollections = connect(mapStateToProps, mapDispatchToProps)(MonthlyJobCollections);

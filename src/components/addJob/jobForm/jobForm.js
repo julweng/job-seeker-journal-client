@@ -149,7 +149,7 @@ JobForm = reduxForm({
 
 const mapStateToProps = state => ({
   jobs: state.users.jobs,
-  error: state.user.error,
+  error: state.users.error,
   redirect: state.handlers.redirect
 })
 

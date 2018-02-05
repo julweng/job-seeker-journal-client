@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { openEditJobForm, getInitialJobValues } from '../../../actions/handler';
+import { openEditJobForm } from '../../../actions/handler';
 import ProgressBar from '../progressBar/progressBar';
 import './viewJob.css';
 import CrudButton from '../../common/crudButton/crudButton';
@@ -20,8 +20,10 @@ export class ViewJob extends React.Component {
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log(job_id)
     this.props.getJobFilterById(user_id, job_id);
+    console.log(this.props.job)
   }
 
   handleEditClick() {
@@ -48,6 +50,7 @@ export class ViewJob extends React.Component {
     return false;
   }
   render() {
+    console.log(this.props.job)
     const { error, job } = this.props;
     if(error) {
       return <p>Oops! Sorry, your data vanished...</p>
@@ -66,6 +69,7 @@ export class ViewJob extends React.Component {
             </div>
 
           <div className="col-12 edit-job-button-container">
+            <div className="col-2">&nbsp;</div>
             <div className="col-4">
               <CrudButton
                 type={`button`}
@@ -84,15 +88,7 @@ export class ViewJob extends React.Component {
               />
             </Link>
             </div>
-            <div className="col-4">
-              <Link to="/job-collection">
-                <CrudButton
-                  type={`button`}
-                  className={`cancel-button`}
-                  text={`Collection`}
-                />
-              </Link>
-            </div>
+            <div className="col-2">&nbsp;</div>
           </div>
           {this.showForm(this.props.editJob)}
         </div>
@@ -106,21 +102,13 @@ const mapStateToProps = state => ({
   editJob: state.handlers.editJob,
   job: state.users.job,
   jobs: state.users.jobs,
-  initialValues: state.handlers.jobData,
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     openEditJobForm: openEditJobForm,
     getJobFilterById: getJobFilterById,
-    getInitialJobValues: getInitialJobValues,
     deleteJob: deleteJob,
   }, dispatch));
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewJob);
-
-ViewJob.defaultProps = {
-  title: 'Junior Front-end Web Developer',
-  company: 'Illumina',
-  location: 'San Diego, CA'
-}

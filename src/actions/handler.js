@@ -56,23 +56,7 @@ export const closeEditJobForm = editJob => {
   }
 }
 
-export const ADD_JOB_SKILL_ENTRY = 'ADD_JOB_SKILL_ENTRY';
-export const addJobSkillEntry = jobSkillCount => {
-  return {
-    type: ADD_JOB_SKILL_ENTRY,
-    jobSkillCount
-  }
-}
-
-export const LOAD_SKILL_DATA = 'LOAD_SKILL_DATA';
-export const loadSkillData = skillData => {
-  return {
-    type: LOAD_SKILL_DATA,
-    skillData
-  }
-}
-
-export const LOAD_JOB_DATA_SUCCESS = 'LOAD_JOB_DATA';
+export const LOAD_JOB_DATA_SUCCESS = 'LOAD_JOB_DATA_SUCCESS';
 export const loadJobDataSuccess = jobData => {
   return {
     type: LOAD_JOB_DATA_SUCCESS,
@@ -114,9 +98,11 @@ export function getInitialJobValues(data) {
 
 // for loading initial values into redux form
 export function getInitialSkillValues(data) {
-  const { skill, experience } = data;
+  const { _id, user_id, skill, experience } = data;
   return (dispatch) => {
     dispatch(loadSkillDataSuccess({
+      id: _id,
+      user_id: user_id,
       skill: skill,
       experience: experience
     }))
