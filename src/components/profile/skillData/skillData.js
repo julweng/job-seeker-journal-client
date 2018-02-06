@@ -63,7 +63,6 @@ const mapStateToProps = state => ({
   editSkill: state.handlers.editSkill,
   skill_id: state.users.skill_id,
   err: state.users.err,
-  initialValues: state.users.initialValues
 });
 
 const mapDispatchToProps = dispatch => (

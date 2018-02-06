@@ -68,7 +68,7 @@
   -webkit-appearance: none;
 }
 
-.select-style select: focus {
+.select-style select:focus {
   outline: none !important;
 }
 
