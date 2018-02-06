@@ -14,7 +14,6 @@ export class TopNav extends React.Component {
     localStorage.removeItem('user_id');
     localStorage.removeItem('skill_id');
     localStorage.removeItem('job_id');
-
     }
 
   logOutLink(loggedIn) {

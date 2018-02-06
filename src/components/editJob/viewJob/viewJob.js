@@ -42,10 +42,19 @@ export class ViewJob extends React.Component {
         </div>
       );
     }
-    return false;
+    return null;
+  }
+
+  deleteMessage(deleted) {
+    if(deleted) {
+      return (
+        <p>Job is successfully deleted.<br />
+        Go to your <Link to="/job-collection">job collection</Link> to select more jobs to edit.</p>
+      )
+    }
   }
   render() {
-    const { error, job } = this.props;
+    const { error, job, editJob, deleted } = this.props;
     if(error) {
       return <p>Oops! Sorry, your data went to Fillory...</p>
     } else if(job) {
@@ -73,18 +82,17 @@ export class ViewJob extends React.Component {
               />
             </div>
             <div className="col-4">
-            <Link to="/job-collection">
               <CrudButton
                 type={`button`}
                 className={`delete-button`}
                 text={`Delete`}
                 handleDeleteClick={this.handleDeleteClick}
               />
-            </Link>
             </div>
             <div className="col-2">&nbsp;</div>
           </div>
-          {this.showForm(this.props.editJob)}
+          {this.deleteMessage(deleted)}
+          {this.showForm(editJob)}
         </div>
       );
     }
@@ -96,13 +104,14 @@ const mapStateToProps = state => ({
   editJob: state.handlers.editJob,
   job: state.users.job,
   jobs: state.users.jobs,
+  deleted: state.users.deleted
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     openEditJobForm: openEditJobForm,
     getJobFilterById: getJobFilterById,
-    deleteJob: deleteJob,
+    deleteJob: deleteJob
   }, dispatch));
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewJob);

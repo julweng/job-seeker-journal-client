@@ -441,10 +441,10 @@ export function deleteJob() {
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
-      dispatch(deleteSkillSuccess(job_id))
+      dispatch(deleteJobSuccess(job_id))
     })
     .catch(err => {
-      dispatch(deleteSkillError(err.message))
+      dispatch(deleteJobError(err.message))
     })
   }
 }

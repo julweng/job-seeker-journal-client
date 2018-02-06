@@ -10,7 +10,9 @@ export class DropDownTopNav extends React.Component {
   logOut() {
     this.props.clearAuth();
     clearAuthToken();
-    console.log(this.props.loggedIn)
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('skill_id');
+    localStorage.removeItem('job_id');
   }
 
   logOutLink(loggedIn) {

@@ -37,7 +37,8 @@ const initialState = {
   skill_id: '',
   loading: false,
   job_id:'',
-  initialValues: {}
+  initialValues: {},
+  deleted: false,
 }
 
 export const users = (state = initialState, action) => {
@@ -139,7 +140,8 @@ export const users = (state = initialState, action) => {
       return {
         ...state,
         jobs: state.jobs.filter(job => job._id !== action.job),
-        job: state.job._id === action.job ? {} : state.job
+        job: state.job._id === action.job ? {} : state.job,
+        deleted: true
       }
 
     case DELETE_JOB_ERROR:
