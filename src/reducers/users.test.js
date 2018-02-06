@@ -1,7 +1,5 @@
 import { users } from './users';
 import {
-  getUserSuccess,
-  getUserError,
   getSkillError,
   getSkillSuccess,
   addSkillSuccess,
@@ -42,22 +40,6 @@ describe('users', () => {
     let currentState = {};
     const state = users(currentState, {type: '__UNKNOWN'});
     expect(state).toBe(currentState);
-  });
-});
-
-describe('getUserSuccessr', () => {
-  it('should get user', () => {
-    let state = { user: null };
-    state = users(state, getUserSuccess({username: 'foo', password: 'bar'}));
-    expect(state.user).toEqual({username: 'foo', password: 'bar'});
-  });
-});
-
-describe('getUserError', () => {
-  it('should get err', () => {
-    let state = { err: null };
-    state = users(state, getUserError(state.err));
-    expect(state.err).toEqual(null);
   });
 });
 

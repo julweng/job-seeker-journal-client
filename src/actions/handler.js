@@ -80,6 +80,14 @@ export const loadSkillDataSuccess = skillData => {
   }
 }
 
+export const TO_JOB_COLLECTION = 'TO_JOB_COLLECTION';
+export const toJobCollection = jobCollection => {
+  return {
+    type: TO_JOB_COLLECTION,
+    jobCollection
+  }
+}
+
 // for loading initial values into redux form
 export function getInitialJobValues(data) {
   const { _id, user_id, title, location, company, progress, dateApplied } = data;

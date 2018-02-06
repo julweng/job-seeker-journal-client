@@ -7,11 +7,9 @@ import DateInput from '../../common/dateInput/dateInput';
 import { postJob } from '../../../actions/users';
 import { bindActionCreators } from 'redux';
 import { required } from '../../../validators';
-import { toRedirect } from '../../../actions/handler';
+import { toJobCollection } from '../../../actions/handler';
 import CrudButton from  '../../common/crudButton/crudButton';
 import './jobForm.css';
-
-const user_id = localStorage.getItem('user_id');
 
 const progress = ['resume submitted', 'phone interview', 'on-site interview', 'offer received']
 
@@ -19,16 +17,16 @@ export class JobForm extends React.Component {
 
   onSubmit(values) {
     const { title, company, location, dateApplied, progress } = values;
-    this.props.toRedirect(this.props.redirect);
-    return this.props.dispatch(postJob(user_id, title, company, location, dateApplied, progress));
+    this.props.toJobCollection(true);
+    return this.props.dispatch(postJob(title, company, location, dateApplied, progress));
   }
 
-  saveSuccess(redirect) {
-    if(redirect) {
+  saveSuccess(jobCollection) {
+    if(jobCollection) {
       return (
         <div>
-        <p className="succes-text">Your job entry has been saved.</p>
-        <p>Check it out in your <Link to="/job-collection">job collections</Link></p>
+        <p className="succes-text">Your job entry has been saved.
+        Check it out in your <Link to="/job-collection">job collections</Link></p>
         </div>
       )
     }
@@ -36,7 +34,7 @@ export class JobForm extends React.Component {
 }
 
   render() {
-    const { redirect, error, handleSubmit, pristine, submitting, reset } = this.props;
+    const { jobCollection, error, handleSubmit, pristine, submitting, reset } = this.props;
 
     if (error) {
       return <p>Sorry! Something went horribly wrong </p>
@@ -114,14 +112,13 @@ export class JobForm extends React.Component {
               text={`Save`}
               disabled={pristine || submitting}
             />
-
           </div>
           <div className="col-4">
           <Link to="/job-collection">
           <CrudButton
             type={`click`}
             className={`cancel-button`}
-            text={`Cancel`}
+            text={`Collection`}
           />
           </Link>
           </div>
@@ -134,12 +131,11 @@ export class JobForm extends React.Component {
           </div>
           </div>
         </form>
-        {this.saveSuccess(redirect)}
+        {this.saveSuccess(jobCollection)}
       </div>
     )
   }
 }
-
 
 JobForm = reduxForm({
   form: 'addJobForm',
@@ -150,13 +146,13 @@ JobForm = reduxForm({
 const mapStateToProps = state => ({
   jobs: state.users.jobs,
   error: state.users.error,
-  redirect: state.handlers.redirect
+  jobCollection: state.handlers.jobCollection
 })
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     postJob: postJob,
-    toRedirect: toRedirect
+    toJobCollection: toJobCollection
   }, dispatch));
 
 JobForm = connect(mapStateToProps, mapDispatchToProps)(JobForm);

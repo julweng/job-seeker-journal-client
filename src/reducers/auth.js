@@ -3,15 +3,14 @@ import {
     CLEAR_AUTH,
     AUTH_REQUEST,
     AUTH_SUCCESS,
-    AUTH_ERROR
+    AUTH_ERROR,
 } from '../actions/auth';
 
 const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null,
     loading: false,
-    error: null,
-    userId: null
+    error: null
 };
 
 export const auth = (state = initialState, action) => {
@@ -25,7 +24,8 @@ export const auth = (state = initialState, action) => {
         return {
           ...state,
           authToken: null,
-          currentUser: null
+          currentUser: null,
+          userId: null
         }
       case AUTH_REQUEST:
         return {

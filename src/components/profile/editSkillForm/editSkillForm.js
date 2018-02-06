@@ -9,8 +9,6 @@ import { required, number, minValue } from '../../../validators';
 import { getSkillFilterById, putSkill } from '../../../actions/users';
 import { getInitialSkillValues } from '../../../actions/handler';
 
-const user_id = localStorage.getItem('user_id');
-const skill_id = localStorage.getItem('skillId');
 const minValueZero = minValue(0);
 
 export class EditSkillForm extends React.Component {
@@ -20,29 +18,25 @@ export class EditSkillForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getSkillFilterById(user_id, skill_id);
+    this.props.getSkillFilterById(this.props.skill_id);
     this.props.getInitialSkillValues(this.props.skill);
   }
 
-  handleCancelClick() { this.props.closeEditSkillForm(this.props.editSkill)
+  handleCancelClick() {
+    this.props.closeEditSkillForm(this.props.editSkill);
   }
 
   onSubmit(values) {
     this.props.closeEditSkillForm(this.props.addSkill);
     const { skill, experience } = values;
-    const skill_id = localStorage.getItem('skillId')
-    return this.props
-      .dispatch(putSkill(user_id, skill_id, skill, experience))
+    this.props.dispatch(putSkill(this.props.skill_id, skill, experience));
   }
 
   render () {
     const skillName = `Skill: ${this.props.skill.skill}`;
     const skillExperience = `Experience: ${this.props.skill.experience} year(s)`;
-      console.log(this.props.skill)
-      console.log(this.props.skillData)
-
     if(!this.props.editSkill) {
-      return false;
+      return null;
     }
     return (
       <form
@@ -109,7 +103,11 @@ const mapStateToProps = (state) => ({
   error: state.users.err,
   skill: state.users.skill,
   skillData: state.handlers.skillData,
-  InitialValues: state.handlers.skillData
+  skill_id: state.users.skill_id,
+  InitialValues: {
+    skill: state.users.skill.skill,
+    experience: state.users.skill.experience
+  }
 });
 
 const mapDispatchToProps = dispatch => (

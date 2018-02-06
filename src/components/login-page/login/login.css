@@ -6,14 +6,6 @@
   text-align: left;
 }
 
-#login button {
-  width: 40%;
-  height: 2rem;
-  margin: 0;
-  background-color: #379392;
-  color: #FFF;
-}
-
 #login input {
   width: 98%;
   border: none;
@@ -27,15 +19,6 @@
   outline: none;
 }
 
-.login-button-container {
-  text-align: center;
-}
-
-#login-button {
-  background-color: #FFD256;
-  color: #282E34;
-}
-
 .demo {
   text-align: center;
   color: #E36397;
@@ -45,8 +28,4 @@
   #login input {
     width: 100%;
   }
-  #login button {
-    width: 60%;
-  }
-
 }

@@ -18,12 +18,13 @@
 .cancel-button {
   background-color: #FFF;
   color: #379392;
-  border: 0.188rem #379392 solid;
+  border: 0.188rem solid #379392;
 }
 
 .save-button, .submit-button, .add-button, .edit-button {
   background-color: #379392;
   color: #FFF;
+  border: 0.188rem solid #379392;
 }
 
 .delete-skill-button {

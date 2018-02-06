@@ -60,7 +60,8 @@ stopPeriodicRefresh() {
 
 const mapStateToProps = state => ({
   hasAuthToken: state.auth.authoToken !== null,
-  loggedIn: state.auth.currentUser !== null
+  loggedIn: state.auth.currentUser !== null,
+  userId: state.auth.userId
 })
 
 export default connect(mapStateToProps)(App);

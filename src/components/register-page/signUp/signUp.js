@@ -46,6 +46,7 @@ export class SignUp extends React.Component {
                   type="text"
                   name="username"
                   id="username"
+                  placeholder={`3-8 characters`}
                   validate={[required, nonEmpty, isTrimmed, usernameLength]}
                 />
               </div>
@@ -56,6 +57,7 @@ export class SignUp extends React.Component {
                   type="password"
                   name="password"
                   id="password"
+                  placeholder={`3-8 characters`}
                   validate={[required, passwordLength, isTrimmed]}
                 />
               </div>

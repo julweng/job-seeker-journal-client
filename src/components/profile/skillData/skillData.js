@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { openEditSkillForm } from '../../../actions/handler';
-import { deleteSkill } from '../../../actions/users'
+import { deleteSkill, saveSkillId } from '../../../actions/users'
 import CrudButton from '../../common/crudButton/crudButton';
 import './skillData.css';
 
@@ -16,22 +16,27 @@ export class SkillData extends React.Component {
   handleEditClick(e) {
     this.props.openEditSkillForm(this.props.editSkill)
     const skill_id = e.target.getAttribute('id');
-    localStorage.setItem('skillId', skill_id);
+    this.props.saveSkillId(skill_id);
   }
 
   handleDeleteClick(e) {
     const skill_id = e.target.getAttribute('id');
-    const user_id = localStorage.getItem('user_id');
-    this.props.deleteSkill(user_id, skill_id);
+    this.props.deleteSkill(skill_id);
   }
 
   render() {
-    return (
+    const { err, skill, experience, id } = this.props
+    if(err) {
+      return (
+        <p>Sorry, something went wrong when retrieving skills</p>
+      )
+    } else {
+      return (
         <div className="col-12 individual-skill-container">
-          <p className="col-4">{this.props.skill}</p>
-          <p className="col-4">{this.props.experience} year(s)</p>
+          <p className="col-4">{skill}</p>
+          <p className="col-4">{experience} year(s)</p>
           <div className="col-2">
-            <CrudButton id={`${this.props.id}`}
+            <CrudButton id={`${id}`}
               type={`button`}
               className={`edit-skill-button`}
               text={`Edit`}
@@ -40,7 +45,7 @@ export class SkillData extends React.Component {
           </div>
           <div className="col-2">
             <CrudButton
-              id={`${this.props.id}`}
+              id={`${id}`}
               type={`button`}
               className={`delete-skill-button`}
               text={`Delete`}
@@ -49,17 +54,21 @@ export class SkillData extends React.Component {
           </div>
         </div>
       )
+    }
   }
 }
 
 const mapStateToProps = state => ({
-  editSkill: state.handlers.editSkill
+  editSkill: state.handlers.editSkill,
+  skill_id: state.users.skill_id,
+  err: state.users.err
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     openEditSkillForm: openEditSkillForm,
-    deleteSkill: deleteSkill
+    deleteSkill: deleteSkill,
+    saveSkillId: saveSkillId,
   }, dispatch));
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillData);

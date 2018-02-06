@@ -3,19 +3,28 @@ import Input from '../../common/input/input';
 import { Field, reduxForm, focus } from 'redux-form';
 import { login } from '../../../actions/auth';
 import { required, nonEmpty} from '../../../validators';
+import CrudButton from '../../common/crudButton/crudButton';
 import './login.css';
 
 export class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDemoClick = this.handleDemoClick.bind(this);
+  }
   onSubmit(values) {
     const { username, password } = values;
     return this.props.dispatch(login(username, password));
   }
+  handleDemoClick() {
+    return this.props.dispatch(login('abc', '123'));
+  }
   render() {
-    let error;
-    if(this.props.error) {
-      error = (
+    const { handleSubmit, pristine, submitting, error } = this.props;
+    let loginError;
+    if(error) {
+      loginError = (
         <div className="form-error" aria-live="polite">
-          {this.props.error}
+          {error}
         </div>
       );
     }
@@ -34,10 +43,10 @@ export class Login extends React.Component {
             <form
               className="col-12 login-form"
               id="login"
-              onSubmit={this.props.handleSubmit(values =>
+              onSubmit={handleSubmit(values =>
                 this.onSubmit(values)
             )}>
-              {error}
+              {loginError}
               <div className="col-12">
                 <label htmlFor="username">Username</label>
                 <Field
@@ -58,14 +67,18 @@ export class Login extends React.Component {
                   validate={[required, nonEmpty]}
                 />
               </div>
-              <div className="col-12 login-button-container">
-                <button
-                  type="submit"
-                  id="login-button"
-                  disabled={ this.props.pristine || this.props.submitting }>
-                  Log in
-                </button>
-              </div>
+              <CrudButton
+                type={`submit`}
+                className={`save-button`}
+                text={`Log in`}
+                disabled={pristine || submitting}
+              />
+              <CrudButton
+                type={`button`}
+                className={`cancel-button`}
+                text={`Demo`}
+                handleDemoClick={this.handleDemoClick}
+              />
             </form>
           </div>
           <div className="col-3">&nbsp;</div>

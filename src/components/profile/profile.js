@@ -26,7 +26,7 @@ export function Profile(props) {
 }
 
 const mapStateToProps = state => ({
-  header: state.markup.header.profile
+  header: state.markup.header.profile,
 });
 
 export default connect(mapStateToProps)(Profile);

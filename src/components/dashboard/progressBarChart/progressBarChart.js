@@ -8,8 +8,6 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import './progressBarChart.css';
 
-const user_id = localStorage.getItem('user_id');
-
 function monthToInt(date) {
   return parseInt(moment(date).format("M"), 10);
 }
@@ -65,13 +63,17 @@ function progressChartData(jobs) {
   return chartData
 }
 
-
 export class ProgressBarChart extends React.Component {
   componentDidMount() {
-    this.props.getJobs(user_id);
+    this.props.getJobs(this.props.currentUser.id);
   }
 
   render() {
+    if(this.props.jobs.length === 0) {
+      return (
+        <p>You have not made any progress. Please <Link to="/add-job"> Add Job </Link> or <br />view your <Link to="/job-collection"> Job Collection </Link> and select jobs to edit your progress</p>
+      )
+    }
     return (
       <div className="row">
         <div className="col-2">&nbsp;</div>
@@ -104,12 +106,13 @@ export class ProgressBarChart extends React.Component {
   }
 
   const mapStateToProps = state => ({
-    jobs: state.users.jobs
+    jobs: state.users.jobs,
+    currentUser: state.auth.currentUser
   });
 
   const mapDispatchToProps = dispatch => (
     bindActionCreators({
-      getJobs: getJobs,
+      getJobs: getJobs
     }, dispatch));
 
   export default connect(mapStateToProps, mapDispatchToProps)(ProgressBarChart);

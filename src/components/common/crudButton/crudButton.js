@@ -8,7 +8,7 @@ export default function CrudButton(props) {
         id={props.id}
         type={props.type}
         className={props.className}
-        onClick={props.handleCancelClick || props.handleAddClick || props.handleEditClick || props.handleDeleteClick}
+        onClick={props.handleCancelClick || props.handleAddClick || props.handleEditClick || props.handleDeleteClick || props.handleDemoClick}
       >
         {props.text}
       </button>

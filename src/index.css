@@ -12,6 +12,7 @@ body {
   color: #444;
   text-align: center;
   line-height: 1.5;
+  margin-bottom: 10rem;
 }
 
 nav {
@@ -30,9 +31,15 @@ nav, footer {
 }
 
 footer {
-  margin-top: 10rem;
-  padding-bottom: 3%;
+  margin-top: 8rem;
   height: 5rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 4rem;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 button:focus {

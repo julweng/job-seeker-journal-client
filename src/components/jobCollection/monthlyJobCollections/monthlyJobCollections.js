@@ -2,13 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
-import { getJobsFilterByMonth, getJobs } from '../../../actions/users';
-import { toRedirect } from '../../../actions/handler';
+import { getJobsFilterByMonth, getJobs, setJobId } from '../../../actions/users';
+import { toRedirect, toJobCollection } from '../../../actions/handler';
 import './monthlyJobCollections.css';
 import JobItem from '../../jobItem/jobItem';
 import { Field, reduxForm, focus } from 'redux-form';
-
-const user_id = localStorage.getItem('user_id');
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -20,13 +18,14 @@ export class MonthlyJobCollections extends React.Component {
 
   handleClick(e) {
     const job_id = e.target.getAttribute('id');
-    localStorage.setItem('jobId', job_id);
-    this.props.toRedirect(this.props.redirect);
+    this.props.setJobId(job_id);
+    this.props.toRedirect(true);
+    this.props.toJobCollection(this.props.jobCollection);
   }
 
   onSubmit(values) {
     const { selectedMonth } = values;
-    this.props.getJobsFilterByMonth(user_id, selectedMonth);
+    this.props.getJobsFilterByMonth(selectedMonth);
   }
 
   renderList(jobsByMonth) {
@@ -61,6 +60,7 @@ export class MonthlyJobCollections extends React.Component {
   }
 
   render() {
+    console.log(this.props.redirect)
     const { error, handleSubmit, jobsByMonth, redirect} = this.props
     if(redirect) {
       return <Redirect to="/edit-job" />
@@ -75,7 +75,7 @@ export class MonthlyJobCollections extends React.Component {
       <div className="row">
         <div className="col-2">&nbsp;</div>
         <div className="col-8 month-card-container">
-          <form className="col-12" id="select-month-form"  onSubmit={handleSubmit(values =>  this.onSubmit(values)
+          <form className="col-12" id="select-month-form"  onSubmit={handleSubmit(values => this.onSubmit(values)
           )}>
             <fieldset>
               <div className="col-12 select-style">
@@ -118,7 +118,9 @@ const mapStateToProps = state => {
     jobs: state.users.jobs,
     jobsByMonth: state.users.jobsByMonth,
     error: state.users.err,
-    redirect: state.handlers.redirect
+    redirect: state.handlers.redirect,
+    jobCollection: state.handlers.jobCollection,
+    job_id: state.users.job_id
   }
 };
 
@@ -126,7 +128,9 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getJobsFilterByMonth: getJobsFilterByMonth,
     getJobs: getJobs,
-    toRedirect: toRedirect
+    toRedirect: toRedirect,
+    setJobId: setJobId,
+    toJobCollection: toJobCollection
   }, dispatch));
 
 MonthlyJobCollections = connect(mapStateToProps, mapDispatchToProps)(MonthlyJobCollections);

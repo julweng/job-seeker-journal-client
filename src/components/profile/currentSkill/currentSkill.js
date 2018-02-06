@@ -10,8 +10,6 @@ import CrudButton from '../../common/crudButton/crudButton';
 import SkillData from '../skillData/skillData';
 import { getSkills } from '../../../actions/users';
 
-const user_id = localStorage.getItem('user_id');
-
 export class CurrentSkill extends React.Component {
   constructor(props) {
     super(props);
@@ -19,11 +17,11 @@ export class CurrentSkill extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getSkills(user_id);
+    this.props.getSkills();
   }
 
   handleAddClick() {
-    this.props.openAddSkillForm(this.props.addSkill)
+    this.props.openAddSkillForm(this.props.addSkill);
   }
 
   showAddSkill(addSkill) {
@@ -64,7 +62,7 @@ export class CurrentSkill extends React.Component {
     const { skills, addSkill, editSkill, error } = this.props;
     if(error) {
       return (
-        <p>Sorry, something went horribly awry</p>
+        <p>Sorry, something went horribly awry.</p>
       )
     }
     return (
@@ -99,7 +97,7 @@ export class CurrentSkill extends React.Component {
           <Link to="/dashboard">
             <CrudButton
               type={`button`}
-              text={`Cancel`}
+              text={`Dashboard`}
               className={`cancel-button`}
             />
           </Link>
@@ -119,6 +117,7 @@ const mapStateToProps = state => {
     editSkill: state.handlers.editSkill,
     skills: state.users.skills,
     error: state.users.err,
+    currentUser: state.auth.currentUser,
   }
 };
 

@@ -7,8 +7,10 @@ import {
   OPEN_EDIT_JOB_FORM,
   CLOSE_EDIT_JOB_FORM,
   LOAD_JOB_DATA_SUCCESS,
-  LOAD_SKILL_DATA_SUCCESS,
-  TO_REDIRECT
+  TO_REDIRECT,
+  TO_JOB_COLLECTION,
+  LOAD_SKILL_DATA_SUCCESS
+
 } from '../actions/handler';
 
 const initialState = {
@@ -18,7 +20,7 @@ const initialState = {
   editJob: false,
   jobData: {},
   redirect: false,
-  chartData: [],
+  jobCollection: false,
   skillData: {}
 }
 
@@ -61,12 +63,6 @@ export const handlers = (state = initialState, action) => {
         editJob: false
       };
 
-    case LOAD_SKILL_DATA_SUCCESS:
-      return {
-        ...state,
-        skillData: action.skillData
-      };
-
     case LOAD_JOB_DATA_SUCCESS:
       return {
         ...state,
@@ -79,6 +75,17 @@ export const handlers = (state = initialState, action) => {
         redirect: !state.redirect
       }
 
+    case TO_JOB_COLLECTION:
+      return {
+        ...state,
+        jobCollection: !state.jobCollection
+      }
+
+    case LOAD_SKILL_DATA_SUCCESS:
+      return {
+        ...state,
+        skillData: action.skillData
+      }
     default:
       return state;
   }

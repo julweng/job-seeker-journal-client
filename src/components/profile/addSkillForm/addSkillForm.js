@@ -9,8 +9,6 @@ import CrudButton from '../../common/crudButton/crudButton';
 import { required, number, minValue } from '../../../validators';
 import { postSkill } from '../../../actions/users';
 
-const user_id = localStorage.getItem('user_id');
-
 const minValueZero = minValue(0);
 
 export class AddSkillForm extends React.Component {
@@ -26,12 +24,12 @@ export class AddSkillForm extends React.Component {
     this.props.closeAddSkillForm(this.props.addSkill);
     const { skill, experience } = values;
     return this.props
-      .dispatch(postSkill(user_id, skill, experience))
+      .dispatch(postSkill(skill, experience))
   }
 
   render() {
     if(!this.props.addSkill) {
-      return false;
+      return null;
     }
     return (
       <form

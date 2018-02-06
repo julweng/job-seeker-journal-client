@@ -1,6 +1,4 @@
 import {
-  GET_USER_SUCCESS,
-  GET_USER_ERROR,
   GET_SKILL_ERROR,
   GET_SKILL_SUCCESS,
   ADD_SKILL_SUCCESS,
@@ -22,7 +20,9 @@ import {
   GET_JOBS_FILTER_BY_MONTH_SUCCESS,
   GET_JOBS_FILTER_BY_MONTH_ERROR,
   GET_SKILL_FILTER_BY_ID_SUCCESS,
-  GET_SKILL_FILTER_BY_ID_ERROR
+  GET_SKILL_FILTER_BY_ID_ERROR,
+  SAVE_SKILL_ID,
+  SAVE_JOB_ID
 } from '../actions/users';
 
 const initialState = {
@@ -32,22 +32,14 @@ const initialState = {
   job: {},
   jobsByMonth: [],
   skill: {},
-  err: null
+  err: null,
+  skill_id: '',
+  loading: false,
+  job_id:''
 }
 
 export const users = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USER_SUCCESS:
-      return {
-        ...state,
-        user: action.user
-      }
-
-    case GET_USER_ERROR:
-      return {
-        ...state,
-        err: action.err
-      }
     case GET_SKILL_ERROR:
       return {
         ...state,
@@ -60,6 +52,11 @@ export const users = (state = initialState, action) => {
         skills: action.skills
       }
 
+    case SAVE_SKILL_ID:
+      return {
+        ...state,
+        skill_id: action.skill_id
+      }
 
     case ADD_SKILL_SUCCESS:
       return  {
@@ -148,35 +145,47 @@ export const users = (state = initialState, action) => {
         ...state,
         err: action.err
       }
+
     case GET_JOB_FILTER_BY_ID_SUCCESS:
       return {
         ...state,
         job: action.job[0]
       }
+
     case GET_JOB_FILTER_BY_ID_ERROR:
       return {
         ...state,
         err: action.err
       }
+
     case GET_JOBS_FILTER_BY_MONTH_SUCCESS:
       return {
         ...state,
         jobsByMonth: action.jobsByMonth
       }
+
     case GET_JOBS_FILTER_BY_MONTH_ERROR:
       return {
         ...state,
         err: action.err
       }
+
     case GET_SKILL_FILTER_BY_ID_SUCCESS:
       return {
         ...state,
         skill: action.skill[0]
       }
+
     case GET_SKILL_FILTER_BY_ID_ERROR:
       return {
         ...state,
         err: action.err
+      }
+
+    case SAVE_JOB_ID:
+      return {
+        ...state,
+        job_id: action.job_id
       }
     default:
       return state;

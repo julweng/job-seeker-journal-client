@@ -4,18 +4,6 @@ import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 import moment from 'moment';
 
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
-export const getUserSuccess = user => ({
-  type: 'GET_USER_SUCCESS',
-  user
-})
-
-export const GET_USER_ERROR = 'GET_USER_ERROR'
-export const getUserError = err => ({
-  type: 'GET_USER_ERROR',
-  err
-})
-
 export const GET_SKILL_ERROR = 'GET_SKILL_ERROR';
 export const getSkillError = err => ({
   type: 'GET_SKILL_ERROR',
@@ -148,6 +136,18 @@ export const getJobsFilterByMonthError = err => ({
   err
 })
 
+export const SAVE_SKILL_ID = 'SAVE_SKILL_ID';
+export const saveSkillId = skill_id => ({
+  type: SAVE_SKILL_ID,
+  skill_id
+})
+
+export const SAVE_JOB_ID = 'SAVE_JOB_ID';
+export const saveJobId = job_id => ({
+  type: SAVE_JOB_ID,
+  job_id
+})
+
 const headers = { 'content-type': 'application/json' }
 
 // register users
@@ -172,37 +172,17 @@ export const registerUser = user => dispatch => {
         });
 };
 
-// get user
-export function getUser(username) {
-  return (dispatch) => {
-    const url = `${API_BASE_URL}/users/user?username=${username}`;
-    return axios.get(url)
-    .then(res => {
-      if(res.status !== 200) {
-        throw Error(res.statusText);
-      }
-      const data = res.data
-      const user_id = data[0]._id
-      localStorage.setItem('user_id', user_id)
-      dispatch(getUserSuccess(res.data))
-    })
-    .catch(err => {
-      dispatch(getUserError(err.message))
-    })
-  }
-}
-
-
 // get skills
-export function getSkills(user_id) {
+export function getSkills() {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/skills/${user_id}`;
     return axios.get(url)
       .then(res => {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
-        dispatch(getSkillSuccess(res.data))
+        dispatch(getSkillSuccess(res.data));
       })
     .catch(err => {
       dispatch(getSkillError(err.message))
@@ -211,8 +191,9 @@ export function getSkills(user_id) {
 }
 
 //get skill filter by id
-export function getSkillFilterById(user_id, skill_id) {
+export function getSkillFilterById(skill_id) {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/skills/${user_id}`;
     return axios.get(url)
       .then(res => {
@@ -228,8 +209,9 @@ export function getSkillFilterById(user_id, skill_id) {
   }
 
 // post skills
-export function postSkill(user_id, skill, experience) {
+export function postSkill(skill, experience) {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/new/skills/${user_id}`;
     return axios.post(url, {
       user_id: user_id,
@@ -240,7 +222,7 @@ export function postSkill(user_id, skill, experience) {
       if(res.status !== 201) {
         throw Error(res.statusText);
       }
-      dispatch(addSkillSuccess(res.data.skills))
+      dispatch(addSkillSuccess(res.data.skills));
     })
     .catch(err => {
       dispatch(addSkillError(err.message))
@@ -249,8 +231,9 @@ export function postSkill(user_id, skill, experience) {
 }
 
 // put skill
-export function putSkill(user_id, skill_id, skill, experience) {
+export function putSkill(skill_id, skill, experience) {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const updateSkill = {
       id: skill_id,
       user_id: user_id,
@@ -263,7 +246,7 @@ export function putSkill(user_id, skill_id, skill, experience) {
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
-    dispatch(updateSkillSuccess(updateSkill))
+    dispatch(updateSkillSuccess(updateSkill));
     })
     .catch(err => {
       dispatch(updateSkillError(err.message))
@@ -272,15 +255,16 @@ export function putSkill(user_id, skill_id, skill, experience) {
 }
 
 // delete skill
-export function deleteSkill(user_id, skill_id) {
+export function deleteSkill(skill_id) {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/delete/${user_id}/skills/${skill_id}`;
     return axios.delete(url)
     .then(res => {
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
-      dispatch(deleteSkillSuccess(skill_id))
+      dispatch(deleteSkillSuccess(skill_id));
     })
     .catch(err => {
       dispatch(deleteSkillError(err.message))
@@ -289,15 +273,16 @@ export function deleteSkill(user_id, skill_id) {
 }
 
 // get job
-export function getJobs(user_id) {
+export function getJobs() {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/jobs/${user_id}`;
     return axios.get(url)
       .then(res => {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
-        dispatch(getJobSuccess(res.data))
+        dispatch(getJobSuccess(res.data));
       })
     .catch(err => {
       dispatch(getJobError(err.message))
@@ -306,8 +291,10 @@ export function getJobs(user_id) {
 }
 
 // get job and filter by id
-export function getJobFilterById(user_id, job_id) {
+export function getJobFilterById() {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
+    const job_id = localStorage.getItem('job_id');
     const url = `${API_BASE_URL}/users/jobs/${user_id}`;
     return axios.get(url)
       .then(res => {
@@ -323,15 +310,16 @@ export function getJobFilterById(user_id, job_id) {
 }
 
 // get job and filter by month
-export function getJobsFilterByMonth(user_id, month) {
+export function getJobsFilterByMonth(month) {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/jobs/${user_id}`;
     return axios.get(url)
       .then(res => {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
-        dispatch(getJobsFilterByMonthSuccess(res.data.filter(job => parseInt(moment(job.dateApplied).format("M"), 10) === parseInt(moment().month(month).format("M"), 10))))
+        dispatch(getJobsFilterByMonthSuccess(res.data.filter(job => parseInt(moment(job.dateApplied).format("M"), 10) === parseInt(moment().month(month).format("M"), 10))));
       })
       .catch(err => {
         dispatch(getJobsFilterByMonthError(err.message))
@@ -340,8 +328,9 @@ export function getJobsFilterByMonth(user_id, month) {
 }
 
 // post job
-export function postJob(user_id, title, company, location, dateApplied, progress) {
+export function postJob(title, company, location, dateApplied, progress) {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/new/jobs/${user_id}`;
     return axios.post(url, {
       user_id: user_id,
@@ -355,7 +344,7 @@ export function postJob(user_id, title, company, location, dateApplied, progress
       if(res.status !== 201) {
         throw Error(res.statusText);
       }
-      dispatch(addJobSuccess(res.data.jobs))
+      dispatch(addJobSuccess(res.data.jobs));
     })
     .catch(err => {
       dispatch(addJobError(err.message))
@@ -363,8 +352,18 @@ export function postJob(user_id, title, company, location, dateApplied, progress
   }
 }
 
+// save job id
+export function setJobId(job_id) {
+  localStorage.setItem('job_id', job_id);
+  return (dispatch) => {
+    dispatch(saveJobId(job_id));
+  }
+}
+
 // put job
-export function putJob(user_id, job_id, title, company, location, dateApplied, progress) {
+export function putJob(title, company, location, dateApplied, progress) {
+  const user_id = localStorage.getItem('id');
+  const job_id = localStorage.getItem('job_id');
   return (dispatch) => {
     const updateJob = {
       id: job_id,
@@ -390,8 +389,10 @@ export function putJob(user_id, job_id, title, company, location, dateApplied, p
 }
 
 // delete job
-export function deleteJob(user_id, job_id) {
+export function deleteJob() {
   return (dispatch) => {
+    const user_id = localStorage.getItem('id');
+    const job_id = localStorage.getItem('job_id');
     const url = `${API_BASE_URL}/users/delete/${user_id}/jobs/${job_id}`;
     return axios.delete(url)
     .then(res => {

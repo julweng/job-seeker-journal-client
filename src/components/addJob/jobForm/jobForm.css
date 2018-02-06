@@ -44,6 +44,8 @@ input:focus {
 
 .success-text {
   color: #379392;
+  margin-bottom: 5rem;
+  margin-top: 2rem;
 }
 
 p > a {

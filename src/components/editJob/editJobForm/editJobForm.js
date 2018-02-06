@@ -9,10 +9,6 @@ import CrudButton from  '../../common/crudButton/crudButton';
 import { closeEditJobForm, getInitialJobValues } from '../../../actions/handler';
 import DateInput from '../../common/dateInput/dateInput';
 import './editJobForm.css';
-import { toRedirect } from '../../../actions/handler';
-
-const user_id = localStorage.getItem('user_id');
-const job_id = localStorage.getItem('jobId');
 
 const progress = ['resume submitted', 'phone interview', 'on-site interview', 'offer received']
 
@@ -23,32 +19,22 @@ export class EditJobForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getJobFilterById(user_id, job_id);
+    this.props.getJobFilterById();
     this.props.getInitialJobValues(this.props.job);
   }
 
-  handleCancelClick() { this.props.closeEditJobForm(this.props.editJob)
-  }
+  handleCancelClick() { this.props.closeEditJobForm(this.props.editJob) }
 
   onSubmit(values) {
     const { title, company, location, dateApplied, progress } = values;
-    this.props.toRedirect(this.props.redirect);
-    return this.props.dispatch(putJob(user_id, job_id, title, company, location, dateApplied, progress))
+    this.props.closeEditJobForm(this.props.editJob);
+    return this.props.dispatch(putJob(title, company, location, dateApplied, progress))
   }
 
-  editSuccess(redirect) {
-    if(redirect) {
-      return (
-        <div>
-        <p className="succes-text">Your edit has been saved.</p>
-        </div>
-      )
-    }
-    return false;
-}
-
   render() {
-    const { error, handleSubmit, pristine, submitting, reset, redirect } = this.props
+    const { error, handleSubmit, pristine, submitting, reset, jobCollection } = this.props
+
+    console.log(jobCollection)
 
     if(error) {
       return <p>Sorry! Something went horribly wrong </p>
@@ -142,7 +128,6 @@ export class EditJobForm extends React.Component {
           />
         </div>
       </form>
-      {this.editSuccess(redirect)}
       </div>
       )
     }
@@ -162,7 +147,7 @@ const mapStateToProps = state => ({
   error: state.users.error,
   jobData: state.handlers.jobData,
   initialValues: state.handlers.jobData,
-  redirect: state.handlers.redirect
+  job_id: state.users.job_id,
 })
 
 const mapDispatchToProps = dispatch => (
@@ -171,7 +156,6 @@ const mapDispatchToProps = dispatch => (
     getJobFilterById: getJobFilterById,
     closeEditJobForm: closeEditJobForm,
     getInitialJobValues: getInitialJobValues,
-    toRedirect: toRedirect
   }, dispatch));
 
 EditJobForm = connect(mapStateToProps, mapDispatchToProps)(EditJobForm);

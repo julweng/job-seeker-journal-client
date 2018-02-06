@@ -10,9 +10,6 @@ import { getJobFilterById, deleteJob } from '../../../actions/users';
 import EditJobForm from '../editJobForm/editJobForm';
 import moment from 'moment';
 
-const user_id = localStorage.getItem('user_id');
-const job_id = localStorage.getItem('jobId');
-
 export class ViewJob extends React.Component {
   constructor(props) {
     super(props);
@@ -21,9 +18,8 @@ export class ViewJob extends React.Component {
   }
 
   componentWillMount() {
-    console.log(job_id)
-    this.props.getJobFilterById(user_id, job_id);
-    console.log(this.props.job)
+    this.props.getJobFilterById();
+    console.log(this.props.editJob)
   }
 
   handleEditClick() {
@@ -31,7 +27,7 @@ export class ViewJob extends React.Component {
   }
 
   handleDeleteClick() {
-    this.props.deleteJob(user_id, job_id);
+    this.props.deleteJob();
   }
 
   showForm(editJob) {
@@ -50,10 +46,9 @@ export class ViewJob extends React.Component {
     return false;
   }
   render() {
-    console.log(this.props.job)
     const { error, job } = this.props;
     if(error) {
-      return <p>Oops! Sorry, your data vanished...</p>
+      return <p>Oops! Sorry, your data went to Fillory...</p>
     } else if(job) {
       return (
         <div className="row view-job-container">
@@ -79,7 +74,7 @@ export class ViewJob extends React.Component {
               />
             </div>
             <div className="col-4">
-            <Link to="job-collection">
+            <Link to="/job-collection">
               <CrudButton
                 type={`button`}
                 className={`delete-button`}
