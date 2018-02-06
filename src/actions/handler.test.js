@@ -109,14 +109,3 @@ describe('toRedirect', () => {
     expect(handlers.toRedirect(redirect)).toEqual(expectedAction);
   })
 })
-
-describe('loadSkillDataSuccess', () => {
-  it('should return the action', () => {
-    const skillData = {skill: 'skill', experience: 'experience'};
-    const expectedAction = {
-      type: 'LOAD_SKILL_DATA_SUCCESS',
-      skillData
-    }
-    expect(handlers.loadSkillDataSuccess(skillData)).toEqual(expectedAction);
-  })
-})
