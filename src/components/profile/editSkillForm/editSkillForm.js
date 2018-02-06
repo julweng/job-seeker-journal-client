@@ -7,7 +7,6 @@ import { Field, reduxForm, focus } from 'redux-form';
 import CrudButton from '../../common/crudButton/crudButton';
 import { required, number, minValue } from '../../../validators';
 import { getSkillFilterById, putSkill } from '../../../actions/users';
-import { getInitialSkillValues } from '../../../actions/handler';
 
 const minValueZero = minValue(0);
 
@@ -15,12 +14,7 @@ export class EditSkillForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleCancelClick = this.handleCancelClick.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.getSkillFilterById(this.props.skill_id);
-    this.props.getInitialSkillValues(this.props.skill);
-  }
+}
 
   handleCancelClick() {
     this.props.closeEditSkillForm(this.props.editSkill);
@@ -29,12 +23,13 @@ export class EditSkillForm extends React.Component {
   onSubmit(values) {
     this.props.closeEditSkillForm(this.props.addSkill);
     const { skill, experience } = values;
-    this.props.dispatch(putSkill(this.props.skill_id, skill, experience));
+    this.props.dispatch(putSkill(skill, experience));
   }
 
   render () {
     const skillName = `Skill: ${this.props.skill.skill}`;
     const skillExperience = `Experience: ${this.props.skill.experience} year(s)`;
+
     if(!this.props.editSkill) {
       return null;
     }
@@ -57,7 +52,7 @@ export class EditSkillForm extends React.Component {
                 type="text"
                 name="skill"
                 id="skill"
-
+                defaultValue={`${this.props.skill.skill}`}
                 validate={[required]}
               />
               </div>
@@ -102,30 +97,30 @@ const mapStateToProps = (state) => ({
   skills: state.users.skills,
   error: state.users.err,
   skill: state.users.skill,
-  skillData: state.handlers.skillData,
   skill_id: state.users.skill_id,
-  InitialValues: {
-    skill: state.users.skill.skill,
-    experience: state.users.skill.experience
-  }
+  initialValues: state.users.skill,
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getSkillFilterById: getSkillFilterById,
     closeEditSkillForm: closeEditSkillForm,
-    getInitialSkillValues: getInitialSkillValues,
     putSkill: putSkill
   }, dispatch));
 
 EditSkillForm = connect(mapStateToProps, mapDispatchToProps)(EditSkillForm);
 
-export default reduxForm({
+EditSkillForm = reduxForm({
   form: 'skillEntry',
+  enableReinitialize: true,
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus('skillEntry', Object.keys(errors)[0]))
 })(EditSkillForm);
 
-EditSkillForm.defaultProps = {
-  editSkill: true,
-}
+EditSkillForm = connect(
+  state => ({
+    initialValues: state.users.skill
+  }),
+)(EditSkillForm)
+
+export default EditSkillForm

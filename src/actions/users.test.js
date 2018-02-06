@@ -1,38 +1,5 @@
 import * as users from './users';
 
-describe('getUserSuccess', () => {
-  it('should return the action', () => {
-    const user = null;
-    const expectedAction = {
-      type: 'GET_USER_SUCCESS',
-      user
-    }
-    expect(users.getUserSuccess(user)).toEqual(expectedAction);
-  });
-});
-
-describe('getUserSuccess', () => {
-  it('should return the action', () => {
-    const user = null;
-    const expectedAction = {
-      type: 'GET_USER_SUCCESS',
-      user
-    }
-    expect(users.getUserSuccess(user)).toEqual(expectedAction);
-  });
-});
-
-describe('getUserError', () => {
-  it('should return the action', () => {
-    const err = null;
-    const expectedAction = {
-      type: 'GET_USER_ERROR',
-      err
-    }
-    expect(users.getUserError(err)).toEqual(expectedAction);
-  })
-})
-
 describe('getSkillError', () => {
   it('should return the action', () => {
     const err = null;

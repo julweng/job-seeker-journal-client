@@ -148,6 +148,12 @@ export const saveJobId = job_id => ({
   job_id
 })
 
+export const LOAD_SKILL_DATA_SUCCESS = 'LOAD_SKILL_DATA_SUCCESS';
+export const loadSkillDataSuccess = skillData => ({
+  type: LOAD_SKILL_DATA_SUCCESS,
+  skillData
+})
+
 const headers = { 'content-type': 'application/json' }
 
 // register users
@@ -191,16 +197,17 @@ export function getSkills() {
 }
 
 //get skill filter by id
-export function getSkillFilterById(skill_id) {
+export function getSkillFilterById() {
   return (dispatch) => {
     const user_id = localStorage.getItem('id');
+    const skill_id = localStorage.getItem('skill_id')
     const url = `${API_BASE_URL}/users/skills/${user_id}`;
     return axios.get(url)
       .then(res => {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
-        dispatch(getSkillFilterByIdSuccess(res.data.filter(skill => skill._id === skill_id)));
+        dispatch(getSkillFilterByIdSuccess(res.data.filter(skill => skill._id === skill_id)))
       })
       .catch(err => {
         dispatch(getSkillFilterByIdError(err.message))
@@ -231,9 +238,10 @@ export function postSkill(skill, experience) {
 }
 
 // put skill
-export function putSkill(skill_id, skill, experience) {
+export function putSkill(skill, experience) {
   return (dispatch) => {
     const user_id = localStorage.getItem('id');
+    const skill_id = localStorage.getItem('skill_id');
     const updateSkill = {
       id: skill_id,
       user_id: user_id,
@@ -349,6 +357,14 @@ export function postJob(title, company, location, dateApplied, progress) {
     .catch(err => {
       dispatch(addJobError(err.message))
     })
+  }
+}
+
+// save skill id
+export function setSkillId(skill_id) {
+  localStorage.setItem('skill_id', skill_id);
+  return (dispatch) => {
+    dispatch(saveSkillId(skill_id));
   }
 }
 

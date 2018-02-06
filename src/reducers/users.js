@@ -22,7 +22,7 @@ import {
   GET_SKILL_FILTER_BY_ID_SUCCESS,
   GET_SKILL_FILTER_BY_ID_ERROR,
   SAVE_SKILL_ID,
-  SAVE_JOB_ID
+  SAVE_JOB_ID,
 } from '../actions/users';
 
 const initialState = {
@@ -35,7 +35,8 @@ const initialState = {
   err: null,
   skill_id: '',
   loading: false,
-  job_id:''
+  job_id:'',
+  initialValues: {}
 }
 
 export const users = (state = initialState, action) => {
@@ -173,7 +174,8 @@ export const users = (state = initialState, action) => {
     case GET_SKILL_FILTER_BY_ID_SUCCESS:
       return {
         ...state,
-        skill: action.skill[0]
+        skill: action.skill[0],
+        initialValues: action.skill[0]
       }
 
     case GET_SKILL_FILTER_BY_ID_ERROR:
@@ -187,6 +189,7 @@ export const users = (state = initialState, action) => {
         ...state,
         job_id: action.job_id
       }
+
     default:
       return state;
   }

@@ -118,6 +118,7 @@ const mapStateToProps = state => {
     skills: state.users.skills,
     error: state.users.err,
     currentUser: state.auth.currentUser,
+    initialValues: state.users.initialValues
   }
 };
 

@@ -40,7 +40,3 @@ export default function ProgressBar(props) {
     </div>
   )
 }
-
-ProgressBar.defaultProps = {
-  progress: 'on-site interview'
-}

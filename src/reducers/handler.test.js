@@ -8,8 +8,8 @@ import {
   openEditJobForm,
   closeEditJobForm,
   loadJobDataSuccess,
-  loadSkillDataSuccess,
-  toDirect
+  toRedirect,
+  toJobCollection,
 } from '../actions/handler';
 
 
@@ -22,8 +22,8 @@ describe('handlers', () => {
     expect(state.editJob).toEqual(false);
     expect(state.jobData).toEqual({});
     expect(state.redirect).toEqual(false);
-    expect(state.chartData).toEqual([]);
     expect(state.skillData).toEqual({});
+    expect(state.jobCollection).toEqual(false);
   });
 
   it('Should return the current state on an unknown action', () => {
@@ -86,18 +86,6 @@ describe('closeEditJobForm', () => {
     let state = { editJob: true };
     state = handlers(state, openEditJobForm(state.editJob));
     expect(state.editJob).toEqual(false);
-  });
-});
-
-describe('loadSkillDataSuccess', () => {
-  it('should return skillData', () => {
-    let state = { skillData: {} };
-    state = handlers(state, loadSkillDataSuccess({
-      skill: 'skill', experience: 'experience'
-    }));
-    expect(state.skillData).toEqual({
-      skill: 'skill', experience: 'experience'
-    });
   });
 });
 

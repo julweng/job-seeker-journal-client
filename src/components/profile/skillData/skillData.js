@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { openEditSkillForm } from '../../../actions/handler';
-import { deleteSkill, saveSkillId } from '../../../actions/users'
+import { deleteSkill, getSkillFilterById, setSkillId } from '../../../actions/users'
 import CrudButton from '../../common/crudButton/crudButton';
 import './skillData.css';
 
@@ -16,7 +16,8 @@ export class SkillData extends React.Component {
   handleEditClick(e) {
     this.props.openEditSkillForm(this.props.editSkill)
     const skill_id = e.target.getAttribute('id');
-    this.props.saveSkillId(skill_id);
+    this.props.setSkillId(skill_id);
+    this.props.getSkillFilterById(skill_id);
   }
 
   handleDeleteClick(e) {
@@ -61,14 +62,16 @@ export class SkillData extends React.Component {
 const mapStateToProps = state => ({
   editSkill: state.handlers.editSkill,
   skill_id: state.users.skill_id,
-  err: state.users.err
+  err: state.users.err,
+  initialValues: state.users.initialValues
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     openEditSkillForm: openEditSkillForm,
     deleteSkill: deleteSkill,
-    saveSkillId: saveSkillId,
+    getSkillFilterById: getSkillFilterById,
+    setSkillId: setSkillId
   }, dispatch));
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillData);

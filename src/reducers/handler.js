@@ -9,7 +9,6 @@ import {
   LOAD_JOB_DATA_SUCCESS,
   TO_REDIRECT,
   TO_JOB_COLLECTION,
-  LOAD_SKILL_DATA_SUCCESS
 
 } from '../actions/handler';
 
@@ -81,11 +80,6 @@ export const handlers = (state = initialState, action) => {
         jobCollection: !state.jobCollection
       }
 
-    case LOAD_SKILL_DATA_SUCCESS:
-      return {
-        ...state,
-        skillData: action.skillData
-      }
     default:
       return state;
   }

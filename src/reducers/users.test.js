@@ -89,7 +89,7 @@ describe('addSkillError', () => {
 
 describe('updateSkillSuccess', () => {
   it('should update skill', () => {
-    let state = { skills: [{ id: '1', skill: 'a', experience: 5 }] };
+    let state = { skills: [{ id: '1', skill: 'b', experience: 4 }] };
     state = users(state, updateSkillSuccess(
       { id: '1', skill: 'b', experience: 4 }
     ));
