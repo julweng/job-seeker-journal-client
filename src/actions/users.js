@@ -154,6 +154,12 @@ export const loadSkillDataSuccess = skillData => ({
   skillData
 })
 
+export const IS_LOADING = 'IS_LOADING';
+export const isLoading = loading => ({
+  type: IS_LOADING,
+  loading
+})
+
 const headers = { 'content-type': 'application/json' }
 
 // register users
@@ -181,6 +187,7 @@ export const registerUser = user => dispatch => {
 // get skills
 export function getSkills() {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/skills/${user_id}`;
     return axios.get(url)
@@ -188,6 +195,7 @@ export function getSkills() {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
+        dispatch(isLoading(false));
         dispatch(getSkillSuccess(res.data));
       })
     .catch(err => {
@@ -202,11 +210,13 @@ export function getSkillFilterById() {
     const user_id = localStorage.getItem('id');
     const skill_id = localStorage.getItem('skill_id')
     const url = `${API_BASE_URL}/users/skills/${user_id}`;
+    dispatch(isLoading(true))
     return axios.get(url)
       .then(res => {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
+        dispatch(isLoading(false))
         dispatch(getSkillFilterByIdSuccess(res.data.filter(skill => skill._id === skill_id)))
       })
       .catch(err => {
@@ -218,6 +228,7 @@ export function getSkillFilterById() {
 // post skills
 export function postSkill(skill, experience) {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/new/skills/${user_id}`;
     return axios.post(url, {
@@ -229,6 +240,7 @@ export function postSkill(skill, experience) {
       if(res.status !== 201) {
         throw Error(res.statusText);
       }
+      dispatch(isLoading(false))
       dispatch(addSkillSuccess(res.data.skills));
     })
     .catch(err => {
@@ -240,6 +252,7 @@ export function postSkill(skill, experience) {
 // put skill
 export function putSkill(skill, experience) {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const skill_id = localStorage.getItem('skill_id');
     const updateSkill = {
@@ -254,6 +267,7 @@ export function putSkill(skill, experience) {
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
+      dispatch(isLoading(false))
     dispatch(updateSkillSuccess(updateSkill));
     })
     .catch(err => {
@@ -265,6 +279,7 @@ export function putSkill(skill, experience) {
 // delete skill
 export function deleteSkill(skill_id) {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/delete/${user_id}/skills/${skill_id}`;
     return axios.delete(url)
@@ -272,6 +287,7 @@ export function deleteSkill(skill_id) {
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
+      dispatch(isLoading(false));
       dispatch(deleteSkillSuccess(skill_id));
     })
     .catch(err => {
@@ -283,6 +299,7 @@ export function deleteSkill(skill_id) {
 // get job
 export function getJobs() {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/jobs/${user_id}`;
     return axios.get(url)
@@ -290,6 +307,7 @@ export function getJobs() {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
+        dispatch(isLoading(false));
         dispatch(getJobSuccess(res.data));
       })
     .catch(err => {
@@ -301,6 +319,7 @@ export function getJobs() {
 // get job and filter by id
 export function getJobFilterById() {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const job_id = localStorage.getItem('job_id');
     const url = `${API_BASE_URL}/users/jobs/${user_id}`;
@@ -309,6 +328,7 @@ export function getJobFilterById() {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
+        dispatch(isLoading(false));
         dispatch(getJobFilterByIdSuccess(res.data.filter(job => job._id === job_id)));
       })
       .catch(err => {
@@ -320,6 +340,7 @@ export function getJobFilterById() {
 // get job and filter by month
 export function getJobsFilterByMonth(month) {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/jobs/${user_id}`;
     return axios.get(url)
@@ -327,6 +348,7 @@ export function getJobsFilterByMonth(month) {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
+        dispatch(isLoading(false));
         dispatch(getJobsFilterByMonthSuccess(res.data.filter(job => parseInt(moment(job.dateApplied).format("M"), 10) === parseInt(moment().month(month).format("M"), 10))));
       })
       .catch(err => {
@@ -338,6 +360,7 @@ export function getJobsFilterByMonth(month) {
 // post job
 export function postJob(title, company, location, dateApplied, progress) {
   return (dispatch) => {
+    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/new/jobs/${user_id}`;
     return axios.post(url, {
@@ -352,6 +375,7 @@ export function postJob(title, company, location, dateApplied, progress) {
       if(res.status !== 201) {
         throw Error(res.statusText);
       }
+      dispatch(isLoading(false));
       dispatch(addJobSuccess(res.data.jobs));
     })
     .catch(err => {
@@ -381,6 +405,7 @@ export function putJob(title, company, location, dateApplied, progress) {
   const user_id = localStorage.getItem('id');
   const job_id = localStorage.getItem('job_id');
   return (dispatch) => {
+    dispatch(isLoading(true));
     const updateJob = {
       id: job_id,
       user_id: user_id,
@@ -396,6 +421,7 @@ export function putJob(title, company, location, dateApplied, progress) {
       if(res.status !== 204) {
         throw Error(res.statusText);
       }
+      dispatch(isLoading(false));
     dispatch(updateJobSuccess(updateJob))
     })
     .catch(err => {

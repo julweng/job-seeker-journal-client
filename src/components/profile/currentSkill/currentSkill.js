@@ -9,6 +9,7 @@ import EditSkillForm from '../editSkillForm/editSkillForm';
 import CrudButton from '../../common/crudButton/crudButton';
 import SkillData from '../skillData/skillData';
 import { getSkills } from '../../../actions/users';
+import FontAwesome from 'react-fontawesome';
 
 export class CurrentSkill extends React.Component {
   constructor(props) {
@@ -59,12 +60,24 @@ export class CurrentSkill extends React.Component {
   }
 
   render() {
-    const { skills, addSkill, editSkill, error } = this.props;
+    const { skills, addSkill, editSkill, error, loading } = this.props;
     if(error) {
       return (
         <p>Sorry, something went horribly awry.</p>
       )
     }
+
+    if (loading) {
+      return (
+        <FontAwesome
+        name='spinner'
+        size='3x'
+        spin
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
+      )
+    }
+
     return (
       <div className="row current-skill-container">
       <div className="row">
@@ -118,7 +131,7 @@ const mapStateToProps = state => {
     skills: state.users.skills,
     error: state.users.err,
     currentUser: state.auth.currentUser,
-    initialValues: state.users.initialValues
+    loading: state.users.loading
   }
 };
 

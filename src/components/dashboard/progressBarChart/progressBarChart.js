@@ -69,10 +69,14 @@ export class ProgressBarChart extends React.Component {
   }
 
   render() {
-    if(this.props.jobs.length === 0) {
+    const { error, loading, jobs } = this.props;
+    if(error) {
       return (
-        <p>You have not made any progress. Please <Link to="/add-job"> Add Job </Link> or <br />view your <Link to="/job-collection"> Job Collection </Link> and select jobs to edit your progress</p>
+        <p>...it's not you, it's me. This is all my fault</p>
       )
+    }
+    if(loading) {
+      return <div></div>
     }
     return (
       <div className="row">
@@ -80,7 +84,7 @@ export class ProgressBarChart extends React.Component {
         <div className="col-8 chart-container">
           <h3>Progress Summary</h3>
           <ResponsiveContainer aspect={2}>
-      	    <BarChart data={progressChartData(this.props.jobs)}
+      	    <BarChart data={progressChartData(jobs)}
               margin={{top: 3, right: 4, left: 4, bottom: 3}}>
               <XAxis dataKey="period" />
               <YAxis/>
@@ -107,7 +111,9 @@ export class ProgressBarChart extends React.Component {
 
   const mapStateToProps = state => ({
     jobs: state.users.jobs,
-    currentUser: state.auth.currentUser
+    currentUser: state.auth.currentUser,
+    error: state.users.err,
+    loading: state.users.loading
   });
 
   const mapDispatchToProps = dispatch => (

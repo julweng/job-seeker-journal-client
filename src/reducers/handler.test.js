@@ -59,7 +59,7 @@ describe('closeAddSkillForm', () => {
 
 describe('openEditSkillForm', () => {
   it('should return editSkill as true', () => {
-    let state = { editSkill: false };
+    let state = { editSkill: true };
     state = handlers(state, openEditSkillForm(state.editSkill));
     expect(state.editSkill).toEqual(true);
   });
@@ -84,7 +84,7 @@ describe('openEditJobForm', () => {
 describe('closeEditJobForm', () => {
   it('should return editJob as false', () => {
     let state = { editJob: true };
-    state = handlers(state, openEditJobForm(state.editJob));
+    state = handlers(state, closeEditJobForm(state.editJob));
     expect(state.editJob).toEqual(false);
   });
 });

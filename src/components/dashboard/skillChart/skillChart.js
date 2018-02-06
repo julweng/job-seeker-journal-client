@@ -7,6 +7,7 @@ import {
   Radar, RadarChart, PolarGrid,
   ResponsiveContainer, PolarAngleAxis, PolarRadiusAxis
 } from 'recharts';
+import FontAwesome from 'react-fontawesome';
 import './skillChart.css';
 
 export class SkillChart extends React.Component {
@@ -15,47 +16,53 @@ export class SkillChart extends React.Component {
   }
 
   render () {
-    const { error, skills } = this.props;
+    const { error, skills, loading } = this.props;
     const userSkills = skills.map(skill => {
       return {
         skill: skill.skill,
         experience: parseInt(skill.experience, 10),
-        fullMark: 20
+        fullMark: 15
       }
     });
+
     if(error) {
       return (
         <p>Sorry! Something went horribly wrong. Relog and try again.</p>
       )
-    } else if (skills.length === 0) {
-      return (
-        <p>You may not have saved any skills. Please go to your
-          <Link to="/profile"> profile </Link>
-        to add some skills !</p>
-      )
-    } else {
-      return (
-        <div className="row">
-          <div className="col-12 chart-container">
-            <h3>Skill Chart</h3>
-            <p>experience in years</p>
-            <ResponsiveContainer aspect={2}>
-              <RadarChart data={userSkills}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey='skill' />
-                <PolarRadiusAxis/>
-                <Radar dataKey='experience' stroke="#37b5bf" fill="#92d6db"   fillOpacity={0.5}/>
-              </RadarChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="col-12 edit-container">
-            <Link to="/profile">
-              Edit Profile...
-            </Link>
-          </div>
-        </div>
-      );
     }
+
+    if (loading) {
+      return (
+        <FontAwesome
+        name='spinner'
+        size='3x'
+        spin
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
+      )
+    }
+
+    return (
+      <div className="row">
+        <div className="col-12 chart-container">
+          <h3>Skill Chart</h3>
+          <p>experience in years</p>
+          <ResponsiveContainer aspect={2}>
+            <RadarChart data={userSkills}>
+              <PolarGrid />
+              <PolarAngleAxis dataKey='skill' />
+              <PolarRadiusAxis/>
+              <Radar dataKey='experience' stroke="#37b5bf" fill="#92d6db"   fillOpacity={0.5}/>
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="col-12 edit-container">
+          <Link to="/profile">
+            Edit Profile...
+          </Link>
+        </div>
+      </div>
+    );
   }
 }
 
@@ -70,6 +77,7 @@ const mapStateToProps = state => {
     skills: state.users.skills,
     error: state.users.err,
     currentUser: state.auth.currentUser,
+    loading: state.users.loading
   }
 }
 

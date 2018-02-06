@@ -14,8 +14,9 @@
 }
 
 .job-item button:hover {
-  background-color: #E8E8E8;
+  background-color: #E6E6E6;
   color: #000;
+  opacity: 1;
   font-size: 100%;
 }
 

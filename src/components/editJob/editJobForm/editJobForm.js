@@ -8,6 +8,7 @@ import { putJob, getJobFilterById } from '../../../actions/users';
 import CrudButton from  '../../common/crudButton/crudButton';
 import { closeEditJobForm, getInitialJobValues } from '../../../actions/handler';
 import DateInput from '../../common/dateInput/dateInput';
+import FontAwesome from 'react-fontawesome';
 import './editJobForm.css';
 
 const progress = ['resume submitted', 'phone interview', 'on-site interview', 'offer received']
@@ -32,13 +33,23 @@ export class EditJobForm extends React.Component {
   }
 
   render() {
-    const { error, handleSubmit, pristine, submitting, reset, jobCollection } = this.props
-
-    console.log(jobCollection)
+    const { error, loading, handleSubmit, pristine, submitting, reset } = this.props
 
     if(error) {
       return <p>Sorry! Something went horribly wrong </p>
     }
+
+    if (loading) {
+      return (
+        <FontAwesome
+        name='spinner'
+        size='3x'
+        spin
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
+      )
+    }
+
     return (
       <div>
       <form className="row" id="add-job-form" onSubmit={handleSubmit(values =>
@@ -148,6 +159,7 @@ const mapStateToProps = state => ({
   jobData: state.handlers.jobData,
   initialValues: state.handlers.jobData,
   job_id: state.users.job_id,
+  loading: state.users.loading
 })
 
 const mapDispatchToProps = dispatch => (

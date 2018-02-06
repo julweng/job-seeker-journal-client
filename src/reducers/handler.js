@@ -53,7 +53,7 @@ export const handlers = (state = initialState, action) => {
     case OPEN_EDIT_JOB_FORM:
       return {
         ...state,
-        editJob: !state.editJob
+        editJob: true
       };
 
     case CLOSE_EDIT_JOB_FORM:

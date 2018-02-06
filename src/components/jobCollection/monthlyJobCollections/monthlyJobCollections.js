@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
 import { getJobsFilterByMonth, getJobs, setJobId } from '../../../actions/users';
-import { toRedirect, toJobCollection } from '../../../actions/handler';
+import { toRedirect } from '../../../actions/handler';
 import './monthlyJobCollections.css';
 import JobItem from '../../jobItem/jobItem';
 import { Field, reduxForm, focus } from 'redux-form';
+import FontAwesome from 'react-fontawesome';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -20,7 +21,6 @@ export class MonthlyJobCollections extends React.Component {
     const job_id = e.target.getAttribute('id');
     this.props.setJobId(job_id);
     this.props.toRedirect(true);
-    this.props.toJobCollection(this.props.jobCollection);
   }
 
   onSubmit(values) {
@@ -60,17 +60,29 @@ export class MonthlyJobCollections extends React.Component {
   }
 
   render() {
-    console.log(this.props.redirect)
-    const { error, handleSubmit, jobsByMonth, redirect} = this.props
+    const { error, loading, handleSubmit, jobsByMonth, redirect} = this.props
     if(redirect) {
       return <Redirect to="/edit-job" />
     }
+
     if(error) {
       return <p>
       Sorry...your file is not here,
       It may have been important,
       But now it is gone.</p>
     }
+
+    if (loading) {
+      return (
+        <FontAwesome
+        name='spinner'
+        size='3x'
+        spin
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
+      )
+    }
+
     return (
       <div className="row">
         <div className="col-2">&nbsp;</div>
@@ -119,8 +131,8 @@ const mapStateToProps = state => {
     jobsByMonth: state.users.jobsByMonth,
     error: state.users.err,
     redirect: state.handlers.redirect,
-    jobCollection: state.handlers.jobCollection,
-    job_id: state.users.job_id
+    job_id: state.users.job_id,
+    loading: state.users.loading
   }
 };
 
@@ -130,7 +142,6 @@ const mapDispatchToProps = dispatch => (
     getJobs: getJobs,
     toRedirect: toRedirect,
     setJobId: setJobId,
-    toJobCollection: toJobCollection
   }, dispatch));
 
 MonthlyJobCollections = connect(mapStateToProps, mapDispatchToProps)(MonthlyJobCollections);

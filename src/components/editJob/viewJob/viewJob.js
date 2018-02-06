@@ -19,7 +19,6 @@ export class ViewJob extends React.Component {
 
   componentWillMount() {
     this.props.getJobFilterById();
-    console.log(this.props.editJob)
   }
 
   handleEditClick() {

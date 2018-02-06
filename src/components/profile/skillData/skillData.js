@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { openEditSkillForm } from '../../../actions/handler';
 import { deleteSkill, getSkillFilterById, setSkillId } from '../../../actions/users'
 import CrudButton from '../../common/crudButton/crudButton';
+import FontAwesome from 'react-fontawesome';
 import './skillData.css';
 
 export class SkillData extends React.Component {
@@ -17,7 +18,7 @@ export class SkillData extends React.Component {
     this.props.openEditSkillForm(this.props.editSkill)
     const skill_id = e.target.getAttribute('id');
     this.props.setSkillId(skill_id);
-    this.props.getSkillFilterById(skill_id);
+    this.props.getSkillFilterById();
   }
 
   handleDeleteClick(e) {
@@ -26,43 +27,53 @@ export class SkillData extends React.Component {
   }
 
   render() {
-    const { err, skill, experience, id } = this.props
-    if(err) {
+    const { error, loading, skill, experience, id } = this.props
+    if(error) {
       return (
         <p>Sorry, something went wrong when retrieving skills</p>
       )
-    } else {
+    }
+    if (loading) {
       return (
-        <div className="col-12 individual-skill-container">
-          <p className="col-4">{skill}</p>
-          <p className="col-4">{experience} year(s)</p>
-          <div className="col-2">
-            <CrudButton id={`${id}`}
-              type={`button`}
-              className={`edit-skill-button`}
-              text={`Edit`}
-              handleEditClick={this.handleEditClick}
-            />
-          </div>
-          <div className="col-2">
-            <CrudButton
-              id={`${id}`}
-              type={`button`}
-              className={`delete-skill-button`}
-              text={`Delete`}
-              handleDeleteClick={this.handleDeleteClick}
-            />
-          </div>
-        </div>
+        <FontAwesome
+        name='spinner'
+        size='3x'
+        spin
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
       )
     }
+    return (
+      <div className="col-12 individual-skill-container">
+        <p className="col-4">{skill}</p>
+        <p className="col-4">{experience} year(s)</p>
+        <div className="col-2">
+          <CrudButton id={`${id}`}
+            type={`button`}
+            className={`edit-skill-button`}
+            text={`Edit`}
+            handleEditClick={this.handleEditClick}
+          />
+        </div>
+        <div className="col-2">
+          <CrudButton
+            id={`${id}`}
+            type={`button`}
+            className={`delete-skill-button`}
+            text={`Delete`}
+            handleDeleteClick={this.handleDeleteClick}
+          />
+        </div>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => ({
   editSkill: state.handlers.editSkill,
   skill_id: state.users.skill_id,
-  err: state.users.err,
+  error: state.users.err,
+  loading: state.users.loading
 });
 
 const mapDispatchToProps = dispatch => (

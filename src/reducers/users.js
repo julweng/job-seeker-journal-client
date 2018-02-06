@@ -23,6 +23,7 @@ import {
   GET_SKILL_FILTER_BY_ID_ERROR,
   SAVE_SKILL_ID,
   SAVE_JOB_ID,
+  IS_LOADING,
 } from '../actions/users';
 
 const initialState = {
@@ -188,6 +189,12 @@ export const users = (state = initialState, action) => {
       return {
         ...state,
         job_id: action.job_id
+      }
+
+    case IS_LOADING:
+      return {
+        ...state,
+        loading: action.loading
       }
 
     default:

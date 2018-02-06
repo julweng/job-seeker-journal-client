@@ -7,6 +7,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 import CrudButton from '../../common/crudButton/crudButton';
 import { required, number, minValue } from '../../../validators';
 import { getSkillFilterById, putSkill } from '../../../actions/users';
+import FontAwesome from 'react-fontawesome';
 
 const minValueZero = minValue(0);
 
@@ -27,17 +28,31 @@ export class EditSkillForm extends React.Component {
   }
 
   render () {
-    const skillName = `Skill: ${this.props.skill.skill}`;
-    const skillExperience = `Experience: ${this.props.skill.experience} year(s)`;
+    const { editSkill, error, loading, handleSubmit, pristine, submitting } = this.props;
+    if(error) {
+      return <p>Sorry, the server is currently heavily involved in the battle for Azeroth.</p>
+    }
 
-    if(!this.props.editSkill) {
+    if(!editSkill) {
       return null;
     }
+
+    if (loading) {
+      return (
+        <FontAwesome
+        name='spinner'
+        size='3x'
+        spin
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
+      )
+    }
+
     return (
       <form
         className="row"
         id="add-skill-form"
-        onSubmit={this.props.handleSubmit(values =>
+        onSubmit={handleSubmit(values =>
           this.onSubmit(values)
       )}>
         <div className="col-12" id="form-title-container">
@@ -46,24 +61,22 @@ export class EditSkillForm extends React.Component {
           <div className="col-12">
             <fieldset>
               <div className="col-6">
-              <label htmlFor="skills">{skillName}</label>
+              <label htmlFor="skills">{`Skill`}</label>
               <Field
                 component={Input}
                 type="text"
                 name="skill"
                 id="skill"
-                defaultValue={`${this.props.skill.skill}`}
                 validate={[required]}
               />
               </div>
               <div className="col-6 experience-container">
-              <label htmlFor="experience">{skillExperience}</label>
+              <label htmlFor="experience">{`Experience`}</label>
               <Field
                 component={Input}
                 type="number"
                 name="experience"
                 id="experience"
-
                 validate={[required, number, minValueZero]}
               />
               </div>
@@ -74,7 +87,7 @@ export class EditSkillForm extends React.Component {
               type={`submit`}
               text={`Save`}
               className={`save-button`}
-              disabled={this.props.pristine || this.props.submitting}
+              disabled={pristine || submitting}
             />
             </div>
             <div className="col-4">
@@ -99,6 +112,7 @@ const mapStateToProps = (state) => ({
   skill: state.users.skill,
   skill_id: state.users.skill_id,
   initialValues: state.users.skill,
+  loading: state.users.loading
 });
 
 const mapDispatchToProps = dispatch => (
