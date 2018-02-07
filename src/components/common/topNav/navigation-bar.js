@@ -9,11 +9,12 @@ import {clearAuthToken} from '../../../local-storage';
 
 export class TopNav extends React.Component {
   logOut() {
-    this.props.clearAuth();
-    clearAuthToken();
     localStorage.removeItem('user_id');
     localStorage.removeItem('skill_id');
     localStorage.removeItem('job_id');
+    localStorage.removeItem('username');
+    this.props.clearAuth();
+    clearAuthToken();
     }
 
   logOutLink(loggedIn) {

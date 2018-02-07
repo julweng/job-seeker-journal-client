@@ -190,6 +190,26 @@ export const registerUser = user => dispatch => {
         });
 };
 
+// get skills by Username
+export function getSkillsByName() {
+  return (dispatch) => {
+    dispatch(isLoading(true));
+    const username = localStorage.getItem('username');
+    const url = `${API_BASE_URL}/user?username=${username}`;
+    return axios.get(url)
+      .then(res => {
+        if(res.status !== 200) {
+          throw Error(res.statusText);
+        }
+        dispatch(isLoading(false));
+        dispatch(getSkillSuccess(res.data.skills));
+      })
+    .catch(err => {
+      dispatch(getSkillError(err.message))
+    })
+  }
+}
+
 // get skills
 export function getSkills() {
   return (dispatch) => {

@@ -12,7 +12,7 @@ import './skillChart.css';
 
 export class SkillChart extends React.Component {
   componentDidMount() {
-    this.props.getSkills(this.props.currentUser.id);
+    this.props.getSkills();
   }
 
   showSkillChart(skills) {
@@ -29,13 +29,10 @@ export class SkillChart extends React.Component {
   }
 
   render () {
-    const { error, skills, loading } = this.props;
+    const { skills, loading } = this.props;
 
-    if(error) {
-      return (
-        <p>Sorry! Something went horribly wrong. Relog and try again.</p>
-      )
-    }
+
+
 
     if(loading) {
       return (
@@ -88,7 +85,6 @@ const mapDispatchToProps = dispatch => (
 const mapStateToProps = state => {
   return {
     skills: state.users.skills,
-    error: state.users.err,
     currentUser: state.auth.currentUser,
     loading: state.users.loading
   }
