@@ -78,6 +78,10 @@ export class ProgressBarChart extends React.Component {
     if(loading) {
       return <div></div>
     }
+
+    if(jobs.length === 0) {
+      return <div>You have not entered any jobs yet.</div>
+    }
     return (
       <div className="row">
         <div className="col-2">&nbsp;</div>

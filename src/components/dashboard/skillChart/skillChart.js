@@ -17,9 +17,8 @@ export class SkillChart extends React.Component {
 
   render () {
     const { error, skills, loading } = this.props;
-    let userSkills = [];
-    if(skills) {
-      userSkills = skills.map(skill => {
+
+    const userSkills = skills.map(skill => {
         return {
           skill: skill.skill,
           experience: parseInt(skill.experience, 10),
@@ -27,7 +26,6 @@ export class SkillChart extends React.Component {
         }
       })
     }
-    userSkills = [{ skill: '', experience: 0, fullMark: 15 } ]
 
     if(error) {
       return (
@@ -44,6 +42,9 @@ export class SkillChart extends React.Component {
         style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
         />
       )
+    }
+    if(userSkills.length === 0) {
+      return <div>You have not entered any skills yet.</div>
     }
 
     return (
