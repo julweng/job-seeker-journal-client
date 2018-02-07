@@ -69,7 +69,7 @@ input::placeholder {
   Animations for typography & form elements
 ------------------------------------------------------------------------------*/
 h1, h2, h3, p, a, input, button, ol, ul, div, form {
-  transition: all .3s linear;
+  transition: all .5s linear;
 }
 
 /*------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ h1, h2, h3, p, a, input, button, ol, ul, div, form {
 
 @media screen and (min-width: 40rem) {
   h1, h2, h3, p, a, input, button, ol, ul, div, form {
-    transition: all .3s linear;
+    transition: all .5s linear;
   }
   .smallScreenDisplay {
     display: none;

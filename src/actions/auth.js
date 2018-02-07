@@ -40,12 +40,11 @@ const storeAuthInfo = (authToken, dispatch) => {
   dispatch(authSuccess(decodedToken.user));
   saveUserId(decodedToken.user.id);
   saveAuthToken(authToken);
-
 };
 
 export const login = (username, password) => dispatch => {
-    dispatch(authRequest());
-    localStorage.setItem('username', username);
+  localStorage.setItem('username', username);
+  dispatch(authRequest());
     return (
         fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',

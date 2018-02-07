@@ -8,10 +8,7 @@ import './dropDownTopNav.css';
 
 export class DropDownTopNav extends React.Component {
   logOut() {
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('skill_id');
-    localStorage.removeItem('job_id');
-    localStorage.removeItem('username');
+    localStorage.clear();
     this.props.clearAuth();
     clearAuthToken();
   }

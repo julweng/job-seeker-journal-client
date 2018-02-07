@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid,
         ResponsiveContainer, Tooltip, Legend} from 'recharts';
 import { connect } from 'react-redux';
-import { getJobs } from '../../../actions/users';
+import { getJobsByName } from '../../../actions/users';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import './progressBarChart.css';
@@ -65,16 +65,17 @@ function progressChartData(jobs) {
 
 export class ProgressBarChart extends React.Component {
   componentDidMount() {
-    this.props.getJobs(this.props.currentUser.id);
+    this.props.getJobsByName();
   }
 
   render() {
     const { error, loading, jobs } = this.props;
     if(error) {
       return (
-        <p>...it's not you, it's me. This is all my fault</p>
+        <p>Sorry, the server is currently involved in exploring the world in Zelda. Please try again later.</p>
       )
     }
+
     if(loading) {
       return <div></div>
     }
@@ -122,7 +123,7 @@ export class ProgressBarChart extends React.Component {
 
   const mapDispatchToProps = dispatch => (
     bindActionCreators({
-      getJobs: getJobs
+      getJobsByName: getJobsByName
     }, dispatch));
 
   export default connect(mapStateToProps, mapDispatchToProps)(ProgressBarChart);

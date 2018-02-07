@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getSkills } from '../../../actions/users';
+import { getSkillsByName } from '../../../actions/users';
 import { bindActionCreators } from 'redux';
 import {
   Radar, RadarChart, PolarGrid,
@@ -12,7 +12,7 @@ import './skillChart.css';
 
 export class SkillChart extends React.Component {
   componentDidMount() {
-    this.props.getSkills();
+    this.props.getSkillsByName();
   }
 
   showSkillChart(skills) {
@@ -29,10 +29,12 @@ export class SkillChart extends React.Component {
   }
 
   render () {
-    const { skills, loading } = this.props;
-
-
-
+    const { error, skills, loading } = this.props;
+    if(error) {
+      return (
+        <p>Sorry, it's not you. It's me...</p>
+      )
+    }
 
     if(loading) {
       return (
@@ -45,7 +47,7 @@ export class SkillChart extends React.Component {
       )
     }
 
-    if(skills.length === 0) {
+    if(skills.length === 0 || !skills) {
       return (
         <p>you have not entered any skills yet<br/>
         Add/Edit your skills in <Link to="/profile">Profile</Link></p>
@@ -78,7 +80,7 @@ export class SkillChart extends React.Component {
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators ({
-    getSkills: getSkills
+    getSkillsByName: getSkillsByName
   }, dispatch)
 )
 

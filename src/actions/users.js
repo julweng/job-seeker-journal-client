@@ -195,14 +195,14 @@ export function getSkillsByName() {
   return (dispatch) => {
     dispatch(isLoading(true));
     const username = localStorage.getItem('username');
-    const url = `${API_BASE_URL}/user?username=${username}`;
+    const url = `${API_BASE_URL}/users/user?username=${username}`;
     return axios.get(url)
       .then(res => {
         if(res.status !== 200) {
           throw Error(res.statusText);
         }
         dispatch(isLoading(false));
-        dispatch(getSkillSuccess(res.data.skills));
+        dispatch(getSkillSuccess(res.data[0].skills));
       })
     .catch(err => {
       dispatch(getSkillError(err.message))
@@ -212,9 +212,9 @@ export function getSkillsByName() {
 
 // get skills
 export function getSkills() {
+  const user_id = localStorage.getItem('id');
   return (dispatch) => {
     dispatch(isLoading(true));
-    const user_id = localStorage.getItem('id');
     const url = `${API_BASE_URL}/users/skills/${user_id}`;
     return axios.get(url)
       .then(res => {
@@ -322,11 +322,31 @@ export function deleteSkill(skill_id) {
   }
 }
 
+// get skills by Username
+export function getJobsByName() {
+  return (dispatch) => {
+    dispatch(isLoading(true));
+    const username = localStorage.getItem('username');
+    const url = `${API_BASE_URL}/users/user?username=${username}`;
+    return axios.get(url)
+      .then(res => {
+        if(res.status !== 200) {
+          throw Error(res.statusText);
+        }
+        dispatch(isLoading(false));
+        dispatch(getJobSuccess(res.data[0].jobs));
+      })
+    .catch(err => {
+      dispatch(getJobError(err.message))
+    })
+  }
+}
+
 // get job
 export function getJobs() {
   return (dispatch) => {
-    dispatch(isLoading(true));
     const user_id = localStorage.getItem('id');
+    dispatch(isLoading(true));
     const url = `${API_BASE_URL}/users/jobs/${user_id}`;
     return axios.get(url)
       .then(res => {
