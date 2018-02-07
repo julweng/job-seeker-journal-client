@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Input from '../../common/input/input';
 import { Field, reduxForm, focus } from 'redux-form';
-import { registerUser } from '../../../actions/users';
-import { login } from '../../../actions/auth';
+import { registerUser, isRegistered } from '../../../actions/users';
+import { bindActionCreators } from 'redux';
 import { required, nonEmpty, matches, length, isTrimmed } from '../../../validators';
 
 import './signUp.css';
@@ -15,12 +17,17 @@ export class SignUp extends React.Component {
   onSubmit(values) {
     const { username, password } = values;
     const user = { username, password };
-    return this.props
-      .dispatch(registerUser(user))
-      .then(() => this.props.dispatch(login(username, password)));
+    return this.props.registerUser(user)
+      .then(() => this.props.isRegistered(true));
   }
-
+  loginMessage(registered) {
+    if(registered) {
+      return <p>You are registered!<br/>Please <Link to="/login">log in</Link></p>
+    }
+    return null;
+  }
   render() {
+    const { handleSubmit, pristine, submitting, registered } = this.props;
     return (
       <section className="row">
         <div className="row">
@@ -36,7 +43,7 @@ export class SignUp extends React.Component {
             <form
               className="col-12"
               id="register"
-              onSubmit={this.props.handleSubmit(values =>
+              onSubmit={handleSubmit(values =>
                 this.onSubmit(values)
             )}>
               <div className="col-12">
@@ -76,7 +83,7 @@ export class SignUp extends React.Component {
                 <button
                   type="submit"
                   id="register-button"
-                  disabled={ this.props.pristine || this.props.submitting }>
+                  disabled={ pristine || submitting }>
                   Register
                 </button>
               </div>
@@ -84,10 +91,23 @@ export class SignUp extends React.Component {
           </div>
           <div className="col-3">&nbsp;</div>
         </div>
+        {this.loginMessage(registered)}
       </section>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  registered: state.users.registered
+})
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    isRegistered: isRegistered,
+    registerUser: registerUser
+  }, dispatch));
+
+SignUp = connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
 export default reduxForm({
   form: 'registration',

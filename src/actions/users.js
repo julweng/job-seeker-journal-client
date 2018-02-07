@@ -160,6 +160,12 @@ export const isLoading = loading => ({
   loading
 })
 
+export const IS_REGISTERED = 'IS_REGISTERED';
+export const isRegistered = registered => ({
+  type: IS_REGISTERED,
+  registered
+})
+
 const headers = { 'content-type': 'application/json' }
 
 // register users

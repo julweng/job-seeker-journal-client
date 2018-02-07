@@ -24,6 +24,7 @@ import {
   SAVE_SKILL_ID,
   SAVE_JOB_ID,
   IS_LOADING,
+  IS_REGISTERED
 } from '../actions/users';
 
 const initialState = {
@@ -39,6 +40,7 @@ const initialState = {
   job_id:'',
   initialValues: {},
   deleted: false,
+  registered: false
 }
 
 export const users = (state = initialState, action) => {
@@ -197,6 +199,11 @@ export const users = (state = initialState, action) => {
       return {
         ...state,
         loading: action.loading
+      }
+    case IS_REGISTERED:
+      return {
+        ...state,
+        registered: action.registered
       }
 
     default:

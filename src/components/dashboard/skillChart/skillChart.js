@@ -17,13 +17,17 @@ export class SkillChart extends React.Component {
 
   render () {
     const { error, skills, loading } = this.props;
-    const userSkills = skills.map(skill => {
-      return {
-        skill: skill.skill,
-        experience: parseInt(skill.experience, 10),
-        fullMark: 15
-      }
-    });
+    let userSkills = [];
+    if(skills) {
+      userSkills = skills.map(skill => {
+        return {
+          skill: skill.skill,
+          experience: parseInt(skill.experience, 10),
+          fullMark: 15
+        }
+      })
+    }
+    userSkills = [{ skill: '', experience: 0, fullMark: 15 } ]
 
     if(error) {
       return (
@@ -58,7 +62,7 @@ export class SkillChart extends React.Component {
         </div>
         <div className="col-12 edit-container">
           <Link to="/profile">
-            Edit Profile...
+            Add skills to your Profile...
           </Link>
         </div>
       </div>
