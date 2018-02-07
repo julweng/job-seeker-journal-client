@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { openEditJobForm } from '../../../actions/handler';
@@ -48,8 +47,7 @@ export class ViewJob extends React.Component {
   deleteMessage(deleted) {
     if(deleted) {
       return (
-        <p>Job is successfully deleted.<br />
-        Go to your <Link to="/job-collection">job collection</Link> to select more jobs to edit.</p>
+        <p>Job is successfully deleted.<br /></p>
       )
     }
   }
@@ -57,6 +55,10 @@ export class ViewJob extends React.Component {
     const { error, job, editJob, deleted } = this.props;
     if(error) {
       return <p>Oops! Sorry, your data went to Fillory...</p>
+    } else if(deleted) {
+      return (
+        <p>Job is successfully deleted.<br /></p>
+      )
     } else if(job) {
       return (
         <div className="row view-job-container">

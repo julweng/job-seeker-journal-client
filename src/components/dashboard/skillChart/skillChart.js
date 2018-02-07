@@ -15,10 +15,9 @@ export class SkillChart extends React.Component {
     this.props.getSkills(this.props.currentUser.id);
   }
 
-  render () {
-    const { error, skills, loading } = this.props;
-
-    const userSkills = skills.map(skill => {
+  showSkillChart(skills) {
+    if(skills) {
+      return skills.map(skill => {
         return {
           skill: skill.skill,
           experience: parseInt(skill.experience, 10),
@@ -26,6 +25,11 @@ export class SkillChart extends React.Component {
         }
       })
     }
+    return null;
+  }
+
+  render () {
+    const { error, skills, loading } = this.props;
 
     if(error) {
       return (
@@ -33,7 +37,7 @@ export class SkillChart extends React.Component {
       )
     }
 
-    if (loading) {
+    if(loading) {
       return (
         <FontAwesome
         name='spinner'
@@ -43,8 +47,12 @@ export class SkillChart extends React.Component {
         />
       )
     }
-    if(userSkills.length === 0) {
-      return <div>You have not entered any skills yet.</div>
+
+    if(skills.length === 0) {
+      return (
+        <p>you have not entered any skills yet<br/>
+        Add/Edit your skills in <Link to="/profile">Profile</Link></p>
+      )
     }
 
     return (
@@ -53,7 +61,7 @@ export class SkillChart extends React.Component {
           <h3>Skill Chart</h3>
           <p>experience in years</p>
           <ResponsiveContainer aspect={2}>
-            <RadarChart data={userSkills}>
+            <RadarChart data={this.showSkillChart(skills)}>
               <PolarGrid />
               <PolarAngleAxis dataKey='skill' />
               <PolarRadiusAxis/>

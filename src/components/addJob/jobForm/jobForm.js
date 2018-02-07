@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from '../../common/input/input'
 import DateInput from '../../common/dateInput/dateInput';
@@ -25,8 +24,8 @@ export class JobForm extends React.Component {
     if(jobCollection) {
       return (
         <div>
-        <p className="succes-text">Your job entry has been saved.
-        Check it out in your <Link to="/job-collection">job collections</Link></p>
+        <p className="succes-text">Your job entry has been saved</p>
+        <p>Check it out in your job collection</p>
         </div>
       )
     }
@@ -105,6 +104,7 @@ export class JobForm extends React.Component {
         }
         </div>
           </fieldset>
+          <div className="col-2">&nbsp;</div>
           <div className="col-4">
             <CrudButton
               type={`submit`}
@@ -114,15 +114,6 @@ export class JobForm extends React.Component {
             />
           </div>
           <div className="col-4">
-          <Link to="/job-collection">
-          <CrudButton
-            type={`click`}
-            className={`cancel-button`}
-            text={`Collection`}
-          />
-          </Link>
-          </div>
-          <div className="col-4">
           <div className="col-12 big-button-container">
             <button type="click" className="reset-button" disabled={pristine || submitting} onClick={reset}
             >
@@ -130,6 +121,7 @@ export class JobForm extends React.Component {
             </button>
           </div>
           </div>
+          <div className="col-2">&nbsp;</div>
         </form>
         {this.saveSuccess(jobCollection)}
       </div>

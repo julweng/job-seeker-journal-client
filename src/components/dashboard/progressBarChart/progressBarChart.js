@@ -80,8 +80,10 @@ export class ProgressBarChart extends React.Component {
     }
 
     if(jobs.length === 0) {
-      return <div>You have not entered any jobs yet.</div>
+      return <p>You have not entered any jobs yet. <br/>
+            <Link to="/add-job">Add some jobs</Link></p>
     }
+
     return (
       <div className="row">
         <div className="col-2">&nbsp;</div>
@@ -104,9 +106,7 @@ export class ProgressBarChart extends React.Component {
         </div>
         <div className="col-2">&nbsp;</div>
         <div className="col-12 edit-container">
-          <Link to="/job-collection">
-            Add/Edit your Job Collection...
-          </Link>
+            <Link to="/add-job">Add Jobs</Link> or Edit your <Link to="/job-collection">Job Collection...</Link>
         </div>
       </div>
       );
