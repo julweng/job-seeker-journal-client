@@ -21,7 +21,9 @@ import {
   deleteJobSuccess,
   deleteJobError,
   getJobsFilterByMonthSuccess,
-  getJobsFilterByMonthError
+  getJobsFilterByMonthError,
+  isLoading,
+  isRegistered
 } from '../actions/users';
 
 describe('users', () => {

@@ -82,9 +82,6 @@ export class Login extends React.Component {
             </form>
           </div>
           <div className="col-3">&nbsp;</div>
-          <div className="col-12 demo">
-            <p>Demo username/password: abc/123</p>
-          </div>
         </div>
       </section>
     );
