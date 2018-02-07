@@ -20,7 +20,13 @@ export class JobForm extends React.Component {
     return this.props.dispatch(postJob(title, company, location, dateApplied, progress));
   }
 
-  saveSuccess(jobCollection) {
+  render() {
+    const { jobCollection, error, handleSubmit, pristine, submitting, reset } = this.props;
+
+    if (error) {
+      return <p>Sorry! Something went horribly wrong </p>
+    }
+
     if(jobCollection) {
       return (
         <div>
@@ -29,15 +35,7 @@ export class JobForm extends React.Component {
         </div>
       )
     }
-    return false;
-}
 
-  render() {
-    const { jobCollection, error, handleSubmit, pristine, submitting, reset } = this.props;
-
-    if (error) {
-      return <p>Sorry! Something went horribly wrong </p>
-    }
     return (
       <div>
       <form className="row" id="add-job-form" onSubmit={handleSubmit(values =>
@@ -123,7 +121,6 @@ export class JobForm extends React.Component {
           </div>
           <div className="col-2">&nbsp;</div>
         </form>
-        {this.saveSuccess(jobCollection)}
       </div>
     )
   }
