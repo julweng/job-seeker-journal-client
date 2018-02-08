@@ -5,7 +5,7 @@ This inspiration came from the fact that I would like a simple and interesting a
 ![Snapshot of Job Seeker's Journal](/app_screen_shot.jpeg)
 
 ## What does the app do
-Try the app on this [site] (https://job-seeker-journal.netlify.com/)
+Try the app on this [site](https://job-seeker-journal.netlify.com/)
 The app currently provides users with the following functions:
 1. Add and edit skills and corresponding experience in years
 2. Graph skills on a radial chart, allowing users to assess their current skill sets and gauge on their potential on landing their target jobs
@@ -29,4 +29,4 @@ The app currently provides users with the following functions:
 * Travis CI
 
 ### Back End
-[job-seeker-journal-api] (https://github.com/julweng/job-seeker-journal-api)
+[job-seeker-journal-api](https://github.com/julweng/job-seeker-journal-api)
