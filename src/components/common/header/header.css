@@ -1,6 +1,10 @@
 #landing-header {
   padding: 5rem 1rem;
-  background-image: url("landing.jpg");
+  background: linear-gradient(
+      rgba(26, 26, 26, 0.5),
+      rgba(26, 26, 26, 0.5)
+    ),
+  url("landing.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -26,4 +30,18 @@
 
 #user-header {
   padding: 1rem;
+}
+
+#register-header-button {
+  width: 100%;
+  padding: 0.7rem 2rem;
+  margin: 2rem 0;
+  border: 0.188rem solid #379392;
+  border-radius: 0.188rem;
+  background-color: #379392;
+  color: #FFF;
+}
+
+#register-header-button:hover {
+  opacity: 0.7;
 }

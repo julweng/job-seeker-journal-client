@@ -57,8 +57,9 @@ export class SkillChart extends React.Component {
     return (
       <div className="row">
         <div className="col-12 chart-container">
-          <h3>Skill Chart</h3>
-          <p>experience in years</p>
+        <div className="col-2">&nbsp;</div>
+          <h3 className="col-10">Skill Chart</h3>
+          <p className="col-12">experience in years</p>
           <ResponsiveContainer aspect={2}>
             <RadarChart data={this.showSkillChart(skills)}>
               <PolarGrid />
@@ -68,7 +69,7 @@ export class SkillChart extends React.Component {
             </RadarChart>
           </ResponsiveContainer>
         </div>
-        <div className="col-12 edit-container">
+        <div className="col-12 edit-skill-container">
           <Link to="/profile">
             Add skills to your Profile...
           </Link>

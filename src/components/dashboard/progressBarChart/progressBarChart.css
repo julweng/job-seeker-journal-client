@@ -1,3 +1,13 @@
 .recharts-legend-wrapper {
   margin-left: 2.8rem;
 }
+
+.edit-job-container {
+  text-align: right;
+  margin: 0.65rem 0;
+}
+
+.edit-job-container a {
+  color: #379392;
+  text-align: right;
+}

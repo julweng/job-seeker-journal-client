@@ -9,16 +9,21 @@
   text-align: left;
 }
 
+.chart-container p {
+  margin: 0.2rem 0;
+}
+
 .recharts-wrapper {
   margin: 0 auto;
 }
 
-.edit-container {
+.edit-skill-container {
   text-align: right;
-  margin-top: 1rem;
+  margin-top: 6.5rem;
   margin-bottom: 1rem;
 }
 
-.edit-container a {
+.edit-skill-container a {
   color: #379392;
+  text-align: right;
 }

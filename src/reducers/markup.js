@@ -38,7 +38,7 @@ export default function () {
         headerId: 'landing-header',
         h1Id: 'app-title',
         h1Text: `Job Seeker's Journal`,
-        h2Text: <h2>Track & Manage</h2>
+        h2Text: <h2>Track & Manage Jobs</h2>
       },
       profile: {
         headerId: 'user-header',

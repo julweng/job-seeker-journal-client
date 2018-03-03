@@ -106,7 +106,7 @@ export class ProgressBarChart extends React.Component {
           </ResponsiveContainer>
         </div>
         <div className="col-2">&nbsp;</div>
-        <div className="col-12 edit-container">
+        <div className="col-12 edit-job-container">
             <Link to="/add-job">Add Jobs</Link> or Edit your <Link to="/job-collection">Job Collection...</Link>
         </div>
       </div>
