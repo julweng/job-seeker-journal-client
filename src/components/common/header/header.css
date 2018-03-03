@@ -12,12 +12,20 @@
 }
 
 #app-title, h2 {
-  margin-top: 5rem;
   text-align: center;
   color: #FFF;
   font-family: 'Maven Pro', sans-serif;
-  font-size: 2rem;
+}
+
+#app-title {
   font-weight: bolder;
+  margin-top: 5rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  font-weight: lighter;
 }
 
 #user-header-title {
