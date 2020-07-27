@@ -1,5 +1,5 @@
 # Job Seeker's Journal
-[Job Seeker's Journal](https://job-seeker-journal.netlify.com/) is the client side of a full-stack React-Redux project that allows users to maintain a record of jobs they are applying, chart their skills, and keep track of their job application process.
+[Job Seeker's Journal](https://job-seeker-journal.netlify.com/) is the client side of a full-stack React-Redux project that allows users to maintain a record of jobs they are applying, chart their skills, and keep track of their job application process. The api is [here](https://github.com/julweng/job-seeker-journal-api)
 
 This inspiration came from the fact that I would like a simple and interesting app to monitor my job hunting, and at the same time, try to avoid having to rely on writing on post-its or notebooks, typing up an excel sheet, or using apps that require subscription and provide only limited free trial.
 ![Snapshot of Job Seeker's Journal](/app_screen_shot.jpeg)
